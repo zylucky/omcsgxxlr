@@ -74,7 +74,7 @@
           <li class="clearfix pr">
             <span class="ys_tit">商铺类型：</span>
             <div class="ys_item_con fl" v-if="shplxqx">
-              <input type="text" value="" v-model.trim="shplx" placeholder="请选择" @click="openBtype">
+              <input type="text" value="" v-model.trim="shplx" readonly="readonly" onfocus="this.blur()" placeholder="请选择" @click="openBtype">
               <i class="right_arrow" @click="openBtype">&gt;</i>
             </div>
             <div class="ys_item_con fl" v-else>
@@ -109,7 +109,7 @@
         <li class="clearfix">
           <span class="ys_tit">装修水平：</span>
           <div class="ys_item_con fl" v-if="zxspqx">
-            <input type="text" value="" v-model.trim="zxsp" placeholder="请选择" @click="openDecorationType">
+            <input type="text" value="" readonly="readonly" onfocus="this.blur()" v-model.trim="zxsp" placeholder="请选择" @click="openDecorationType">
             <i class="right_arrow" @click="openDecorationType">&gt;</i>
           </div>
           <div class="ys_item_con fl" v-else>

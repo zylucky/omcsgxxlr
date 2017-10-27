@@ -60,7 +60,7 @@
         <li class="clearfix pr" v-if="lpjbqx">
           <span class="ys_tit">楼盘级别：</span>
           <div class="ys_item_con fl">
-            <input type="text" value="" v-model="lpjb" placeholder="请选择" @click="openLevel">
+            <input type="text" value="" v-model="lpjb" readonly onfocus="this.blur()" placeholder="请选择" @click="openLevel">
             <i class="right_arrow" @click="openLevel">&gt;</i>
           </div>
         </li>

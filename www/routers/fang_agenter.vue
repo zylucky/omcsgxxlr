@@ -38,15 +38,15 @@
             <td v-else>  <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
             <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">  <span>******</span></td>
             <td v-else>  <span>{{datum.phone}}</span></td>
-            <td v-if="datum.qxzt == 1 || datum.qxzt == 21 || datum.qxzt == 22 || datum.qxzt == 31 || datum.qxzt == 32 || datum.qxzt == 46 || datum.qxzt == 50 || datum.qxzt == 42 || datum.qxzt == 44 || datum.qxzt == 49">
+            <td style="width: 2rem;" v-if="datum.qxzt == 1 || datum.qxzt == 21 || datum.qxzt == 22 || datum.qxzt == 31 || datum.qxzt == 32 || datum.qxzt == 46 || datum.qxzt == 50 || datum.qxzt == 42 || datum.qxzt == 44 || datum.qxzt == 49">
                 <i class="" :agent="datum.id" @click="modifyAgent($event)">修改</i>
                 <i class="" :agent="datum.id" @click="modifyAgentck($event)">查看</i>
                 <i class="" :agent="datum.id" @click="modifyAgent1($event)">删除</i>
             </td>
-            <td v-if="datum.qxzt == 3 || datum.qxzt == 11 || datum.qxzt == 24 || datum.qxzt == 20 || datum.qxzt == 34 || datum.qxzt == 30 || datum.qxzt == 41 || datum.qxzt == 47 || datum.qxzt == 45">
+            <td style="width: 2rem;" v-if="datum.qxzt == 3 || datum.qxzt == 11 || datum.qxzt == 24 || datum.qxzt == 20 || datum.qxzt == 34 || datum.qxzt == 30 || datum.qxzt == 41 || datum.qxzt == 47 || datum.qxzt == 45">
                 <i class="" :agent="datum.id" @click="modifyAgentck($event)">查看</i>&nbsp;&nbsp;&nbsp;
             </td>
-          <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">
+          <td style="width: 2rem;" v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">
 
           </td>
         </tr>

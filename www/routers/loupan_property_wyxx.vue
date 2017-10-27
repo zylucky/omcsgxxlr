@@ -166,7 +166,7 @@
                 </p>
                 <p class="clearfix" style="clear: both;" v-if="glzdqx">
                     <label >管理座栋:</label>
-                    <input type="text" style="width: 2.58rem;" value="" name="wtel6" id="wtel6" v-model="wtel6" placeholder="请选择" @click="glzdAction" readonly="readonly"/>
+                    <input type="text" style="width: 2.58rem;" value="" name="wtel6" id="wtel6" v-model="wtel6" placeholder="请选择" @click="glzdAction" readonly="readonly" onfocus="this.blur()"/>
                     <input type="hidden" value="" name="glzd" id="glzd" v-model="glzd" placeholder="请选择"/>
                 </p>
                 <p class="clearfix" style="clear: both;" v-else>
@@ -175,7 +175,7 @@
                     <input type="hidden" value="" name="glzd" id="glzd" v-model="glzd" placeholder="请选择"/>
                 </p>
 
-                <div class="glzdClass" style="display:none;height: 1.5rem;overflow: scroll;display:inline-block;" v-show="glzdqx">
+                <div class="glzdClass" style="width:5rem;display:none;height: 1.5rem;overflow: scroll;display:inline-block;" v-show="glzdqx">
                     <li v-for="zdl in optionsgssx" class="clearfix pr" style="list-style:none;width:1.5rem;display:inline-block;">
                         <input type="checkbox" :value="zdl.zdh"  :id="zdl.id" class="checkbox" name="xzzdh" />
                         <label>{{zdl.zdh}}</label>

@@ -32,11 +32,11 @@
           <td>操作</td>
         </tr>
         <tr v-for="datum in data" class="clearfix pr" style="text-align:center;border-bottom: 1px solid rgb(206,206,206);height: .8rem;">
-            <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">  <span class="ys_tit">*****</span></td>
-            <td v-else>  <span class="ys_tit">{{datum.topic}}</span></td>
-            <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">   <span class="ys_tit">*</span></td>
+            <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="word-break:break-all;">  <span class="ys_tit">{{datum.topic}}</span></td>
+            <td v-else style="word-break:break-all;">  <span class="ys_tit">{{datum.topic}}</span></td>
+            <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">   <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
             <td v-else>  <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
-            <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">  <span>******</span></td>
+            <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">  <span>{{datum.phone}}</span></td>
             <td v-else>  <span>{{datum.phone}}</span></td>
             <td style="width: 2rem;" v-if="datum.qxzt == 1 || datum.qxzt == 21 || datum.qxzt == 22 || datum.qxzt == 31 || datum.qxzt == 32 || datum.qxzt == 46 || datum.qxzt == 50 || datum.qxzt == 42 || datum.qxzt == 44 || datum.qxzt == 49">
                 <i class="" :agent="datum.id" @click="modifyAgent($event)">修改</i>
@@ -116,6 +116,26 @@
                     this.ryzt = data.ryzt;
                     this.qxzt = data.qxzt;
                     that.data = data;
+                    for(var i=0;i<that.data.length;i++){
+                        if(that.data[i].qxzt == 10 || that.data[i].qxzt == 25 || that.data[i].qxzt == 23 || that.data[i].qxzt == 35 || that.data[i].qxzt == 33 || that.data[i].qxzt == 48 || that.data[i].qxzt == 43){
+                            if(that.data[i].topic.length == 2){
+                                var name = that.data[i].topic.substr(0,1)+"*";
+                                that.data[i].topic = name;
+                                var phone = that.data[i].phone.substr(0,3)+"****"+that.data[i].phone.substr(7,4);
+                                that.data[i].phone = phone;
+                            }else if(that.data[i].topic.length == 3){
+                                var name = that.data[i].topic.substr(0,1)+"**";
+                                that.data[i].topic = name;
+                                var phone = that.data[i].phone.substr(0,3)+"****"+that.data[i].phone.substr(7,4);
+                                that.data[i].phone = phone;
+                            }else{
+                                var name = that.data[i].topic.substr(0,2)+"**";
+                                that.data[i].topic = name;
+                                var phone = that.data[i].phone.substr(0,3)+"****"+that.data[i].phone.substr(7,4);
+                                that.data[i].phone = phone;
+                            }
+                        }
+                    }
                     $('title').html(data1.topic + '一' + data1.zdh + '一' + data1.fybh);
                 }, (res)=>{
                     Indicator.close()

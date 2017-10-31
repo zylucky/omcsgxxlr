@@ -248,13 +248,13 @@
                 infinite-scroll-distance="20"
                 infinite-scroll-immediate-check="checked">
           <li class="ys_listcon pv15" v-for="item in resultData">
-            <a href="javascript:;" class="supply_box" :fyid="item.id" @click="shadowShow">
+            <a href="javascript:;" class="supply_box" :fyid="item.id">
               <dl class="supply">
-                <dt>
+                <dt @click="shadowShow">
                   <img v-if="item.pic" :src="$prefix + '/' + item.pic">
                   <img v-else :src="$prefix + '/upload/2017-08-27/6404b4de960b81fc5403c870aefcea34.png'">
                 </dt>
-                <dd class="supply_msg_box">
+                <dd class="supply_msg_box" @click="shadowShow">
                   <dl>
                     <dd class="supply_house">{{item.topic}}&nbsp;&nbsp;{{item.zdh}}&nbsp;-&nbsp;{{item.fybh}}</dd>
                     <dd class="supply_color ellipsis">{{item.fjmj}}㎡</dd>
@@ -477,7 +477,7 @@
                 this.$router.push({path: link});
             },
             toDetail(){
-                const location = "http://wx.urskongjian.com:5000/#/order?house_id=" + this.fyid;
+                const location = "http://omc.urskongjian.com/nx/#/order?house_id=" + this.fyid;
                 setTimeout(function(){
                     window.location = location;
                 }, 200);

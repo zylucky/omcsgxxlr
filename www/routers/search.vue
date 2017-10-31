@@ -151,7 +151,7 @@
                     <li v-for="item in hotArray" @click="toListw(item.name)">{{item.name}}</li>
                 </ul>
             </div>
-            <div class="pr history-out">
+            <!--<div class="pr history-out">
                 <h3 class="more-house-title mt10 mb15">历史搜索</h3>
                 <a href="javascript:;" class="del-btn" @click="clearHistoty">
                     <img src="../resources/images/list/del-icon.png" alt="清除">
@@ -159,7 +159,7 @@
                 <ul class="search-list clearfix historyArray">
                     <li v-for="item in historyArray" @click="toListw(item.name)">{{item.name}}</li>
                 </ul>
-            </div>
+            </div>-->
             <ul class="result-search">
                 <li class="clearfix">
                     <span class="ellipsis">北京万达广场</span>

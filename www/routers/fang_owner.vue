@@ -28,28 +28,28 @@
         <tr style="text-align:center;background-color: rgb(206,206,206);height: .7rem;">
           <td style="width: 1.5rem;">姓名</td>
           <td style="width: 1.5rem;">性别</td>
-          <td style="width: 2.8rem;">联系方式</td>
-          <td>操作</td>
+          <td style="width: 2rem;">联系方式</td>
+          <td style="width: 2.8rem;">操作</td>
         </tr>
         <tr v-for="datum in data" class="clearfix pr" style="text-align:center;border-bottom: 1px solid rgb(206,206,206);height: .8rem;">
-          <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="width: 1.5rem;"> <span class="ys_tit">{{datum.topic}}</span></td>
-          <td v-else style="width: 1.5rem;"> <span class="ys_tit">{{datum.topic}}</span></td>
+          <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="width: 1.5rem;word-break:break-all;"> <span class="ys_tit">{{datum.topic}}</span></td>
+          <td v-else style="width: 1.5rem;word-break:break-all;"> <span class="ys_tit">{{datum.topic}}</span></td>
           <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="width: 1.5rem;"> <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
           <td v-else style="width: 1.5rem;"> <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
-          <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="word-wrap:break-word;width:2.8rem;"> <span>{{datum.phone}}</span></td>
-          <td v-else style="word-wrap:break-word;width:2.8rem;"> <span>{{datum.phone}}</span></td>
+          <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="word-break:break-all;;width:2rem;"> <span>{{datum.phone}}</span></td>
+          <td v-else style="word-break:break-all;;width:2rem;"> <span>{{datum.phone}}</span></td>
           <!--<td style="width: 1.5rem;"> <span class="ys_tit">{{datum.topic}}</span></td>
           <td style="width: 1.5rem;"> <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
           <td style="word-wrap:break-word;width:2.8rem;"> <span>{{datum.phone}}</span></td>-->
-          <td style="width: 2rem;" v-if="datum.qxzt == 1 || datum.qxzt == 21 || datum.qxzt == 22 || datum.qxzt == 31 || datum.qxzt == 32 || datum.qxzt == 46 || datum.qxzt == 50 || datum.qxzt == 42 || datum.qxzt == 44 || datum.qxzt == 49">
+          <td style="width: 2.8rem;" v-if="datum.qxzt == 1 || datum.qxzt == 21 || datum.qxzt == 22 || datum.qxzt == 31 || datum.qxzt == 32 || datum.qxzt == 46 || datum.qxzt == 50 || datum.qxzt == 42 || datum.qxzt == 44 || datum.qxzt == 49">
             <i class="" :owner="datum.id" @click="modifyOwner($event)">修改</i>
             <i class="" :owner="datum.id" @click="modifyOwnerck($event)">查看</i>
             <i class="" :owner="datum.id" @click="modifyOwner1($event)">删除</i>
           </td>
-          <td style="width: 2rem;" v-if="datum.qxzt == 3 || datum.qxzt == 11 || datum.qxzt == 24 || datum.qxzt == 20 || datum.qxzt == 34 || datum.qxzt == 30 || datum.qxzt == 41 || datum.qxzt == 47 || datum.qxzt == 45">
+          <td style="width: 2.8rem;" v-if="datum.qxzt == 3 || datum.qxzt == 11 || datum.qxzt == 24 || datum.qxzt == 20 || datum.qxzt == 34 || datum.qxzt == 30 || datum.qxzt == 41 || datum.qxzt == 47 || datum.qxzt == 45">
             <i class="" :owner="datum.id" @click="modifyOwnerck($event)">查看</i>&nbsp;&nbsp;&nbsp;
           </td>
-          <td style="width: 2rem;" v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">
+          <td style="width: 2.8rem;" v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43">
 
           </td>
         </tr>
@@ -132,22 +132,6 @@
                         MessageBox('提示',meg);
                         return;
                     }
-                    //此用户有所有权限
-                    /*if(data.qxzt == 1 || data.qxzt == 21 || data.qxzt == 22 || data.qxzt == 31 || data.qxzt == 32 || data.qxzt == 46 || data.qxzt == 50 || data.qxzt == 42 || data.qxzt == 44 || data.qxzt == 49){
-
-                    }*/
-                    //只有查看权限
-                   /* if(data.qxzt == 3 || data.qxzt == 11 || data.qxzt == 24 || data.qxzt == 20 || data.qxzt == 34 || data.qxzt == 30 || data.qxzt == 41 || data.qxzt == 47 || data.qxzt == 45){
-                        alert(333);
-                        this.modifyOwnerqx = false;
-                    }*/
-                    //只有添加按钮，没有其他的任何权限
-
-                  /*if(data.qxzt == 45){
-                   MessageBox('提示',"此用户不属于收购部人员！");
-                   this.$router.push({path: '/login'});
-                   }*/
-
                     that.data = data;
                     console.log(that.data);
                     for(var i=0;i<that.data.length;i++){
@@ -155,14 +139,68 @@
                             if(that.data[i].topic.length == 2){
                                 var name = that.data[i].topic.substr(0,1)+"*";
                                 that.data[i].topic = name;
+                                if(that.data[i].phone.length>11){
+                                    var arrayphone = that.data[i].phone.split(",");
+                                    var str = "";
+                                    var pho=new Array();
+                                    for(var k=0;k<arrayphone.length;k++){
+                                        pho[k] = arrayphone[k].substr(0,3)+"****"+ arrayphone[k].substr(7,4);
+                                        if(k==0){
+                                            str = pho[k];
+                                        }
+                                        if(k>0){
+                                            str = str + "," + pho[k];
+                                        }
+                                    }
+                                    that.data[i].phone = str;
+                                }else{
+                                    var phone = that.data[i].phone.substr(0,3)+"****"+ that.data[i].phone.substr(7,4);
+                                    that.data[i].phone = phone;
+                                }
                                 console.log(that.data[i].topic);
                             }else if(that.data[i].topic.length == 3){
                                 var name = that.data[i].topic.substr(0,1)+"**";
                                 that.data[i].topic = name;
+                                if(that.data[i].phone.length>11){
+                                    var arrayphone = that.data[i].phone.split(",");
+                                    var str = "";
+                                    var pho=new Array();
+                                    for(var k=0;k<arrayphone.length;k++){
+                                        pho[k] = arrayphone[k].substr(0,3) + "****" + arrayphone[k].substr(7,4);
+                                        if(k==0){
+                                            str = pho[k];
+                                        }
+                                        if(k>0){
+                                            str = str + "," + pho[k];
+                                        }
+                                        that.data[i].phone = str;
+                                    }
+                                }else{
+                                    var phone = that.data[i].phone.substr(0,3)+"****"+ that.data[i].phone.substr(7,4);
+                                    that.data[i].phone = phone;
+                                }
                                 console.log(that.data[i].topic);
                             }else{
                                 var name = that.data[i].topic.substr(0,2)+"**";
                                 that.data[i].topic = name;
+                                if(that.data[i].phone.length>11){
+                                    var arrayphone = that.data[i].phone.split(",");
+                                    var str = "";
+                                    var pho=new Array();
+                                    for(var k=0;k<arrayphone.length;k++){
+                                        pho[k] = arrayphone[k].substr(0,3) + "****" + arrayphone[k].substr(7,4);
+                                        if(k==0){
+                                            str = pho[k];
+                                        }
+                                        if(k>0){
+                                            str = str + "," + pho[k];
+                                        }
+                                        that.data[i].phone = str;
+                                    }
+                                }else{
+                                    var phone = that.data[i].phone.substr(0,3)+"****"+ that.data[i].phone.substr(7,4);
+                                    that.data[i].phone = phone;
+                                }
                                 console.log(that.data[i].topic.length);
                                 console.log(that.data[i].topic);
                             }

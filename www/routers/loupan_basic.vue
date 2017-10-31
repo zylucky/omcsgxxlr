@@ -76,7 +76,7 @@
           <div class="ys_item_con fl"><a href="javascript:;">{{chqxz_c}}</a></div>
         </li>
         <li class="clearfix" v-show="cqxzqx">
-          <div class="ys_item_con fl w570">
+          <div class="ys_item_con fl w570" style="width:5.7rem !important;">
             <div class="check_wrap clearfix">
               <label class="fl"><input type="checkbox" value="1" name="" v-model="chqxz">写字楼</label>
             </div>
@@ -87,26 +87,7 @@
               <label class="fl"><input type="checkbox" value="3" name="" v-model="chqxz">商务楼</label>
             </div>
             <div class="check_wrap clearfix">
-              <label class="fl"><input type="checkbox" value="4" name="" v-model="chqxz">住宅</label>
-            </div>
-            <div class="check_wrap clearfix">
               <label class="fl"><input type="checkbox" value="5" name="" v-model="chqxz">商业</label>
-            </div>
-            <div class="check_wrap clearfix">
-              <label class="fl"><input type="checkbox" value="6" name="" v-model="chqxz">酒店</label>
-            </div>
-            <div class="check_wrap clearfix">
-
-              <label class="fl"><input type="checkbox" value="8" name="" v-model="chqxz">别墅</label>
-            </div>
-            <div class="check_wrap clearfix">
-              <label class="fl"><input type="checkbox" value="7" name="" v-model="chqxz">综合</label>
-            </div>
-            <div class="check_wrap clearfix">
-              <label class="fl"><input type="checkbox" value="9" name="" v-model="chqxz">商业综合体</label>
-            </div>
-            <div class="check_wrap clearfix">
-              <label class="fl"><input type="checkbox" value="10" name="" v-model="chqxz">酒店式公寓</label>
             </div>
           </div>
         </li>
@@ -335,7 +316,7 @@
                 if(this.chqxz.length < 1){
                     return "请选择标签";
                 }
-                const map = {"1":"写字楼", "2":"公寓","3":"商务楼","4":"住宅","5":"商业","6":"酒店","7":"综合","8":"别墅","9":"商业综合体","10":"酒店式公寓"};
+                const map = {"1":"写字楼", "2":"公寓","3":"商务楼","5":"商业"};
                 let tip = this.chqxz.map((item,idx)=>{return map[item.toString()]});
                 return tip.join(",");
             },

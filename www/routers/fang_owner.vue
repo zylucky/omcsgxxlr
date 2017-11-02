@@ -28,7 +28,7 @@
         <tr style="text-align:center;background-color: rgb(206,206,206);height: .7rem;">
           <td style="width: 1.5rem;">姓名</td>
           <td style="width: 1.5rem;">性别</td>
-          <td style="width: 2rem;">联系方式</td>
+          <td style="width: 2.2rem;">联系方式</td>
           <td style="width: 2.8rem;">操作</td>
         </tr>
         <tr v-for="datum in data" class="clearfix pr" style="text-align:center;border-bottom: 1px solid rgb(206,206,206);height: .8rem;">
@@ -36,8 +36,8 @@
           <td v-else style="width: 1.5rem;word-break:break-all;"> <span class="ys_tit">{{datum.topic}}</span></td>
           <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="width: 1.5rem;"> <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
           <td v-else style="width: 1.5rem;"> <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
-          <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="word-break:break-all;;width:2rem;"> <span>{{datum.phone}}</span></td>
-          <td v-else style="word-break:break-all;;width:2rem;"> <span>{{datum.phone}}</span></td>
+          <td v-if="datum.qxzt == 10 || datum.qxzt == 25 || datum.qxzt == 23 || datum.qxzt == 35 || datum.qxzt == 33 || datum.qxzt == 48 || datum.qxzt == 43" style="word-break:break-all;;width:2.2rem;"> <span>{{datum.phone}}</span></td>
+          <td v-else style="word-break:break-all;;width:2.2rem;"> <span>{{datum.phone}}</span></td>
           <!--<td style="width: 1.5rem;"> <span class="ys_tit">{{datum.topic}}</span></td>
           <td style="width: 1.5rem;"> <span class="ys_tit">{{datum.xb=="1"?"男":""}}{{datum.xb=="0"?"女":""}}</span></td>
           <td style="word-wrap:break-word;width:2.8rem;"> <span>{{datum.phone}}</span></td>-->

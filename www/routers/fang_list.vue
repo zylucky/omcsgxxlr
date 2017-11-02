@@ -477,9 +477,11 @@
                 this.$router.push({path: link});
             },
             toDetail(){
-                const location = "http://omc.urskongjian.com/nx/#/order?house_id=" + this.fyid;
+                const _this = this;
+                /*const location = "http://omc.urskongjian.com/nx/#/order?house_id=" + this.fyid;*/
                 setTimeout(function(){
-                    window.location = location;
+                    /*window.location = location;*/
+                    _this.$router.push({path: '/order?house_id=' + _this.fyid});
                 }, 200);
             },
             searchChoose: function (code, val, value, e) {

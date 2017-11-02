@@ -472,8 +472,16 @@
                     if(data.lpjb==6){
                         that.lpjb ="综合" ;
                     }
-
+                    var array=new Array();
+                    var k=0;
                     that.chqxz = data.chqxz.split("、");
+                    for(var i=0;i<that.chqxz.length;i++){
+                        if(that.chqxz[i] == 1 || that.chqxz[i] == 2 || that.chqxz[i] == 3 || that.chqxz[i] == 5){
+                            array[k] = that.chqxz[i];
+                            k++;
+                        }
+                    }
+                    that.chqxz = array;
                     if(data.lppz==1){
                         that.lppz ="优" ;
                     }else  if(data.lppz==2){

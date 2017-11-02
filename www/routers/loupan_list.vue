@@ -490,9 +490,11 @@
 
             },
             toDetail(){
-                const location = "http://omc.urskongjian.com/nx/#/detail?building_id=" + this.lpid;
+                const _this = this;
+                /*const location = "http://omc.urskongjian.com/nx/#/detail?building_id=" + this.lpid;*/
                 setTimeout(function(){
-                    window.location = location;
+                    /*window.location = location;*/
+                    _this.$router.push({path: '/detail?building_id=' + _this.lpid});
                 }, 200);
             },
             getProgress(){
@@ -747,6 +749,7 @@
                 $('.shadow').show();
                 const evt = (event || window.event), target = (evt.target || evt.srcElement), href = $(target).parents("a"), lpid=$(href).attr("lpid");
                 this.lpid = lpid;
+                console.log(this.lpid);
                 this.getProgress();
                 $('#msg_super_wrap').animate({
                     bottom: 0

@@ -59,6 +59,19 @@
                     <span>空置率：<i v-text="vacancy_rate"></i></span>
                     <span>物业公司：<i v-text="property_company"></i></span>
                     <span>物业费：<i v-text="property_fee+'元/㎡·月'"></i></span>
+                    <span>2222</span>
+                    <span>3333</span>
+                    <span class="cash">
+                        <!-- 折现图 -->
+                        <span id="main1" style="width: 1010px;height:400px;margin-top:20px"></span>
+                    </span>
+                </div>
+                <div class="cash"  style="display: none">
+                    <!-- 折现图 -->
+                    <div id="main1" style="width: 1010px;height:400px;margin-top:20px"></div>
+                </div>
+                <div class="cash"  style="display: none">
+                    2222
                 </div>
             </div>
 
@@ -135,6 +148,7 @@
                         <i class="supporting-icon sup-yh"></i>
                         <span class="db">银行 <b class="text-black">22</b></span>
                     </li>
+
                 </ul>
             </div>
         </section>
@@ -149,7 +163,7 @@
     import {InfiniteScroll} from 'mint-ui';
 
 
-    import '../resources/plugin/swiper/js/swiper.min.js';
+    import '../resources/js/chartfy.js';
 
     export default {
         components: {
@@ -381,7 +395,19 @@
         },
 
         mounted(){
-            var _this = this;
+                var myChart = echarts.init(document.getElementById("main1"));
+                //var url='${contextPath}/fyfjxx/getByZdid.do?vurlcode=${sessionScope.sUrlCode}&zdid='+zdfyid;
+                $.post(url,function(data){
+                    $(".cash").css("display","block");
+                    /*var mycars=new Array(data.a1,data.a2,data.a3,data.a4,data.a5,data.a6,data.a7,data.a8,data.a9,data.a10,data.a11,data.a12);
+                    var mycars1=new Array(data.b1,data.b2,data.b3,data.b4,data.b5,data.b6,data.b7,data.b8,data.b9,data.b10,data.b11,data.b12);*/
+                    var mycars=new Array(111,222,333,44,55,66,77,888,99,1010,1212,1313,1414,1515);
+                    var mycars1=new Array(3131,3232,3333,34343,3553,366366,37373,3838,3939,404040,4141414,424242);
+                    //column(myChart,mycars,mycars1);
+                    piechart(myChart);
+
+                },"json")
+            /*var _this = this;
 
             this.building_id = this.$route.query.building_id;
 
@@ -413,7 +439,7 @@
 
                 autoplayDisableOnInteraction: true  //鼠标操作时关闭autopaly
 
-            });
+            });*/
 
 
         }

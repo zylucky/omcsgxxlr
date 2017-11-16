@@ -108,7 +108,7 @@
         <li class="clearfix pr">
           <span class="ys_tit">楼盘均价：</span>
           <div class="ys_item_con fl" v-if="!lpjjqx">
-            <input type="text" value="" v-model="zxjnjg" placeholder="请输入">
+            <input type="text" value="" v-model="zxjnjg" readonly onfocus="this.blur()" placeholder="请输入">
             <i class="right_unit">元/㎡/天</i>
           </div>
           <div class="ys_item_con fl" v-else>
@@ -326,11 +326,12 @@
                 }
                 let tags = this.tsbq.map((t)=>{
                     for(let i = 0; i < this.tsbq_all.length; ++i){
-                        if(this.tsbq_all[i].id === t){
+                        if(this.tsbq_all[i].id == t){
                             return this.tsbq_all[i].topic;
                         }
                     }
                 });
+
                 return tags.join(",");
             }
         },
@@ -416,18 +417,15 @@
             selectTag(e){
                 const target = $(e.target), val = target.attr("value");
                 if(!val){return;}
-
                 if ($(e.target).hasClass('active')) {
                     let tsbq_t = new Set(this.tsbq);
                     tsbq_t.delete(val);
                     this.tsbq = [...tsbq_t];
-
                     $(e.target).removeClass('active');
                 } else {
                     let tsbq_t = new Set(this.tsbq);
                     tsbq_t.add(val);
                     this.tsbq = [...tsbq_t];
-
                     $(e.target).addClass('active');
                 }
             },
@@ -442,7 +440,7 @@
                 const url = this.$api + "/yhcms/web/lpjbxx/getLpjbxx.do";
                 let that = this;
                 this.$http.post(url, {"parameters":{ "lpid":lpid},"foreEndType":2,"code":"30000008"}).then((res)=>{
-                    Indicator.close()
+                    Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
                     that.lpid = lpid;
                     that.topic = data.topic;
@@ -451,6 +449,12 @@
                     that.kfsh = data.kfsh;
                     $('title').html(that.topic);
                     if(data.kprq!=''){
+                        //将时间戳转化为标准的格式
+                      /*  var date =  new Date(data.kprq);
+                        var y = 1900+date.getYear();
+                        var m = "0"+(date.getMonth()+1);
+                        var d = "0"+date.getDate();
+                        var   tt11= y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);*/
                         that.kprq = data.kprq.substring(0,10);
                     }
                     if(data.lpjb==1){
@@ -577,7 +581,7 @@
                     const data = JSON.parse(res.bodyText).data;
                     that.tsbq_all = data;
                 }, (res)=>{
-                    Indicator.close()
+                    Indicator.close(that.tsbq_all);
                 });
             },
 
@@ -592,7 +596,6 @@
                     this.ryzt = data.ryzt;
                     this.qxzt = data.qxzt;
                     console.log("ryzt:"+data.ryzt+",  qxzt: "+data.qxzt);
-                    console.log(data.qxzt);
                     //data.qxzt = 11;
                     if(data.qxzt == 0){
                         this.teqx = false;
@@ -704,6 +707,11 @@
                _this.$router.push({path:'/list2'});
                },1000);
                */
+              if(this.tsbq == ""){
+                  this.tsbq = "";
+              }else{
+                  this.tsbq = "、" + this.tsbq.join("、") + "、";
+              }
                 this.$http.post(
                     this.$api + "/yhcms/web/lpjbxx/saveLp.do",
                     {
@@ -711,7 +719,7 @@
                             "lpid": this.lpid, //楼盘id
                             "topic": this.topic, //楼盘名称
                             "address": this.address, //地址
-                            "tsbq": "、" + this.tsbq.join("、") + "、", //特色标签
+                            "tsbq": this.tsbq, //特色标签
                             "kfsh": this.kfsh, //开发商名称
                             "kprq": this.kprq, //开盘日期(必选)
                             "lpjb": level[this.lpjb], //楼盘级别(必选)

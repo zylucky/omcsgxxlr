@@ -42,25 +42,25 @@
         <li class="clearfix mb20">
           <span class="ys_tit w224">所到楼层：</span>
           <div class="ys_item_con fl kt1_class" style="display:none">
-            <input v-if="!ktd1qx" type="number" class="inp_sm" value="" v-model="ktd1" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktd1" placeholder="请输入">
+            <input v-if="!ktd1qx" type="text" class="inp_sm" value="" v-model="ktd1" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktd1" placeholder="请输入">
             <span class="hor_line"></span>
-            <input v-if="!ktd2qx" type="number" class="inp_sm" value="" v-model="ktd2" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktd2" placeholder="请输入">
+            <input v-if="!ktd2qx" type="text" class="inp_sm" value="" v-model="ktd2" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktd2" placeholder="请输入">
           </div>
           <div class="ys_item_con fl kt2_class" style="display:none;margin-left: 2.3rem;">
-            <input v-if="!ktz1qx" type="number" class="inp_sm" value="" v-model="ktz1" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktz1" placeholder="请输入">
+            <input v-if="!ktz1qx" type="text" class="inp_sm" value="" v-model="ktz1" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktz1" placeholder="请输入">
             <span class="hor_line"></span>
-            <input v-if="!ktz2qx" type="number" class="inp_sm" value="" v-model="ktz2" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktz2" placeholder="请输入">
+            <input v-if="!ktz2qx" type="text" class="inp_sm" value="" v-model="ktz2" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktz2" placeholder="请输入">
           </div>
           <div class="ys_item_con fl kt2_class" style="display:none;margin-left: 2.3rem;">
-            <input v-if="!ktg1qx" type="number" class="inp_sm" value="" v-model="ktg1" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktg1" placeholder="请输入">
+            <input v-if="!ktg1qx" type="text" class="inp_sm" value="" v-model="ktg1" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktg1" placeholder="请输入">
             <span class="hor_line"></span>
-            <input v-if="!ktg2qx" type="number" class="inp_sm" value="" v-model="ktg2" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktg2" placeholder="请输入">
+            <input v-if="!ktg2qx" type="text" class="inp_sm" value="" v-model="ktg2" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="ktg2" placeholder="请输入">
           </div>
 
         </li>
@@ -93,25 +93,25 @@
         <li class="clearfix mb20">
           <span class="ys_tit w224">所到楼层：</span>
           <div class="ys_item_con fl ht1_class" style="display:none">
-            <input v-if="!htd1qx" type="number" class="inp_sm" v-model="htd1" value="" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" readonly onfocus="this.blur()" v-model="htd1" value="" placeholder="请输入">
+            <input v-if="!htd1qx" type="text" class="inp_sm" v-model="htd1" value="" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" readonly onfocus="this.blur()" v-model="htd1" value="" placeholder="请输入">
             <span class="hor_line"></span>
-            <input v-if="!htd2qx" type="number" class="inp_sm" value="" v-model="htd2" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="htd2" placeholder="请输入">
+            <input v-if="!htd2qx" type="text" class="inp_sm" value="" v-model="htd2" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="htd2" placeholder="请输入">
           </div>
           <div class="ys_item_con fl ht2_class" style="display:none;margin-left: 2.3rem;">
-            <input v-if="!htz1qx" type="number" class="inp_sm" v-model="htz1" value="" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" v-model="htz1" value="" readonly onfocus="this.blur()" placeholder="请输入">
+            <input v-if="!htz1qx" type="text" class="inp_sm" v-model="htz1" value="" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" v-model="htz1" value="" readonly onfocus="this.blur()" placeholder="请输入">
             <span class="hor_line"></span>
-            <input v-if="!htz2qx" type="number" class="inp_sm" value="" v-model="htz2" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="htz2" placeholder="请输入">
+            <input v-if="!htz2qx" type="text" class="inp_sm" value="" v-model="htz2" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="htz2" placeholder="请输入">
           </div>
           <div class="ys_item_con fl ht2_class" style="display:none;margin-left: 2.3rem;">
-            <input v-if="!htg1qx" type="number" class="inp_sm" v-model="htg1" value="" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" v-model="htg1" readonly onfocus="this.blur()" value="" placeholder="请输入">
+            <input v-if="!htg1qx" type="text" class="inp_sm" v-model="htg1" value="" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" v-model="htg1" readonly onfocus="this.blur()" value="" placeholder="请输入">
             <span class="hor_line"></span>
-            <input v-if="!htg2qx" type="number" class="inp_sm" value="" v-model="htg2" placeholder="请输入">
-            <input v-else type="number" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="htg2" placeholder="请输入">
+            <input v-if="!htg2qx" type="text" class="inp_sm" value="" v-model="htg2" placeholder="请输入">
+            <input v-else type="text" class="inp_sm" value="" readonly onfocus="this.blur()" v-model="htg2" placeholder="请输入">
           </div>
         </li>
 

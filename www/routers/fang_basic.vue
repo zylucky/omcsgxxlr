@@ -203,7 +203,7 @@
           </div>
         </li>
 
-        <li class="clearfix pr border_top hy2Class" style="display:none">
+        <!--<li class="clearfix pr border_top hy2Class" style="display:none">
 
 
           <span class="ys_tit w224 hy2Class">销售底价：</span>
@@ -216,7 +216,7 @@
             <input type="number" value="" readonly onfocus="this.blur()" placeholder="请输入" v-model.trim="xsdj">
             <i class="right_unit">元/㎡/天</i>
           </div>
-        </li>
+        </li>-->
 
         <li class="clearfix pr">
           <span class="ys_tit w224">业主期望租金：</span>
@@ -325,7 +325,6 @@
 
         data () {
             return {
-                xsdj:'',
                 "id": "",
                 "lpid": "",
                 "zdid": "0",
@@ -371,7 +370,6 @@
                 kzsjqx:0,
                 qzsjqx:0,
                 ckzljgqx:0,
-                xsdjqx:0,
                 qwzjqx:0,
                 zjdjqx:0,
                 shytqx:0,
@@ -495,7 +493,6 @@
             },
             hyAction(){
                 var _this=this;
-                this.xsdj = '';
                 setTimeout(function(){
                     if(_this.hystate==1){
                         $(".hy2Class").css("display","block");
@@ -549,7 +546,6 @@
                     console.log(this.zdid+"座栋");
                     const data = JSON.parse(res.bodyText).data.jbxx;
                     if(data.zdid){
-                        that.xsdj = data.xsdj;
                         that.zdid = data.zdid;
                         that.zdh = data.zdh;
                         //console.log(that.zdh);
@@ -678,18 +674,7 @@
                                     this.ckzljgqx = true;
                                 }
                             }
-                            if(this.xsdj == ""){
-                                if(this.qxzt == 3 || this.qxzt == 11 || this.qxzt == 21 || this.qxzt == 23 || this.qxzt == 31 || this.qxzt == 33 || this.qxzt == 41 || this.qxzt == 42 || this.qxzt == 43){
-                                    this.xsdjqx = true;
-                                }else{
 
-                                    this.xsdjqx = false;
-                                }
-                            }else if(this.qxzt == 1 || this.qxzt == 22 || this.qxzt == 32 || this.qxzt == 45 || this.qxzt == 47){
-                                    this.xsdjqx = false;
-                                }else{
-                                    this.xsdjqx = true;
-                                }
                             }
                         }else{
                             $(".hy2Class").css("display","none");
@@ -841,15 +826,6 @@
                                 this.ckzljgqx = false;
                                 this.saveqx = true;
                             }
-                            if(this.hystate == 1){
-                                this.xsdjqx = true;
-                                if(this.xsdj == ""){
-                                    this.xsdjqx = false;
-                                    this.saveqx = true;
-                                }
-                            }else if(this.hystate == ""){
-                                this.saveqx = true;
-                            }
                             this.qwzjqx = true;
                             if(this.qwzj == ""){
                                 this.qwzjqx = false;
@@ -923,7 +899,6 @@
                         this.kzsjqx = true;
                         this.qzsjqx = true;
                         this.ckzljgqx = false;
-                        this.xsdjqx = false;
                         this.qwzjqx = false;
                         this.zjdjqx = false;
                         this.shytqx = true;
@@ -953,7 +928,6 @@
                         this.kzsjqx = false;
                         this.qzsjqx = false;
                         this.ckzljgqx = true;
-                        this.xsdjqx = true;
                         this.qwzjqx = true;
                         this.zjdjqx = true;
                         this.shytqx = false;
@@ -992,7 +966,6 @@
                     this.kzsjqx = true;
                     this.qzsjqx = true;
                     this.ckzljgqx = false;
-                    this.xsdjqx = false;
                     this.qwzjqx = false;
                     this.zjdjqx = false;
                     this.shytqx = true;
@@ -1139,7 +1112,6 @@
                     {
                         "parameters": {
                             id: this.id,
-                            xsdj:this.xsdj,
                             lpid: this.lpid,
                             zdid: this.zdid,
                             gzys: this.gzys,

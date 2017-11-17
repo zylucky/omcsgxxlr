@@ -39,8 +39,8 @@ var router = new VueRouter({
       /*component: require('./routers/fang_photo.vue')*/
     },
     {
-      path: '/test',
-      component: require('./routers/test.vue')
+      path: '/fang_fenxi/:lpid',
+      component: require('./routers/fang_fenxi.vue')
     },
     {
       path: '/detail',
@@ -322,7 +322,7 @@ var router = new VueRouter({
 
 
 //判断user的用户名和密码以及它的有效时间
-/*router.beforeEach(function(to, from, next){
+router.beforeEach(function(to, from, next){
     const user = JSON.parse(localStorage.getItem('login'));
     if (!user && to.path != '/login') {
         next({ path: '/login' });
@@ -369,7 +369,7 @@ var router = new VueRouter({
             //next();
         }
     }
-});*/
+});
 
 new Vue({
   el: '#app',

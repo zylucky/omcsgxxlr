@@ -139,7 +139,7 @@
           </div>
         </li>
 
-        <li class="clearfix">
+        <!--<li class="clearfix">
           <span class="ys_tit">航远房源：</span>
           <div class="ys_item_con fl" v-if="hystateqx">
             <label class="mr20" @click="hyAction"><input type="radio" v-model.trim="hystate" value="1" name="hy_type">是</label>
@@ -149,7 +149,7 @@
             <label class="mr20"><input type="radio" disabled v-model.trim="hystate" value="1" name="hy_type">是</label>
             <label><input type="radio" disabled  v-model.trim="hystate" value="0" name="hy_type">否</label>
           </div>
-        </li>
+        </li>-->
 
         <li class="clearfix">
           <span class="ys_tit">是否有租户：</span>

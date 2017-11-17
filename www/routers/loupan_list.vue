@@ -367,6 +367,10 @@
           <i class="basic_09" style="margin: .1rem auto .1rem;"></i>
           <span>房源信息</span>
         </router-link>
+        <router-link class="bulid_msg_item" :to="{path:'/fang_fenxi/'+lpid}">
+          <i class="basic_09" style="margin: .1rem auto .1rem;"></i>
+          <span>竞争房源分析</span>
+        </router-link>
         <a class="bulid_msg_item" href="#" @click.stop.prevent="toDetail">
           <i class="basic_13" style="margin: .1rem auto .1rem;"></i>
           <span>楼盘预览</span>

@@ -13,10 +13,15 @@
             <div class="sssj">实时数据</div>
             <div id="main" style="width:100%;height:9rem;"></div>
         </div>
-        <div style="background-color: white !important;height: 10.3rem;border: 1px solid red;margin-top: 0.2rem;">
+        <div style="background-color: white !important;height: 10.3rem;margin-top: 0.2rem;">
             <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>已入住企业类型占比</div>
             <div class="sssj">实时数据</div>
             <div id="main1" style="width:100%;height:8rem;"></div>
+        </div>
+        <div style="background-color: white !important;height: 10.3rem;margin-top: 0.2rem;">
+            <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>八周市场均价走势</div>
+            <div class="sssj" style="width: 2rem !important;">单位：元/㎡/天</div>
+            <div id="main2" style="width:100%;height:8rem;"></div>
         </div>
     </div>
 </template>
@@ -50,7 +55,7 @@
                 tpdata:[],
                 tpdata1:[],
                 yrzdata:[],
-                yrzdata1:[],
+                scjjdata:[],
 
             }
         },
@@ -94,16 +99,47 @@
                 this.$http.post(url1,{"lpid":lpid}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    const result = JSON.parse(res.bodyText);
-                    this.yrzdata.push({value:data.kzfy,name:'可出租房源'});
-                    this.yrzdata.push({value:data.wdqfy,name:'未到期房源'});
-                    this.yrzdata.push({value:data.qsdqfy,name:'90天内到期房源'});
-                    this.yrzdata.push({value:data.swdqfy,name:'45天内到期房源'});
-                    this.yrzdata.push({value:data.xxbq,name:'信息不全'});
-                    this.yrzdata.push({value:data.kzfy,name:'空置房源'});
-                    this.yrzdata.push({value:data.wzfy,name:'未知房源'});
-                    this.yrzdata.push({value:data.yzfy,name:'已租房源'});
+                    this.yrzdata.push({value:data.jr,name:'金融'});
+                    this.yrzdata.push({value:data.jy,name:'教育'});
+                    this.yrzdata.push({value:data.it,name:'互联网'});
+                    this.yrzdata.push({value:data.xx,name:'休闲'});
+                    this.yrzdata.push({value:data.wh,name:'文化'});
+                    this.yrzdata.push({value:data.fdc,name:'房地产'});
+                    this.yrzdata.push({value:data.qt,name:'其它'});
                     this.shanx();
+                }, (res)=>{
+                    Indicator.close()
+                });
+                const url2 = this.$api + "/yhcms/web/jcsj/wxFjxx.do";
+                this.$http.post(url2,{"lpid":lpid}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    const count = data.length;
+                    if(count >= 1){
+                        this.scjjdata.push({value:data[0].zxjnjg});
+                    }
+                    if(count >= 2){
+                        this.scjjdata.push({value:data[1].zxjnjg});
+                    }
+                    if(count >= 3){
+                        this.scjjdata.push({value:data[2].zxjnjg});
+                    }
+                    if(count >= 4){
+                        this.scjjdata.push({value:data[3].zxjnjg});
+                    }
+                    if(count >= 5){
+                        this.scjjdata.push({value:data[4].zxjnjg});
+                    }
+                    if(count >= 6){
+                        this.scjjdata.push({value:data[5].zxjnjg});
+                    }
+                    if(count >= 7){
+                        this.scjjdata.push({value:data[6].zxjnjg});
+                    }
+                    if(count >= 8){
+                        this.scjjdata.push({value:data[7].zxjnjg});
+                    }
+                    this.zhex();
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -196,25 +232,16 @@
                         formatter: "{b} : {c} ({d}%)"
                     },
                     legend: {
-                        // orient: 'vertical',
-                        // top: 'middle',
                         bottom: 10,
                         left: 'center',
-                        data: ['金融', '教育','互联网','科技','文化','传媒','其他']
+                        data: ['金融', '教育','互联网','休闲','文化','房地产','其它']
                     },
                     series : [
                         {
                             type: 'pie',
-                            radius : '65%',
+                            radius : '55%',
                             center: ['50%', '50%'],
-                            selectedMode: 'single',
-                            data:[
-                                {value:1548,name: '金融'},
-                                {value:535, name: '教育'},
-                                {value:510, name: '互联网'},
-                                {value:634, name: '科技'},
-                                {value:735, name: '文化'},
-                            ],
+                            data:this.yrzdata,
                             itemStyle: {
                                 emphasis: {
                                     shadowBlur: 10,
@@ -223,6 +250,64 @@
                                 }
                             }
                         }
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            },
+            //折线图
+            zhex(){
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main2'));
+                // 指定图表的配置项和数据
+                var option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    toolbox: {
+                        show: true,
+                        feature: {
+                            dataZoom: {
+                                yAxisIndex: 'none'
+                            },
+                            dataView: {readOnly: false},
+                            magicType: {type: ['line', 'bar']},
+                            restore: {},
+                            saveAsImage: {}
+                        }
+                    },
+                    xAxis: [{
+                        axisLabel: {
+                            rotate: 30,
+                            interval: 0
+                        },
+                        type: 'category',
+                        boundaryGap: false,
+                        data:['第一周','第二周','第三周','第四周','第五周','第六周','第七周','第八周']
+                    }],
+                    yAxis: {
+                        type: 'value',
+                        axisLabel: {
+                            formatter: '{value}'
+                        }
+                    },
+                    series: [
+                        {
+                            name:'市场均价',
+                            type:'line',
+                            data:this.scjjdata,
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine: {
+                                data: [
+                                    {type: 'average', name: '平均值'}
+                                ]
+                            }
+                        },
                     ]
                 };
                 // 使用刚指定的配置项和数据显示图表。

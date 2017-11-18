@@ -419,7 +419,10 @@
             },
             //选择赋值
             selectLevel(picker, values) {
+                alert(77777);
+                alert(this.shplx);
                 this.shplx = values[0];
+                alert(this.shplx);
             },
 
             //打开底部2
@@ -446,6 +449,7 @@
                 return str;
             },
             checkSplx(value){
+                alert(1111);
                 if(value=='内铺'){
                     return "1";
                 }else if(value=='临街内铺'){
@@ -573,7 +577,7 @@
 
                         that.chqnx = data.chqnx;
                         that.chx = data.chx;
-
+                        alert(this.shplx);
                         if(data.zxsp==1){
                             that.zxsp = "精装交付";
                         }

@@ -326,6 +326,10 @@
           <i class="basic_13" style="margin: .2rem auto .1rem;"></i>
           <span>注册信息</span>
         </router-link>
+        <router-link class="bulid_msg_item"  :to="{path:'/fang_genjin/'+fyid}" style="height: 1.7rem;">
+          <i class="basic_13" style="margin: .2rem auto .1rem;"></i>
+          <span>房源跟进</span>
+        </router-link>
         <a class="bulid_msg_item" href="#" @click.stop.prevent="toDetail">
           <i class="basic_09" style="margin: .1rem auto .1rem;"></i>
           <span>房源预览</span>

@@ -326,9 +326,9 @@
           <i class="basic_13" style="margin: .2rem auto .1rem;"></i>
           <span>注册信息</span>
         </router-link>
-        <router-link class="bulid_msg_item"  :to="{path:'/fang_genjin/'+fyid}" style="height: 1.7rem;">
+        <router-link class="bulid_msg_item"  :to="{path:'/fang_genjin/'+fyid}" style="height: 1.7rem;" v-show="fygjqx">
           <i class="basic_13" style="margin: .2rem auto .1rem;"></i>
-          <span>房源跟进</span>
+          <span>房源状态</span>
         </router-link>
         <a class="bulid_msg_item" href="#" @click.stop.prevent="toDetail">
           <i class="basic_09" style="margin: .1rem auto .1rem;"></i>
@@ -350,6 +350,7 @@
     import {Search} from 'mint-ui';
     import axios from 'axios';
     import qs from 'qs';
+    import { MessageBox } from 'mint-ui';
     export default {
         components: {
             header1,
@@ -387,6 +388,7 @@
                 },
                 progress: "",
                 where:'',
+                fygjqx:false,
             }
         },
         mounted(){
@@ -452,6 +454,35 @@
                 this.getData();
 
 
+            },
+            tebqqxpd(){
+                let user22 = JSON.parse(localStorage.getItem('cook'));
+                const url = this.$api + "/yhcms/web/wxqx/getFyxxqx.do";
+                this.$http.post(url, {"cookie":user22.sjs,"fyid":this.fyid,"foreEndType":2,"code":"30000008"}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    const meg = JSON.parse(res.bodyText).message;
+                    this.ryzt = data.ryzt;
+                    this.qxzt = data.qxzt;
+                    if(data.qxzt == 2){
+                        MessageBox('提示',"此用户已被禁用，请联系管理员！");
+                        this.$router.push({path: '/login'});
+                    }else if(data.qxzt == 0){
+                        MessageBox('提示',meg);
+                        window.history.go(-1);
+                        return;
+                    }else if(data.ryzt == 4){
+                        this.fygjqx = false;
+                    }else{
+                        this.fygjqx = true;
+                    }
+                    if(data.qxzt == 45 && data.ryzt == 5){
+                        MessageBox('提示',"此用户不属于收购部人员！");
+                        this.$router.push({path: '/login'});
+                    }
+                }, (res)=>{
+                    Indicator.close()
+                });
             },
             closeFilter: function () {
                 this.currentFilterTab = 'nth';
@@ -645,6 +676,7 @@
                 $('.shadow').show();
                 const evt = (event || window.event), target = (evt.target || evt.srcElement), href = $(target).parents("a"), fyid=$(href).attr("fyid");
                 this.fyid = fyid;
+                this.tebqqxpd();
                 this.getProgress();
                 $('#msg_super_wrap').animate({
                     bottom: 0

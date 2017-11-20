@@ -5,6 +5,18 @@
     }
     .cwkz{font-size: 0.38rem !important;font-weight: 900;padding-top: 0.5rem !important;margin: auto;text-align:center;}
     .sssj{color: #999999;margin-top: 0.2rem !important;margin: auto;width: 1.5rem;}
+    .fyfxhx{width: 1.6rem;float: left;margin-left: 0.2rem;margin-top: 0.4rem;font-size:0.24rem;border-radius:5px;}
+    .ys_item_ul li{border: 1px solid #dbdadf;line-height: .4rem;}
+    .ys_item_con{width: 1.6rem;}
+    .hxff{color: rgb(166,166,166);}
+    .hxffdjzh{color: rgb(254,122,14);}
+    .qv{width: 1.6rem;text-align: center;}
+    .qvdjzq{color: rgb(166,166,166);}
+    .qvdjzh{color: rgb(254,122,14);}
+    .pfmdjzq{color: rgb(166,166,166);}
+    .pfmdjzh{color: rgb(254,122,14);}
+    .fyfxhxdjzh{background-color: rgb(255,214,170) !important;}
+    .fyfxhxdjzq{background-color: rgb(242,242,242) !important;}
 </style>
 <template>
     <div>
@@ -21,6 +33,63 @@
         <div style="background-color: white !important;height: 10.3rem;margin-top: 0.2rem;">
             <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>八周市场均价走势</div>
             <div class="sssj" style="width: 2rem !important;">单位：元/㎡/天</div>
+            <div id="main2" style="width:100%;height:8rem;"></div>
+        </div>
+        <div style="background-color: white !important;height: 10.3rem;margin-top: 0.2rem;border:1px solid red;">
+            <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>与周边项目空置竞争房源对比</div>
+            <div class="sssj" style="width: 2rem !important;">实时数据</div>
+            <div style="height:0.4rem;border-bottom:1px solid #999999;"></div>
+            <ul class="ys_item_ul mb60" style="margin-top: 0.4rem;border: 1px solid #dbdadf;border-bottom: 0px solid #dbdadf;">
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型1 </div>
+                        <span class="qv qvdjzq">0-100</span><span class="pfmdjzq">㎡</span>
+                    </a>
+                </li>
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型2 </div>
+                        <span class="qv qvdjzq">101-200</span><span class="pfmdjzq">㎡</span>
+                    </a>
+                </li>
+                <li class="clearfix fyfxhx fyfxhxdjzq">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型3 </div>
+                        <span class="qv qvdjzq">201-300</span><span class="pfmdjzq">㎡</span>
+                    </a>
+                </li>
+                <li class="clearfix fyfxhx fyfxhxdjzq">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型4 </div>
+                        <span class="qv qvdjzq">301-400</span><span class="pfmdjzq">㎡</span>
+                    </a>
+                </li>
+                <li class="clearfix fyfxhx fyfxhxdjzq">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型5 </div>
+                        <span class="qv qvdjzq">401-500</span><span class="pfmdjzq">㎡</span>
+                    </a>
+                </li>
+                <li class="clearfix fyfxhx fyfxhxdjzq">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型6 </div>
+                        <span class="qv qvdjzq">501-600</span><span class="pfmdjzq">㎡</span>
+                    </a>
+                </li>
+                <li class="clearfix fyfxhx fyfxhxdjzq">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型7 </div>
+                        <span class="qv qvdjzq">601-1000</span><span class="pfmdjzq">㎡</span>
+                    </a>
+                </li>
+                <li class="clearfix fyfxhx fyfxhxdjzq">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型8 </div>
+                        <span class="qv qvdjzq">1000</span><span class="pfmdjzq">㎡以上</span>
+                    </a>
+                </li>
+            </ul>
+            
             <div id="main2" style="width:100%;height:8rem;"></div>
         </div>
     </div>
@@ -312,6 +381,46 @@
                 };
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
+            },
+            fyfxhxsj(e){
+                //获取HTML超链接页面上的文字内容
+                const li = $(e.target).closest("li"), txt = $(li).find(".qv").text();
+                //加一个class样式
+                if(li.hasClass("fyfxhxdjzh")){
+                    li.removeClass("fyfxhxdjzh");
+                    li.addClass("fyfxhxdjzq");
+                }else{
+                    li.addClass("fyfxhxdjzh");
+                    li.removeClass("fyfxhxdjzq");
+                }
+                li.siblings().removeClass("fyfxhxdjzh");
+                /*li.addClass("hxffdjzh").siblings().removeClass("hxff");
+                li.addClass("qvdjzh").siblings().removeClass("qvdjzq");
+                li.addClass("pfmdjzh").siblings().removeClass("pfmdjzq");*/
+                alert(txt);
+                var qvjian = new Array();
+                var qqj = "";
+                var hqj = "";
+                qvjian = txt.split("-");
+                console.log(qvjian);
+                if(qvjian.length == 1){
+                    qqj = qvjian[0];
+                    hqj = 9999;
+                }else{
+                    qqj = qvjian[0];
+                    hqj = qvjian[1];
+                }
+                const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
+                this.$http.post(url2,{"lpid":this.lpid,"m1":qqj,"m2":hqj}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    console.log(data);
+                    const count = data.length;
+
+                }, (res)=>{
+                    Indicator.close()
+                });
+
             },
         },
         mounted(){

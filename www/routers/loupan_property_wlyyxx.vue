@@ -140,11 +140,11 @@
         <div class="shadow-p" :class="this.showShadow==1?'show':'hide'">
             <div class="info-tab three" :class="this.showTab==2?'show':'hide'">
                 <p class="clearfix" v-if="!wnameqx1">
-                    <label for="wname">网络运营商名称:</label>
+                    <label class="zyzd" for="wname">网络运营商名称:</label>
                     <input type="text" value="" name="wname3" id="wname3" v-model="wname3" placeholder="请输入" />
                 </p>
                 <p class="clearfix" v-else>
-                    <label for="wname">网络运营商名称:</label>
+                    <label class="zyzd" for="wname">网络运营商名称:</label>
                     <input type="text" value="" readonly onfocus="this.blur()" name="wname3" id="wname3" v-model="wname3" placeholder="请输入" />
                 </p>
                 <p class="clearfix" v-if="!wnameqx3">

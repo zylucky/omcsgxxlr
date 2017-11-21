@@ -16,7 +16,7 @@
     <div class="build_top">
       <ul class="ys_item_ul mb60">
         <li class="clearfix pr">
-          <span class="ys_tit w224">房间面积：</span>
+          <span class="ys_tit w224 zyzd">房间面积：</span>
           <div class="ys_item_con fl" v-if="!fjmjqx">
             <input type="number" value="" v-model="fjmj" placeholder="请输入">
             <i class="right_unit">㎡</i>
@@ -38,7 +38,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit w224">房间层高：</span>
+          <span class="ys_tit w224 zyzd">房间层高：</span>
           <div class="ys_item_con fl" v-if="!fjcgqx">
             <input type="number" value="" v-model="fjcg" placeholder="请输入">
             <i class="right_unit">m</i>

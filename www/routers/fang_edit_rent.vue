@@ -44,7 +44,7 @@
           </div>
         </li>
         <li class="clearfix pr mb20" style="margin-bottom: 0px !important;">
-          <span class="ys_tit">起租时间：</span>
+          <span class="ys_tit zyzd">起租时间：</span>
           <div class="ys_item_con fl" v-if="zq1qx">
             <input type="text" value="" readonly v="zq1" placeholder="请选择日期"  v-model.trim="zq1" @click="openPicker($event)">
             <i class="calendar_icon"  v="zq1" @click="openPicker($event)"></i>
@@ -55,7 +55,7 @@
           </div>
         </li>
         <li class="clearfix pr mb20" style="margin-bottom: 0px !important;">
-          <span class="ys_tit">到期时间：</span>
+          <span class="ys_tit zyzd">到期时间：</span>
           <div class="ys_item_con fl" v-if="zq2qx">
             <input type="text" value="" readonly v="zq2" placeholder="请选择日期"  v-model.trim="zq2" @click="openPicker($event)">
             <i class="calendar_icon" v="zq2" @click="openPicker($event)"></i>

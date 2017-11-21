@@ -9,14 +9,15 @@
     .ys_item_ul li{border: 1px solid #dbdadf;line-height: .4rem;}
     .ys_item_con{width: 1.6rem;}
     .hxff{color: rgb(166,166,166);}
-    .hxffdjzh{color: rgb(254,122,14);}
     .qv{width: 1.6rem;text-align: center;}
     .qvdjzq{color: rgb(166,166,166);}
-    .qvdjzh{color: rgb(254,122,14);}
     .pfmdjzq{color: rgb(166,166,166);}
     .pfmdjzh{color: rgb(254,122,14);}
     .fyfxhxdjzh{background-color: rgb(255,214,170) !important;}
     .fyfxhxdjzq{background-color: rgb(242,242,242) !important;}
+    .kztske{background-color:rgb(255,214,170);color:rgb(254,122,14);}
+    .kztszdcss{text-align: center;border: 1.5px solid rgb(254,122,14);line-height: 0.7rem;}
+    .danwei{clear: both;margin-top: 0.2rem;font-size: 0.32rem;width: 1.6rem;float: right;color:rgb(130,130,130);}
 </style>
 <template>
     <div>
@@ -40,10 +41,10 @@
             <div class="sssj" style="width: 2rem !important;">实时数据</div>
             <div style="height:0.4rem;border-bottom:1px solid #999999;"></div>
             <ul class="ys_item_ul mb60" style="margin-top: 0.4rem;border: 1px solid #dbdadf;border-bottom: 0px solid #dbdadf;">
-                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
+                <li class="clearfix fyfxhx fyfxhxdjzh" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型1 </div>
-                        <span class="qv qvdjzq">0-100</span><span class="pfmdjzq">㎡</span>
+                        <div class="ys_item_con fl pfmdjzh" style="margin-left: -0.25rem;text-align: center;">户型1 </div>
+                        <span class="qv pfmdjzh">0-100</span><span class="pfmdjzh">㎡</span>
                     </a>
                 </li>
                 <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
@@ -52,45 +53,106 @@
                         <span class="qv qvdjzq">101-200</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
-                <li class="clearfix fyfxhx fyfxhxdjzq">
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
                         <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型3 </div>
                         <span class="qv qvdjzq">201-300</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
-                <li class="clearfix fyfxhx fyfxhxdjzq">
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
                         <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型4 </div>
                         <span class="qv qvdjzq">301-400</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
-                <li class="clearfix fyfxhx fyfxhxdjzq">
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
                         <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型5 </div>
                         <span class="qv qvdjzq">401-500</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
-                <li class="clearfix fyfxhx fyfxhxdjzq">
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
                         <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型6 </div>
                         <span class="qv qvdjzq">501-600</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
-                <li class="clearfix fyfxhx fyfxhxdjzq">
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
                         <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型7 </div>
                         <span class="qv qvdjzq">601-1000</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
-                <li class="clearfix fyfxhx fyfxhxdjzq">
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
                         <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型8 </div>
                         <span class="qv qvdjzq">1000</span><span class="pfmdjzq">㎡以上</span>
                     </a>
                 </li>
             </ul>
-            
-            <div id="main2" style="width:100%;height:8rem;"></div>
+            <ul style="clear: both;font-size: 0.36rem;margin-top: 3rem;">
+                <li>
+                    <a href="javascript:;">
+                        <div @click="kztske($event)" class="ys_item_con fl kztszdcss kztske" style="width: 2.3rem;margin-left: 0.2rem;border-right:0px;border-bottom-left-radius:5px;border-top-left-radius:5px;">可租套数</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <div @click="kztssc($event)" class="ys_item_con fl kztszdcss" style="width: 2.3rem;border-right:0px;">市场均价</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                        <div @click="kztszq($event)" class="ys_item_con fl kztszdcss" style="width: 2.4rem;border-bottom-right-radius:5px;border-top-right-radius:5px;">平均销售周期</div>
+                    </a>
+                </li>
+            </ul>
+            <div class="danwei">单位：套</div>
+            <!--<ul>
+                <li class="ys_listcon pv15 clearfix" v-for="item in resultData">
+                    <a href="javascript:;" class="supply_box" :lpid="item.id">
+                        <dl class="supply">
+                            <dt @click="shadowShow">
+                                <img v-if="item.pic" :src="$prefix + '/' + item.pic">
+                                <img v-else :src="$prefix + '/upload/2017-08-27/6404b4de960b81fc5403c870aefcea34.png'">
+                            </dt>
+                            <dd class="supply_msg_box clearfix" @click="shadowShow">
+                                <dl>
+                                    <dd class="supply_house">{{item.topic}}</dd>
+                                    <dd class="supply_color ellipsis">{{item.adddress}}</dd>
+                                    <dd>
+                                        <dl class="cell">
+                                            <dd><span v-show="item.jnjg!=='0'">{{item.jnjg}}</span> 元/㎡·天</dd>
+                                            <dd>
+                                                <i style="display: block;position: relative;top: -0.31rem;left: 1.5rem;" v-show="item.mj1!=='0.0'" v-if="item.mj1 != item.mj2">{{item.mj1}} - {{item.mj2}}㎡</i>
+                                                <i style="display: block;position: relative;top: 0rem;left: 0rem;" v-show="item.mj1!=='0.0'" v-else>{{item.mj1}}㎡</i>
+                                            </dd>
+                                        </dl>
+                                    </dd>
+                                </dl>
+                            </dd>
+                        </dl>
+                    </a>
+                </li>
+            </ul>-->
+
+
+
+            <ul style="border: 1px solid red;clear: both;">
+                <li class="ys_listcon pv15 clearfix">
+                    <dl class="supply">
+                        <dt>22222</dt>
+                        <dd class="supply_msg_box clearfix">
+                            <dl>11111</dl>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+
+
+
+
+
         </div>
     </div>
 </template>
@@ -387,17 +449,14 @@
                 const li = $(e.target).closest("li"), txt = $(li).find(".qv").text();
                 //加一个class样式
                 if(li.hasClass("fyfxhxdjzh")){
-                    li.removeClass("fyfxhxdjzh");
-                    li.addClass("fyfxhxdjzq");
+
                 }else{
                     li.addClass("fyfxhxdjzh");
-                    li.removeClass("fyfxhxdjzq");
+                    li.removeClass("fyfxhxdjzq").siblings().addClass("fyfxhxdjzq");
+                    li.children().children().addClass("pfmdjzh");
+                    li.siblings().children().children().removeClass("pfmdjzh").addClass("pfmdjzq");
                 }
                 li.siblings().removeClass("fyfxhxdjzh");
-                /*li.addClass("hxffdjzh").siblings().removeClass("hxff");
-                li.addClass("qvdjzh").siblings().removeClass("qvdjzq");
-                li.addClass("pfmdjzh").siblings().removeClass("pfmdjzq");*/
-                alert(txt);
                 var qvjian = new Array();
                 var qqj = "";
                 var hqj = "";
@@ -416,11 +475,55 @@
                     const data = JSON.parse(res.bodyText).data;
                     console.log(data);
                     const count = data.length;
-
                 }, (res)=>{
                     Indicator.close()
                 });
 
+            },
+            kztske(e){
+                //获取HTML超链接页面上的文字内容
+                const li = $(e.target).closest("div");
+                //加一个class样式
+                li.addClass("kztske").parent().parent().siblings().children().children().removeClass("kztske");
+                const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
+                this.$http.post(url2,{"lpid":this.lpid,"m1":qqj,"m2":hqj}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    console.log(data);
+                    const count = data.length;
+                }, (res)=>{
+                    Indicator.close()
+                });
+            },
+            kztssc(e){
+                //获取HTML超链接页面上的文字内容
+                const li = $(e.target).closest("div");
+                //加一个class样式
+                li.addClass("kztske").parent().parent().siblings().children().children().removeClass("kztske");
+                const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
+                this.$http.post(url2,{"lpid":this.lpid,"m1":qqj,"m2":hqj}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    console.log(data);
+                    const count = data.length;
+                }, (res)=>{
+                    Indicator.close()
+                });
+            },
+            kztszq(e){
+                //获取HTML超链接页面上的文字内容
+                const li = $(e.target).closest("div");
+                //加一个class样式
+                li.addClass("kztske").parent().parent().siblings().children().children().removeClass("kztske");
+                const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
+                this.$http.post(url2,{"lpid":this.lpid,"m1":qqj,"m2":hqj}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    console.log(data);
+                    const count = data.length;
+                }, (res)=>{
+                    Indicator.close()
+                });
             },
         },
         mounted(){

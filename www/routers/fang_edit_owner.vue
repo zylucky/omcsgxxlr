@@ -44,7 +44,7 @@
           </div>
         </li>
         <li v-for="(ph,idx) in phone" class="clearfix">
-          <span class="ys_tit">联系方式：</span>
+          <span class="ys_tit zyzd">联系方式：</span>
           <div class="ys_item_con fl pos pos_a">
             <input type="text" :value="ph.phone" v-model="ph.phone" placeholder="请输入">
             <i class="right_arrow plus" :index="idx" @click="addPhone($event)">{{idx<1 ? "+" : "-"}}</i>

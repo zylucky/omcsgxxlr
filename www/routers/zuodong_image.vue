@@ -30,7 +30,7 @@
 <template>
   <div class="all_elements">
     <div class="build_top">
-      <div class="common_title">座栋照片</div>
+      <div class="common_title zyzd">座栋照片</div>
 
       <div class="image_wrap clearfix mb140">
         <div v-if="il < 1 && imgqx==2" class="upload_btn mr10 fl">

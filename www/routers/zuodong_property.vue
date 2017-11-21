@@ -16,7 +16,7 @@
     <div class="build_top">
       <ul class="ys_item_ul mb60">
         <li class="clearfix pr">
-          <span class="ys_tit w224">物业费：</span>
+          <span class="ys_tit w224 zyzd">物业费：</span>
           <div class="ys_item_con fl" v-if="!wyfqx">
             <input type="number" value="" v-model="wyf" placeholder="请输入物业费">
             <i class="right_unit">元/㎡/月</i>
@@ -69,7 +69,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit w224">供暖费：</span>
+          <span class="ys_tit w224 zyzd">供暖费：</span>
           <div class="ys_item_con fl" v-if="!gnfqx">
             <input type="number" value="" v-model="gnf" placeholder="请输入供暖费">
             <i class="right_unit">元/㎡/季度</i>

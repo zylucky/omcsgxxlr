@@ -21,7 +21,7 @@
     <div class="build_top ele_wrap">
       <ul class="ys_item_ul mb60">
         <li class="clearfix">
-          <span class="ys_tit">座栋号：</span>
+          <span class="ys_tit zyzd">座栋号：</span>
           <select v-model='zdid'  @change="chooseMedicine()" placeholder="请选择" v-if="zdhqx">
             <option value="0"> 请选择</option>
             <option v-for="option in zds" v-bind:value="option.id" :deuer="option.gzys">
@@ -31,7 +31,7 @@
           <input v-else type="text" value="" :readonly="true" onfocus="this.blur()" v-model.trim="zdh" placeholder="请输入">
         </li>
         <li class="clearfix">
-          <span class="ys_tit">房号：</span>
+          <span class="ys_tit zyzd">房号：</span>
           <div class="ys_item_con fl" v-if="!fybhqx">
             <input type="text" value="" v-model.trim="fybh" placeholder="请输入">
             <input type="hidden" value="" v-model.trim="gzys" placeholder="">
@@ -51,7 +51,7 @@
           </div>
         </li>
         <li class="clearfix">
-          <span class="ys_tit">楼层：</span>
+          <span class="ys_tit zyzd">楼层：</span>
           <div class="ys_item_con fl" v-if="!lcqx">
             <input type="number" value="" v-model.trim="lc" placeholder="请输入">
           </div>
@@ -97,7 +97,7 @@
         </li>
 
         <li class="clearfix">
-          <span class="ys_tit">朝向：</span>
+          <span class="ys_tit zyzd">朝向：</span>
           <div class="ys_item_con fl" v-if="!chxqx">
             <input type="text" value="" v-model.trim="chx" placeholder="请输入">
           </div>
@@ -128,7 +128,7 @@
         </li>
 
         <li class="clearfix">
-          <span class="ys_tit">业主属性：</span>
+          <span class="ys_tit zyzd">业主属性：</span>
           <div class="ys_item_con fl" v-if="yzsxqx">
             <label class="mr20"><input type="radio" v-model.trim="yzsx" value="1" name="owner_type">小业主</label>
             <label ><input type="radio" v-model.trim="yzsx" value="2" name="owner_type">开发商</label>
@@ -152,7 +152,7 @@
         </li>-->
 
         <li class="clearfix">
-          <span class="ys_tit">是否有租户：</span>
+          <span class="ys_tit zyzd">是否有租户：</span>
           <div class="ys_item_con fl" v-if="sfzhqx">
             <label class="mr20" @click="zhAction"><input type="radio" v-model="sfzh" value="1" name="rent_num">是</label>
             <label @click="zhAction"><input type="radio" v-model="sfzh" value="0"  name="rent_num">否</label>
@@ -164,7 +164,7 @@
         </li>
         <div class="kzClass" style="display:none">
           <li class="clearfix pr mb20">
-            <span class="ys_tit">空置时间：</span>
+            <span class="ys_tit zyzd">空置时间：</span>
             <div class="ys_item_con fl" v-if="kzsjqx">
               <input type="text" value="" readonly placeholder="请选择日期"  v-model.trim="kzsj" @click="openPicker()">
               <i class="calendar_icon"  @click="openPicker()"></i>
@@ -175,9 +175,9 @@
             </div>
           </li>
         </div>
-        <div class="qzClass" style="display:none">
+        <!--<div class="qzClass" style="display:none">
           <li class="clearfix pr mb20">
-            <span class="ys_tit">起租时间：</span>
+            <span class="ys_tit zyzd">起租时间：</span>
             <div class="ys_item_con fl" v-if="qzsjqx">
               <input type="text" value="" readonly placeholder="请选择日期"  v-model.trim="qzsj" @click="openPicker()">
               <i class="calendar_icon"  @click="openPicker()"></i>
@@ -187,11 +187,11 @@
               <i class="calendar_icon"></i>
             </div>
           </li>
-        </div>
+        </div>-->
 
         <li class="clearfix pr border_top">
-          <span class="ys_tit w224 hy1Class">参考租赁价格：</span>
-          <span class="ys_tit w224 hy2Class" style="display:none">对外价格：</span>
+          <span class="ys_tit w224 hy1Class zyzd">参考租赁价格：</span>
+          <span class="ys_tit w224 hy2Class zyzd" style="display:none">对外价格：</span>
 
           <div class="ys_item_con fl" v-if="!ckzljgqx">
             <input type="number" value="" placeholder="请输入" v-model.trim="ckzljg">
@@ -419,10 +419,7 @@
             },
             //选择赋值
             selectLevel(picker, values) {
-                alert(77777);
-                alert(this.shplx);
                 this.shplx = values[0];
-                alert(this.shplx);
             },
 
             //打开底部2
@@ -449,7 +446,6 @@
                 return str;
             },
             checkSplx(value){
-                alert(1111);
                 if(value=='内铺'){
                     return "1";
                 }else if(value=='临街内铺'){
@@ -577,7 +573,6 @@
 
                         that.chqnx = data.chqnx;
                         that.chx = data.chx;
-                        alert(this.shplx);
                         if(data.zxsp==1){
                             that.zxsp = "精装交付";
                         }

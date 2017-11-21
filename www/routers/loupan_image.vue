@@ -30,7 +30,7 @@
 <template>
   <div class="all_elements">
     <div class="build_top">
-      <div class="common_title">楼盘图</div>
+      <div class="common_title zyzd">楼盘图</div>
       <div class="image_wrap clearfix mb140">
         <div v-if="il < 5 && imgqx==2" class="upload_btn mr10 fl">
           <input @change='add_img1' id="file_add" tag="lp" type="file" multiple>

@@ -29,7 +29,7 @@
         </li>
 
         <li class="clearfix">
-          <span class="ys_tit">可否注册：</span>
+          <span class="ys_tit zyzd">可否注册：</span>
           <div class="ys_item_con fl" v-if="zcqx">
             <label class="mr20"><input type="radio" name="register" value="1" v-model="zc" :checked="zc==1">是</label>
             <label ><input type="radio" name="register" value="0" v-model="zc" :checked="zc==0">否</label>

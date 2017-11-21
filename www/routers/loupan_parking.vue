@@ -16,7 +16,7 @@
     <div class="build_top">
       <ul class="ys_item_ul mb60">
         <li class="clearfix pr">
-          <span class="ys_tit w224">地上车位数：</span>
+          <span class="ys_tit w224 zyzd">地上车位数：</span>
           <div class="ys_item_con fl" v-if="!dshslqx">
             <input type="number"  value="" v-model="dshsl" placeholder="请输入">
           </div>
@@ -34,7 +34,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit w224">地上车位月租金：</span>
+          <span class="ys_tit w224 zyzd">地上车位月租金：</span>
           <div class="ys_item_con fl" v-if="!dshyueqx">
             <input type="number" value="" v-model="dshyue" placeholder="请输入">元/月
           </div>
@@ -43,7 +43,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit w224">地下车位：</span>
+          <span class="ys_tit w224 zyzd">地下车位：</span>
           <div class="ys_item_con fl" v-if="!dxaslqx">
             <input type="number" value="" v-model="dxasl" placeholder="请输入">
           </div>
@@ -61,7 +61,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit w224">地下车位月租金：</span>
+          <span class="ys_tit w224 zyzd">地下车位月租金：</span>
           <div class="ys_item_con fl" v-if="!dxayueqx">
             <input type="number" value="" v-model="dxayue" placeholder="请输入">元/月
           </div>

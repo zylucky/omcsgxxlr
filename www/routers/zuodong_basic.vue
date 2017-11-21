@@ -32,7 +32,7 @@
         </li>
         <li class="clearfix pr">
          
-          <span class="ys_tit"><span class="bitan">*</span>行政区域：</span>
+          <span class="ys_tit zyzd"><span class="bitan">*</span>行政区域：</span>
           <div v-if="xzqx">
             <select v-model='xzqy'  @change="chooseMedicine()" placeholder="请选择（行政区域）">
               <option value="0"> 请选择（行政区域）</option>
@@ -73,7 +73,7 @@
 
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit"><span class="bitan">*</span>业务区域：</span>
+          <span class="ys_tit zyzd"><span class="bitan">*</span>业务区域：</span>
           <div v-if="ywqx">
           <select v-model='ywqy'  @change="chooseyw()" placeholder="请选择（业务区域）">
             <option value="0"> 请选择（业务区域）</option>
@@ -113,7 +113,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit"><span class="bitan">*</span>地铁位置：</span>
+          <span class="ys_tit zyzd"><span class="bitan">*</span>地铁位置：</span>
           <div v-if="dtqx">
           <select v-model='xl'  @change="choosezd()" placeholder="请选择线路">
             <option value="0"> 请选择线路</option>

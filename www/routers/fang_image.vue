@@ -28,7 +28,7 @@
 <template>
   <div class="all_elements">
     <div class="build_top">
-      <div class="common_title">房源图</div>
+      <div class="common_title zyzd">房源图</div>
       <div class="image_wrap clearfix mb140">
         <div v-if="fy < 8 && imgqx==2" class="upload_btn mr10 fl">
             <input @change='add_img1' id="file_add" tag="fy" type="file" multiple>
@@ -43,7 +43,7 @@
           <img class="upload_demo_img" :src="item.id==='xxx'? item.url : $prefix + '/' + item.url" alt="" />
         </div>
       </div>
-      <div class="common_title">户型图</div>
+      <div class="common_title zyzd">户型图</div>
       <div class="image_wrap clearfix mb140">
         <div v-if="hx < 1 && imghxqx==2" class="upload_btn mr10 fl">
             <input @change='add_img2' id="file_add" tag="hx" type="file">

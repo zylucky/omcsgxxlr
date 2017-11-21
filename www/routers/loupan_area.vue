@@ -8,7 +8,7 @@
     <div class="build_top">
       <ul class="ys_item_ul mb60">
         <li class="clearfix pr">
-          <span class="ys_tit w224">总建筑面积：</span>
+          <span class="ys_tit w224 zyzd">总建筑面积：</span>
           <div class="ys_item_con fl" v-if="!zjzmjqx">
             <input type="number" value="" v-model="zjzmj" placeholder="请输入">
             <i class="right_unit">㎡</i>
@@ -19,7 +19,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit w224">开发商总面积：</span>
+          <span class="ys_tit w224 zyzd">开发商总面积：</span>
           <div class="ys_item_con fl" v-if="!kfszmjqx">
             <input type="number" value="" v-model="kfszmj" placeholder="请输入">
             <i class="right_unit">㎡</i>
@@ -30,7 +30,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit w224">业主总面积：</span>
+          <span class="ys_tit w224 zyzd">业主总面积：</span>
           <div class="ys_item_con fl" v-if="!yzzmjqx">
             <input type="number" value="" v-model="yzzmj" placeholder="请输入">
             <i class="right_unit">㎡</i>

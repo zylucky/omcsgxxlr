@@ -139,11 +139,11 @@
         <div class="shadow-p" :class="this.showShadow==1?'show':'hide'">
             <div class="info-tab three" :class="this.showTab==2?'show':'hide'">
                 <p class="clearfix" v-if="!wnameqx1">
-                    <label >物业公司名称:</label>
+                    <label class="zyzd">物业公司名称:</label>
                     <input type="text" value="" name="wname3" id="wname3" v-model="wname3" placeholder="请输入" />
                 </p>
                 <p class="clearfix" v-else>
-                    <label >物业公司名称:</label>
+                    <label class="zyzd">物业公司名称:</label>
                     <input type="text" value="" readonly onfocus="this.blur()" name="wname3" id="wname3" v-model="wname3" placeholder="请输入" />
                 </p>
                 <p class="clearfix" v-if="!wnameqx2">
@@ -165,12 +165,12 @@
 
                 </p>
                 <p class="clearfix" style="clear: both;" v-if="glzdqx">
-                    <label >管理座栋:</label>
+                    <label class="zyzd">管理座栋:</label>
                     <input type="text" style="width: 2.58rem;" value="" name="wtel6" id="wtel6" v-model="wtel6" placeholder="请选择" @click="glzdAction" readonly="readonly" onfocus="this.blur()"/>
                     <input type="hidden" value="" name="glzd" id="glzd" v-model="glzd" placeholder="请选择"/>
                 </p>
                 <p class="clearfix" style="clear: both;" v-else>
-                    <label >管理座栋:</label>
+                    <label class="zyzd">管理座栋:</label>
                     <input type="text" style="width: 2.58rem;" value="" name="wtel6" id="wtel6" v-model="wtel6" placeholder="请选择" readonly="readonly" onfocus="this.blur()"/>
                     <input type="hidden" value="" name="glzd" id="glzd" v-model="glzd" placeholder="请选择"/>
                 </p>

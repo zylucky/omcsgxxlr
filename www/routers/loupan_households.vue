@@ -79,7 +79,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit w224">开发商总数：</span>
+          <span class="ys_tit w224 zyzd">开发商总数：</span>
           <div class="ys_item_con fl" v-if="!kfszhqx">
             <input type="number" value="" v-model="kfszhs" placeholder="请输入">
           </div>
@@ -88,7 +88,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit w224">业主总户数：</span>
+          <span class="ys_tit w224 zyzd">业主总户数：</span>
           <div class="ys_item_con fl" v-if="!yzzhsqx">
             <input type="number" value="" v-model="yzzhs" placeholder="请输入">
           </div>

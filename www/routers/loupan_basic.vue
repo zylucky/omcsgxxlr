@@ -17,7 +17,7 @@
           <div class="ys_item_con ellip fl" v-text="address"></div>
         </li>
         <li class="clearfix">
-          <span class="ys_tit">特色标签：</span>
+          <span class="ys_tit zyzd">特色标签：</span>
           <div class="ys_item_con fl"><a href="javascript:;">{{tsbq_t}}</a></div>
         </li>
         <li class="clearfix bg_gray" v-show="teqx">
@@ -46,7 +46,7 @@
           </div>
         </li>
         <li class="clearfix pr" v-else>
-          <span class="ys_tit">开盘日期：</span>
+          <span class="ys_tit zyzd">开盘日期：</span>
           <div class="ys_item_con fl">
             <input type="text" value=""
                    readonly
@@ -72,7 +72,7 @@
           </div>
         </li>
         <li class="clearfix">
-          <span class="ys_tit">产权性质：</span>
+          <span class="ys_tit zyzd">产权性质：</span>
           <div class="ys_item_con fl"><a href="javascript:;">{{chqxz_c}}</a></div>
         </li>
         <li class="clearfix" v-show="cqxzqx">
@@ -106,7 +106,7 @@
           </div>
         </li>
         <li class="clearfix pr">
-          <span class="ys_tit">楼盘均价：</span>
+          <span class="ys_tit zyzd">楼盘均价：</span>
           <div class="ys_item_con fl" v-if="!lpjjqx">
             <input type="text" value="" v-model="zxjnjg" readonly onfocus="this.blur()" placeholder="请输入">
             <i class="right_unit">元/㎡/天</i>

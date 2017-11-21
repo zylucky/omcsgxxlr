@@ -24,29 +24,29 @@
                     <span class="ys_tit w170" style="width: 2rem !important;">房源租售情况：</span>
                     <div class="ys_item_con fl">
                         <label class="mr20"><input type="radio"  value="1" v-model="fyzsqk" name="fang_sale">出租</label>
-                        <label><input type="radio" value="2" v-model="fyzsqk"  name="fang_sale">出售</label>
-                        <label><input type="radio" value="3" v-model="fyzsqk"  name="fang_sale">可租可售</label>
+                        <label class="mr20"><input type="radio" value="2" v-model="fyzsqk"  name="fang_sale">出售</label>
+                        <label class="mr20"><input type="radio" value="3" v-model="fyzsqk"  name="fang_sale">可租可售</label>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w170" style="width: 2rem !important;">是否精耕：</span>
                     <div class="ys_item_con fl">
                         <label class="mr20"><input type="radio"  value="1" v-model="sfjg" name="shifu_jing">是</label>
-                        <label><input type="radio" value="2" v-model="sfjg"  name="shifu_jing">否</label>
+                        <label class="mr20" style="margin-left: .25rem;"><input type="radio" value="2" v-model="sfjg"  name="shifu_jing">否</label>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w170" style="width: 2rem !important;">房源跟进状态：</span>
                     <div class="ys_item_con fl">
                         <label class="mr20" @click="sfspAction($event)"><input type="radio"  value="1" v-model="fygjzt" name="fangyuan_stat">有效</label>
-                        <label @click="sfspAction($event)"><input type="radio" value="2" v-model="fygjzt"  name="fangyuan_stat">暂缓</label>
-                        <label @click="sfspAction($event)"><input type="radio" value="3" v-model="fygjzt"  name="fangyuan_stat">无效</label>
+                        <label class="mr20" @click="sfspAction($event)"><input type="radio" value="2" v-model="fygjzt"  name="fangyuan_stat">暂缓</label>
+                        <label class="mr20" @click="sfspAction($event)"><input type="radio" value="3" v-model="fygjzt"  name="fangyuan_stat">无效</label>
                     </div>
                 </li>
                 <li class="clearfix pr" v-show="fygjlxsfxs">
                     <span class="ys_tit" style="width: 2rem !important;">房源跟进状态：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model.trim="fygjlx" placeholder="请选择" @click="openBtype">
+                        <input type="text" value="" v-model.trim="fygjlx"  onfocus="this.blur()" placeholder="请选择" @click="openBtype">
                         <i class="right_arrow" @click="openBtype">&gt;</i>
                     </div>
                 </li>
@@ -366,51 +366,57 @@
                 window.history.go(-1);
             },
             saveInfo(){
-                if(this.bezhu == "" && this.fyzsqk == "" && this.sfjg == "" && this.fygjzt == ""){
+                if(this.fygjzt != "" && !this.fygjlx){
                     Toast({
-                        message: '所有信息为空，不予保存',
+                        message: '房源跟进状态不能为空！',
                         duration: 1000
                     });
-                    setTimeout(function () {
-                        history.go(-1);
-                        //_this.$router.push({path: '/index'})
-                    }, 1000);
+                    return false;
                 }else{
-                    Indicator.open({
-                        text: '保存中...',
-                        spinnerType: 'fading-circle'
-                    });
-                    this.$http.post(
-                        this.$api + "/yhcms/web/zdfyxx/saveFyzt.do",
-                        {"parameters":{"bzh":this.bezhu,"fyid":this.fyid,"gjzt1":this.fygjzt,"gjzt2":level1[this.fygjlx],"id":this.id,"jgzt":this.sfjg,"zszt":this.fyzsqk}}
-                    ).then(function (res) {
-                        Indicator.close();
-                        var result = JSON.parse(res.bodyText);
-                        if (result.success) {
+                    if(this.bezhu == "" && this.fyzsqk == "" && this.sfjg == "" && this.fygjzt == ""){
+                        Toast({
+                            message: '所有信息为空，不予保存',
+                            duration: 1000
+                        });
+                        setTimeout(function () {
+                            history.go(-1);
+                            //_this.$router.push({path: '/index'})
+                        }, 1000);
+                    }else{
+                        Indicator.open({
+                            text: '保存中...',
+                            spinnerType: 'fading-circle'
+                        });
+                        this.$http.post(
+                            this.$api + "/yhcms/web/zdfyxx/saveFyzt.do",
+                            {"parameters":{"bzh":this.bezhu,"fyid":this.fyid,"gjzt1":this.fygjzt,"gjzt2":level1[this.fygjlx],"id":this.id,"jgzt":this.sfjg,"zszt":this.fyzsqk}}
+                        ).then(function (res) {
+                            Indicator.close();
+                            var result = JSON.parse(res.bodyText);
+                            if (result.success) {
+                                Toast({
+                                    message: '保存成功',
+                                    duration: 1000
+                                });
+                                setTimeout(function () {
+                                    history.go(-1);
+                                    //_this.$router.push({path: '/index'})
+                                }, 1000);
+                            } else {
+                                Toast({
+                                    message: '保存失败: ' + result.message,
+                                    position: 'bottom'
+                                });
+                            }
+                        }, function (res) {
                             Toast({
-                                message: '保存成功',
-                                duration: 1000
-                            });
-                            setTimeout(function () {
-                                history.go(-1);
-                                //_this.$router.push({path: '/index'})
-                            }, 1000);
-                        } else {
-                            Toast({
-                                message: '保存失败: ' + result.message,
+                                message: '保存失败',
                                 position: 'bottom'
                             });
-                        }
-                    }, function (res) {
-                        Toast({
-                            message: '保存失败',
-                            position: 'bottom'
                         });
-                    });
 
+                    }
                 }
-                console.log("shplx1 is :"+this.shplx);
-                console.log("shplx2 is :", level1);
             }
         },
         computed:{
@@ -430,6 +436,7 @@
         },
         mounted(){
             this.getInitData();
+            $('title').html("房源状态");
 
         },
     }

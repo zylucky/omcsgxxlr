@@ -132,7 +132,7 @@
                 "sshy": "",
                 target: "",
                 pickerValue: '',
-                startDate: new Date()
+                startDate: new Date("2000-01-01")
             }
         },
         methods: {
@@ -165,6 +165,7 @@
                 const target = $(e.target), val = target.attr("v");
                 this.target = val;
                 this.$refs.picker.open();
+                console.log(this.startDate);
             },
             handleConfirm(value){
                 this[this.target || "zq1"] = this.transformDate(value);

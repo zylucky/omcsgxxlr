@@ -12,13 +12,14 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(MintUI);
 
+//Vue.prototype.$prefix = "http://47.92.145.21:81" //图片前缀
 Vue.prototype.$prefix = "http://116.62.68.26:81" //图片前缀
 
 // 测试环境
 //Vue.prototype.$api = "http://192.168.0.222:8080" //api地址
 
 // 生产环境
-//Vue.prototype.$api = "http://omc.urskongjian.com" //api地址
+//Vue.prototype.$api = "http://omc.urskongjian.com" //api地址线上
 Vue.prototype.$api = "http://116.62.68.26:8080" //api地址116的服务地址
 //Vue.prototype.$api = "http://yhcms.tunnel.qydev.com" //api地址本地
 

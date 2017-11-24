@@ -190,7 +190,7 @@
         </div>-->
 
         <li class="clearfix pr border_top">
-          <span class="ys_tit w224 hy1Class zyzd">参考租赁价格：</span>
+          <span class="ys_tit w224 hy1Class">参考租赁价格：</span>
           <span class="ys_tit w224 hy2Class zyzd" style="display:none">对外价格：</span>
 
           <div class="ys_item_con fl" v-if="!ckzljgqx">
@@ -231,7 +231,7 @@
         </li>
 
         <li class="clearfix pr">
-          <span class="ys_tit w224">业主租金底价：</span>
+          <span class="ys_tit w224 zyzd">业主租金底价：</span>
           <div class="ys_item_con fl" v-if="!zjdjqx">
             <input type="number" value="" placeholder="请输入" v-model.trim="zjdj">
             <i class="right_unit">元/㎡/天</i>

@@ -20,19 +20,19 @@
     <div class="all_elements">
         <div class="build_top ele_wrap">
             <ul class="ys_item_ul mb60">
-                <li class="clearfix">
+               <!-- <li class="clearfix">
                     <span class="ys_tit w170" style="width: 2rem !important;">房源租售情况：</span>
                     <div class="ys_item_con fl">
                         <label class="mr20"><input type="radio"  value="1" v-model="fyzsqk" name="fang_sale">出租</label>
                         <label class="mr20"><input type="radio" value="2" v-model="fyzsqk"  name="fang_sale">出售</label>
                         <label class="mr20"><input type="radio" value="3" v-model="fyzsqk"  name="fang_sale">可租可售</label>
                     </div>
-                </li>
+                </li>-->
                 <li class="clearfix">
                     <span class="ys_tit w170" style="width: 2rem !important;">是否精耕：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20"><input type="radio"  value="1" v-model="sfjg" name="shifu_jing">是</label>
-                        <label class="mr20" style="margin-left: .25rem;"><input type="radio" value="2" v-model="sfjg"  name="shifu_jing">否</label>
+                        <label class="mr20"><input type="radio" disabled value="1" v-model="sfjg" name="shifu_jing">是</label>
+                        <label class="mr20" style="margin-left: .25rem;"><input disabled type="radio" value="2" v-model="sfjg"  name="shifu_jing">否</label>
                     </div>
                 </li>
                 <li class="clearfix">
@@ -74,7 +74,7 @@
 </template>
 <script>
     const level1 = {
-        "45天内到期":"1","90天内到期":"2","当前空置":"3","当前不可租":"4","他租":"5","非正常到期":"6","无效房源":"7","不确定":"8"
+        "45天内到期":"1","90天内到期":"2","当前空置":"3","业主直租":"4","资产公司压房或转租":"5","纠纷中":"6","意向不明确":"7","无业主电话":"8","业主电话无效":"9"
     };
     import { Toast } from 'mint-ui'; //toast
     import { Indicator} from 'mint-ui'; //toast
@@ -110,12 +110,12 @@
                 ],
                 slots_bType1: [
                     {
-                        values: ['非正常到期','当前不可租', '他租'],
+                        values: ['业主直租','资产公司压房或转租','纠纷中','意向不明确'],
                     }
                 ],
                 slots_bType2: [
                     {
-                        values: ['无效房源','不确定'],
+                        values: ['无业主电话','业主电话无效'],
                     }
                 ],
             }
@@ -269,22 +269,25 @@
                             if(data.gjzt1 == 2){
                                 this.fygjztxl = 2;
                                 if(this.fygjlx == 4){
-                                    this.fygjlx = "当前不可租";
+                                    this.fygjlx = "业主直租";
                                 }
                                 if(this.fygjlx == 5){
-                                    this.fygjlx = "他租";
+                                    this.fygjlx = "资产公司压房或转租";
                                 }
                                 if(this.fygjlx == 6){
-                                    this.fygjlx = "非正常到期";
+                                    this.fygjlx = "纠纷中";
+                                }
+                                if(this.fygjlx == 7){
+                                    this.fygjlx = "意向不明确";
                                 }
                             }
                             if(data.gjzt1 == 3){
                                 this.fygjztxl = 3;
-                                if(this.fygjlx == 7){
-                                    this.fygjlx = "无效房源";
-                                }
                                 if(this.fygjlx == 8){
-                                    this.fygjlx = "不确定";
+                                    this.fygjlx = "无业主电话";
+                                }
+                                if(this.fygjlx == 9){
+                                    this.fygjlx = "业主电话无效";
                                 }
                             }
                             this.statuess = 1;

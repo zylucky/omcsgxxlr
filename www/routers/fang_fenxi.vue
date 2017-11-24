@@ -18,6 +18,9 @@
     .kztske{background-color:rgb(255,214,170);color:rgb(254,122,14);}
     .kztszdcss{text-align: center;border: 1.5px solid rgb(254,122,14);line-height: 0.7rem;}
     .danwei{clear: both;margin-top: 0.2rem;font-size: 0.32rem;width: 1.6rem;float: right;color:rgb(130,130,130);}
+    .jindtname{height:1rem !important;line-height:1rem;width:2.8rem !important;}
+    .jindt{height:0.7rem !important;border: 1px solid black;line-height:0.7rem;margin-right:0rem !important;width:3.8rem !important;margin-top: 0.15rem;}
+    .jindtpfb{border: 1px solid red;line-height: 0.5rem;height: 0.5rem;margin-top: 0.08rem;width: 50%;}
 </style>
 <template>
     <div>
@@ -36,11 +39,11 @@
             <div class="sssj" style="width: 2rem !important;">单位：元/㎡/天</div>
             <div id="main2" style="width:100%;height:8rem;"></div>
         </div>
-        <div style="background-color: white !important;height: 10.3rem;margin-top: 0.2rem;border:1px solid red;">
+        <div style="background-color: white !important;margin-top: 0.2rem;">
             <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>与周边项目空置竞争房源对比</div>
             <div class="sssj" style="width: 2rem !important;">实时数据</div>
-            <div style="height:0.4rem;border-bottom:1px solid #999999;"></div>
-            <ul class="ys_item_ul mb60" style="margin-top: 0.4rem;border: 1px solid #dbdadf;border-bottom: 0px solid #dbdadf;">
+            <div style="height:0.4rem;border-bottom:1px solid #dbdadf;"></div>
+            <ul class="ys_item_ul mb60" style="margin-top: 0.4rem;">
                 <li class="clearfix fyfxhx fyfxhxdjzh" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
                         <div class="ys_item_con fl pfmdjzh" style="margin-left: -0.25rem;text-align: center;">户型1 </div>
@@ -90,7 +93,7 @@
                     </a>
                 </li>
             </ul>
-            <ul style="clear: both;font-size: 0.36rem;margin-top: 3rem;">
+            <ul style="clear: both;font-size: 0.36rem;margin-top: 3.5rem;">
                 <li>
                     <a href="javascript:;">
                         <div @click="kztske($event)" class="ys_item_con fl kztszdcss kztske" style="width: 2.3rem;margin-left: 0.2rem;border-right:0px;border-bottom-left-radius:5px;border-top-left-radius:5px;">可租套数</div>
@@ -108,51 +111,7 @@
                 </li>
             </ul>
             <div class="danwei">单位：套</div>
-            <!--<ul>
-                <li class="ys_listcon pv15 clearfix" v-for="item in resultData">
-                    <a href="javascript:;" class="supply_box" :lpid="item.id">
-                        <dl class="supply">
-                            <dt @click="shadowShow">
-                                <img v-if="item.pic" :src="$prefix + '/' + item.pic">
-                                <img v-else :src="$prefix + '/upload/2017-08-27/6404b4de960b81fc5403c870aefcea34.png'">
-                            </dt>
-                            <dd class="supply_msg_box clearfix" @click="shadowShow">
-                                <dl>
-                                    <dd class="supply_house">{{item.topic}}</dd>
-                                    <dd class="supply_color ellipsis">{{item.adddress}}</dd>
-                                    <dd>
-                                        <dl class="cell">
-                                            <dd><span v-show="item.jnjg!=='0'">{{item.jnjg}}</span> 元/㎡·天</dd>
-                                            <dd>
-                                                <i style="display: block;position: relative;top: -0.31rem;left: 1.5rem;" v-show="item.mj1!=='0.0'" v-if="item.mj1 != item.mj2">{{item.mj1}} - {{item.mj2}}㎡</i>
-                                                <i style="display: block;position: relative;top: 0rem;left: 0rem;" v-show="item.mj1!=='0.0'" v-else>{{item.mj1}}㎡</i>
-                                            </dd>
-                                        </dl>
-                                    </dd>
-                                </dl>
-                            </dd>
-                        </dl>
-                    </a>
-                </li>
-            </ul>-->
-
-
-
-            <ul style="border: 1px solid red;clear: both;">
-                <li class="ys_listcon pv15 clearfix">
-                    <dl class="supply">
-                        <dt>22222</dt>
-                        <dd class="supply_msg_box clearfix">
-                            <dl>11111</dl>
-                        </dd>
-                    </dl>
-                </li>
-            </ul>
-
-
-
-
-
+            <div id="main3" style="width:100%;height:10rem;background-color: white;clear: both;"></div>
         </div>
     </div>
 </template>
@@ -183,10 +142,15 @@
                 kzfy:'',//空置房源
                 wzfy:'',//未知房源
                 yzfy:'',//已租房源
+                qqj:0,
+                hqj:100,
+                sctype:1,
                 tpdata:[],
                 tpdata1:[],
                 yrzdata:[],
                 scjjdata:[],
+                resuldata:{},
+                zhouqidata:[],
 
             }
         },
@@ -194,6 +158,7 @@
             //获取后台的数据
             getInitData(){
                 const lpid = this.$route.params.lpid;
+                this.lpid = lpid;
                 Indicator.open({
                     text: '',
                     spinnerType: 'fading-circle'
@@ -204,7 +169,6 @@
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
                     const result = JSON.parse(res.bodyText);
-                    that.lpid = lpid;
                     that.topic = result.topic;//楼盘名称
                     that.wdqfy = data.w4;//未到期房源
                     that.swdqfy = data.w2;//45天内到期房源
@@ -213,14 +177,28 @@
                     that.kzfy = data.kzcount;//可出租房源(空置房源)
                     that.wzfy = data.wzcount;//未知房源
                     that.yzfy = data.yzcount;//已租房源
-                    this.tpdata.push({value:this.kzfy,name:'可出租房源'});
-                    this.tpdata.push({value:this.wdqfy,name:'未到期房源'});
-                    this.tpdata.push({value:this.qsdqfy,name:'90天内到期房源'});
-                    this.tpdata.push({value:this.swdqfy,name:'45天内到期房源'});
-                    this.tpdata.push({value:this.xxbq,name:'信息不全'});
-                    this.tpdata1.push({value:this.kzfy,name:'空置房源'});
-                    this.tpdata1.push({value:this.wzfy,name:'未知房源'});
-                    this.tpdata1.push({value:this.yzfy,name:'已租房源'});
+                    if(this.kzfy != 0){
+                        this.tpdata.push({value:this.kzfy,name:'可出租房源'});
+                        this.tpdata1.push({value:this.kzfy,name:'空置房源'});
+                    }
+                    if(this.wdqfy != 0){
+                        this.tpdata.push({value:this.wdqfy,name:'未到期房源'});
+                    }
+                    if(this.qsdqfy != 0){
+                        this.tpdata.push({value:this.qsdqfy,name:'90天内到期房源'});
+                    }
+                    if(this.swdqfy != 0){
+                        this.tpdata.push({value:this.swdqfy,name:'45天内到期房源'});
+                    }
+                    if(this.xxbq != 0){
+                        this.tpdata.push({value:this.xxbq,name:'信息不全'});
+                    }
+                    if(this.wzfy != 0){
+                        this.tpdata1.push({value:this.wzfy,name:'未知房源'});
+                    }
+                    if(this.yzfy != 0){
+                        this.tpdata1.push({value:this.yzfy,name:'已租房源'});
+                    }
                     $('title').html(that.topic);
                     this.pic();
                 }, (res)=>{
@@ -230,13 +208,27 @@
                 this.$http.post(url1,{"lpid":lpid}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    this.yrzdata.push({value:data.jr,name:'金融'});
-                    this.yrzdata.push({value:data.jy,name:'教育'});
-                    this.yrzdata.push({value:data.it,name:'互联网'});
-                    this.yrzdata.push({value:data.xx,name:'休闲'});
-                    this.yrzdata.push({value:data.wh,name:'文化'});
-                    this.yrzdata.push({value:data.fdc,name:'房地产'});
-                    this.yrzdata.push({value:data.qt,name:'其它'});
+                    if(data.jr != 0){
+                        this.yrzdata.push({value:data.jr,name:'金融'});
+                    }
+                    if(data.jy != 0){
+                        this.yrzdata.push({value:data.jy,name:'教育'});
+                    }
+                    if(data.it != 0){
+                        this.yrzdata.push({value:data.it,name:'互联网'});
+                    }
+                    if(data.xx != 0){
+                        this.yrzdata.push({value:data.xx,name:'休闲'});
+                    }
+                    if(data.wh != 0){
+                        this.yrzdata.push({value:data.wh,name:'文化'});
+                    }
+                    if(data.fdc != 0){
+                        this.yrzdata.push({value:data.fdc,name:'房地产'});
+                    }
+                    if(data.qt != 0){
+                        this.yrzdata.push({value:data.qt,name:'其它'});
+                    }
                     this.shanx();
                 }, (res)=>{
                     Indicator.close()
@@ -248,27 +240,35 @@
                     const count = data.length;
                     if(count >= 1){
                         this.scjjdata.push({value:data[0].zxjnjg});
+                        this.zhouqidata.push({value:data[0].time1});
                     }
                     if(count >= 2){
                         this.scjjdata.push({value:data[1].zxjnjg});
+                        this.zhouqidata.push({value:data[1].time1});
                     }
                     if(count >= 3){
                         this.scjjdata.push({value:data[2].zxjnjg});
+                        this.zhouqidata.push({value:data[2].time1});
                     }
                     if(count >= 4){
                         this.scjjdata.push({value:data[3].zxjnjg});
+                        this.zhouqidata.push({value:data[3].time1});
                     }
                     if(count >= 5){
                         this.scjjdata.push({value:data[4].zxjnjg});
+                        this.zhouqidata.push({value:data[4].time1});
                     }
                     if(count >= 6){
                         this.scjjdata.push({value:data[5].zxjnjg});
+                        this.zhouqidata.push({value:data[5].time1});
                     }
                     if(count >= 7){
                         this.scjjdata.push({value:data[6].zxjnjg});
+                        this.zhouqidata.push({value:data[6].time1});
                     }
                     if(count >= 8){
                         this.scjjdata.push({value:data[7].zxjnjg});
+                        this.zhouqidata.push({value:data[7].time1});
                     }
                     this.zhex();
                 }, (res)=>{
@@ -290,12 +290,18 @@
                         left: 'center',
                         data:['可出租房源','未到期房源','90天内到期房源','45天内到期房源','信息不全']
                     },
+                    grid: {
+                        left: '10%',
+                        containLabel: false,
+                    },
+                    //color:['red', 'green','yellow','blueviolet'],//设置扇形图固定的颜色
                     series: [
                         {
                             name:'',
                             type:'pie',
                             selectedMode: 'single',
                             radius: [0, '30%'],
+                            //radius: [0, '25%'],
                             label: {
                                 normal: {
                                     position: 'inner'
@@ -312,6 +318,7 @@
                             name:'',
                             type:'pie',
                             radius: ['40%', '55%'],
+                            //radius: ['30%', '45%'],
                             label: {
                                 normal: {
                                     formatter: '{b|{b}:\n}{c}\n{per|{d}%}\n',
@@ -347,7 +354,8 @@
                             },
                             data:this.tpdata,
                         }
-                    ]
+                    ],
+
                 };
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
@@ -367,6 +375,7 @@
                         left: 'center',
                         data: ['金融', '教育','互联网','休闲','文化','房地产','其它']
                     },
+                    //color:['red', 'green','yellow','blueviolet'],//设置扇形图固定的颜色
                     series : [
                         {
                             type: 'pie',
@@ -404,7 +413,7 @@
                             dataView: {readOnly: false},
                             magicType: {type: ['line', 'bar']},
                             restore: {},
-                            saveAsImage: {}
+                            //saveAsImage: {}//控制保存按钮
                         }
                     },
                     xAxis: [{
@@ -414,7 +423,8 @@
                         },
                         type: 'category',
                         boundaryGap: false,
-                        data:['第一周','第二周','第三周','第四周','第五周','第六周','第七周','第八周']
+                        //data:['第一周','第二周','第三周','第四周','第五周','第六周','第七周','第八周']
+                        data:this.zhouqidata
                     }],
                     yAxis: {
                         type: 'value',
@@ -444,6 +454,7 @@
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
             },
+            //选择户型
             fyfxhxsj(e){
                 //获取HTML超链接页面上的文字内容
                 const li = $(e.target).closest("li"), txt = $(li).find(".qv").text();
@@ -458,72 +469,294 @@
                 }
                 li.siblings().removeClass("fyfxhxdjzh");
                 var qvjian = new Array();
-                var qqj = "";
-                var hqj = "";
                 qvjian = txt.split("-");
                 console.log(qvjian);
                 if(qvjian.length == 1){
-                    qqj = qvjian[0];
-                    hqj = 9999;
+                    this.qqj = qvjian[0];
+                    this.hqj = 9999;
                 }else{
-                    qqj = qvjian[0];
-                    hqj = qvjian[1];
+                    this.qqj = qvjian[0];
+                    this.hqj = qvjian[1];
                 }
+                if(this.sctype == 2){
+                    const url2 = this.$api + "/yhcms/web/jcsj/wxJnjxx.do";
+                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+                        Indicator.close();
+                        const data = JSON.parse(res.bodyText).data;
+                        /*for(var i=0;i<data.length;i++){
+                            if(data[i].jnjg){
+                                var dgdata = data[i].jnjg;
+                                dgdata = parseInt(dgdata);
+                                dgdata = dgdata/(15);
+                                data[i].jnjg = dgdata*100;
+                                data[i].jnjg = data[i].jnjg + "%";
+                            }
+                        }*/
+                        this.resuldata = data;
+                        this.zhuxing();
+                    }, (res)=>{
+                        Indicator.close()
+                    });
+                }else if(this.sctype == 3){
+                    const url2 = this.$api + "/yhcms/web/jcsj/wxXszq.do";
+                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+                        Indicator.close();
+                        const data = JSON.parse(res.bodyText).data;
+                        /*for(var i=0;i<data.length;i++){
+                            if(data[i].xszq){
+                                var dgdata = data[i].xszq;
+                                dgdata = parseInt(dgdata);
+                                dgdata = dgdata/(30);
+                                data[i].xszq = dgdata*100;
+                                data[i].xszq = data[i].xszq + "%";
+                            }
+                        }*/
+                        this.resuldata = data;
+                        this.zhuxing();
+                    }, (res)=>{
+                        Indicator.close()
+                    });
+                }else{
+                    const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
+                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+                        Indicator.close();
+                        const data = JSON.parse(res.bodyText).data;
+                        /*for(var i=0;i<data.length;i++){
+                            if(data[i].kzcount){
+                                var dgdata = data[i].kzcount;
+                                dgdata = parseInt(dgdata);
+                                dgdata = dgdata/(20);
+                                data[i].kzcount = dgdata*100;
+                                data[i].kzcount = data[i].kzcount + "%";
+                            }
+                        }*/
+                        this.resuldata = data;
+                        this.zhuxing();
+                    }, (res)=>{
+                        Indicator.close()
+                    });
+                }
+
+            },
+            //可租套数
+            kztske(e){
+                this.sctype = 1;
+                //获取HTML超链接页面上的文字内容
+                const li = $(e.target).closest("div");
+                //加一个class样式
+                li.addClass("kztske").parent().parent().siblings().children().children().removeClass("kztske");
                 const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
-                this.$http.post(url2,{"lpid":this.lpid,"m1":qqj,"m2":hqj}).then((res)=>{
+                this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    console.log(data);
-                    const count = data.length;
+                    //计算百分比
+                   /* for(var i=0;i<data.length;i++){
+                        if(data[i].kzcount){
+                            var dgdata = data[i].kzcount;
+                            dgdata = parseInt(dgdata);
+                            dgdata = dgdata/(20);
+                            data[i].kzcount = dgdata*100;
+                            data[i].kzcount = data[i].kzcount + "%";
+                        }
+                    }*/
+                    this.resuldata = data;
+                    this.zhuxing();
                 }, (res)=>{
                     Indicator.close()
                 });
 
             },
-            kztske(e){
-                //获取HTML超链接页面上的文字内容
-                const li = $(e.target).closest("div");
-                //加一个class样式
-                li.addClass("kztske").parent().parent().siblings().children().children().removeClass("kztske");
-                const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
-                this.$http.post(url2,{"lpid":this.lpid,"m1":qqj,"m2":hqj}).then((res)=>{
-                    Indicator.close();
-                    const data = JSON.parse(res.bodyText).data;
-                    console.log(data);
-                    const count = data.length;
-                }, (res)=>{
-                    Indicator.close()
-                });
-            },
+            //市场均价
             kztssc(e){
+                this.sctype = 2;
                 //获取HTML超链接页面上的文字内容
                 const li = $(e.target).closest("div");
                 //加一个class样式
                 li.addClass("kztske").parent().parent().siblings().children().children().removeClass("kztske");
-                const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
-                this.$http.post(url2,{"lpid":this.lpid,"m1":qqj,"m2":hqj}).then((res)=>{
+                const url2 = this.$api + "/yhcms/web/jcsj/wxJnjxx.do";
+                this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    console.log(data);
-                    const count = data.length;
+                    //计算百分比
+                    for(var i=0;i<data.length;i++){
+                        if(data[i].jnjg){
+                            var dgdata = data[i].jnjg;
+                            dgdata = parseInt(dgdata);
+                            dgdata = dgdata/(15);
+                            data[i].jnjg = dgdata*100;
+                            data[i].jnjg = data[i].jnjg + "%";
+                        }
+                    }
+                    this.resuldata = data;
+                    this.zhuxing();
                 }, (res)=>{
                     Indicator.close()
                 });
             },
+            //平均销售周期
             kztszq(e){
+                this.sctype = 3;
                 //获取HTML超链接页面上的文字内容
                 const li = $(e.target).closest("div");
                 //加一个class样式
                 li.addClass("kztske").parent().parent().siblings().children().children().removeClass("kztske");
-                const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
-                this.$http.post(url2,{"lpid":this.lpid,"m1":qqj,"m2":hqj}).then((res)=>{
+                const url2 = this.$api + "/yhcms/web/jcsj/wxXszq.do";
+                this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    console.log(data);
-                    const count = data.length;
+                    //计算百分比
+                    /*for(var i=0;i<data.length;i++){
+                        if(data[i].xszq){
+                            var dgdata = data[i].xszq;
+                            dgdata = parseInt(dgdata);
+                            dgdata = dgdata/(30);
+                            data[i].xszq = dgdata*100;
+                            data[i].xszq = data[i].xszq + "%";
+                        }
+                    }*/
+                    this.resuldata = data;
+                    this.zhuxing();
                 }, (res)=>{
                     Indicator.close()
                 });
+            },
+            //柱形图
+            zhuxing(){
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main3'));
+                // 指定图表的配置项和数据
+                var builderJson = {
+                    "charts":this.resuldata,
+                };
+
+                var waterMarkText = 'ECHARTS';
+
+                var canvas = document.createElement('canvas');
+                var ctx = canvas.getContext('2d');
+                canvas.width = canvas.height = 100;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.globalAlpha = 0.08;
+                ctx.font = '20px Microsoft Yahei';
+                ctx.translate(50, 50);
+                ctx.rotate(-Math.PI / 4);
+                ctx.fillText(waterMarkText, 0, 0);
+
+                var option = {
+                    backgroundColor: {
+                        type: 'pattern',
+                        backgroundColor: '#FFFFFF',
+                        borderColor: '#FFFFFF',
+                        repeat: 'repeat'
+                    },
+                    grid: [{
+                        top: 50,
+                        width: '80%',
+                        height: '80%',
+                        bottom: '25%',
+                        left: 10,
+                        containLabel: true
+                    }, {
+                        top: '55%',
+                        width: '50%',
+                        bottom: 0,
+                        left: 10,
+                        containLabel: true
+                    }],
+                    xAxis: {
+                        type: 'value',
+                        max: builderJson.all,
+                        //show: false,//false是不显示x轴
+                        axisTick: {width:10},//length后面这个数字用来设置坐标轴刻度的长度
+                        splitLine: {
+                            show: false
+                        }
+                    },
+                    yAxis:{
+                        type: 'category',
+                        data: Object.keys(builderJson.charts),
+                        /*axisLine: {
+                            lineStyle: {
+                                color:'white',//坐标轴的颜色
+                            }
+                        },*/
+                        /*axisLine: {
+                            lineStyle: {
+                                type: 'solid',
+                                color:'#fff',
+                                width:'2'
+                            }
+                        },*/
+                        /*//去掉坐标轴刻度线
+                        axisTick: {
+                            show: false
+                        },*/
+                        axisLabel: {
+                            interval: 0,
+                            maxInterval:2,
+                            minInterval:1,
+                            rotate: 0,
+                            color: '#000000',//坐标值得具体的颜色
+                        },
+                        splitLine:{ show:false},  //设置不显示坐标区域内的y轴分割线
+                    },
+
+                    color:['red', 'green','yellow','blueviolet'],
+                    series: [{
+                        type: 'bar',
+                        stack: 'chart',
+                        barMaxWidth: '20%',//柱子的宽度
+                        z: 3,
+                        label: {
+                            normal: {
+                                position: 'right',
+                                show: true,
+
+                            }
+                        },
+                        itemStyle: {
+                            //通常情况下：
+                            normal:{
+                                //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
+                                color: function (params){
+                                    var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','rgb(195,229,235)'];
+                                    return colorList[params.dataIndex];
+                                },
+                            },
+                            //鼠标悬停时：
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        },
+                        data: Object.keys(builderJson.charts).map(function (key) {
+                            return builderJson.charts[key];
+                        }),
+                        barGap:'-100%',
+                        barCategoryGap:'40%',
+                    }/*, {
+                        type: 'bar',
+                        stack: 'chart',
+                        silent: true,
+                        itemStyle: {
+                            normal: {
+                                color: '#eee',
+                            }
+                        },
+                        data: Object.keys(builderJson.charts).map(function (key) {
+                            return builderJson.all - builderJson.charts[key];
+                        })
+                    }*/],
+                    //控制边距　
+                    /*grid: {
+                        left: '0%',
+                        right:'10%',
+                        containLabel: true,
+                    },*/
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
             },
         },
         mounted(){
@@ -540,6 +773,24 @@
                 },"json")
             });*/
             this.getInitData();
+            const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
+            this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+                Indicator.close();
+                const data = JSON.parse(res.bodyText).data;
+                /*for(var i=0;i<data.length;i++){
+                    if(data[i].kzcount){
+                        var dgdata = data[i].kzcount;
+                        dgdata = parseInt(dgdata);
+                        dgdata = dgdata/(20);
+                        data[i].kzcount = dgdata*100;
+                        data[i].kzcount = data[i].kzcount + "%";
+                    }
+                }*/
+                this.resuldata = data;
+                this.zhuxing();
+            }, (res)=>{
+                Indicator.close()
+            });
         }
     }
 </script>

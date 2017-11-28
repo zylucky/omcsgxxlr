@@ -83,6 +83,10 @@
           background: url("../resources/images/icons/basic_icon/basic11.png") no-repeat;
           background-size: .90rem .90rem;
         }
+        &.basic_23 {
+          background: url("../resources/images/icons/basic_icon/basic23.png") no-repeat;
+          background-size: .90rem .90rem;
+        }
         &.basic_12 {
           background: url("../resources/images/icons/basic_icon/basic12.png") no-repeat;
           background-size: .90rem .90rem;
@@ -359,17 +363,17 @@
           <i class="basic_12" style="margin: .2rem auto .1rem;"></i>
           <span>楼盘分析</span>
         </router-link>
+        <router-link class="bulid_msg_item" :to="{path:'/fang_fenxi/'+lpid}">
+          <i class="basic_23" style="margin: .2rem auto .1rem;"></i>
+          <span>竞争房源分析</span>
+        </router-link>
         <router-link class="bulid_msg_item" :to="{path:'/zuodong_list/'+lpid}" style="height: 1.7rem;">
-          <i class="basic_11" style="margin: .2rem auto .1rem;"></i>
+          <i class="basic_11" style="margin: .1rem auto .1rem;"></i>
           <span>座栋信息</span>
         </router-link>
         <router-link class="bulid_msg_item" :to="{path:'/fang_list/'+lpid}">
           <i class="basic_09" style="margin: .1rem auto .1rem;"></i>
           <span>房源信息</span>
-        </router-link>
-        <router-link class="bulid_msg_item" :to="{path:'/fang_fenxi/'+lpid}">
-          <i class="basic_09" style="margin: .1rem auto .1rem;"></i>
-          <span>竞争房源分析</span>
         </router-link>
         <a class="bulid_msg_item" href="#" @click.stop.prevent="toDetail">
           <i class="basic_13" style="margin: .1rem auto .1rem;"></i>

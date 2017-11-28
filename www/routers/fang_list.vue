@@ -79,6 +79,10 @@
           background: url("../resources/images/icons/basic_icon/basic13.png") no-repeat;
           background-size: .90rem .90rem;
         }
+        &.basic_22 {
+          background: url("../resources/images/icons/basic_icon/basic22.png") no-repeat;
+          background-size: .90rem .90rem;
+        }
       }
     }
   }
@@ -327,9 +331,13 @@
           <span>注册信息</span>
         </router-link>
         <router-link class="bulid_msg_item"  :to="{path:'/fang_genjin/'+fyid}" style="height: 1.7rem;" v-show="fygjqx">
-          <i class="basic_13" style="margin: .2rem auto .1rem;"></i>
+          <i class="basic_22" style="margin: .1rem auto .1rem;"></i>
           <span>房源状态</span>
         </router-link>
+        <!--<router-link class="bulid_msg_item"  :to="{path:'/fang_shouzbg/'+fyid}" style="height: 1.7rem;">
+          <i class="basic_14" style="margin: .1rem auto .1rem;"></i>
+          <span>售中报告</span>
+        </router-link>-->
         <a class="bulid_msg_item" href="#" @click.stop.prevent="toDetail">
           <i class="basic_09" style="margin: .1rem auto .1rem;"></i>
           <span>房源预览</span>
@@ -472,6 +480,10 @@
                         window.history.go(-1);
                         return;
                     }else if(data.ryzt == 4){
+                        this.fygjqx = false;
+                    }else if(data.fyzt == 1){
+                        this.fygjqx = false;
+                    }else if(data.qxzt == 20 || data.qxzt == 30){
                         this.fygjqx = false;
                     }else{
                         this.fygjqx = true;

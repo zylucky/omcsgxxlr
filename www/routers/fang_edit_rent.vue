@@ -79,7 +79,7 @@
         </li>
         <div class="hy_class" >
           <li class="clearfix">
-            <span class="ys_tit">所属行业：</span>
+            <span class="ys_tit zyzd">所属行业：</span>
             <div class="ys_item_con fl">
               <input type="text" value="" :readonly="sshyqx" v-model="sshy" placeholder="请输入">
             </div>
@@ -141,7 +141,7 @@
                 "sshy": "",
                 target: "",
                 pickerValue: '',
-                startDate: new Date(),
+                startDate: new Date("2000-01-01"),
                 topicqx:false,
                 fhqx:false,
                 zlmjqx:false,
@@ -194,9 +194,6 @@
                     const data=data12.zhxx;
                     that.fybh=data1.fybh;
                     var chqxz=data1.chqxz;
-                    if(chqxz=='公寓'){
-                        $(".hy_class").css("display","none");
-                    }
                     if(data!=''){
                         that.id=data.id;
                         that.topic = data.topic;

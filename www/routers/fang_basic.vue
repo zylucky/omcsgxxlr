@@ -1029,6 +1029,7 @@
             } ,
             fanhui(){
                 window.history.go(-1);
+                //window.location.href = "http://192.168.1.49:7071/#/loupan_basic/3255";
             },
             saveInfo(){
                 var _this = this;

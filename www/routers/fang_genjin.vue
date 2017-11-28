@@ -31,8 +31,8 @@
                 <li class="clearfix">
                     <span class="ys_tit w170" style="width: 2rem !important;">是否精耕：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20"><input type="radio" disabled value="1" v-model="sfjg" name="shifu_jing">是</label>
-                        <label class="mr20" style="margin-left: .25rem;"><input disabled type="radio" value="2" v-model="sfjg"  name="shifu_jing">否</label>
+                        <label class="mr20"><input type="radio" value="1" v-model="sfjg" name="shifu_jing">是</label>
+                        <label class="mr20" style="margin-left: .25rem;"><input type="radio" value="2" v-model="sfjg"  name="shifu_jing">否</label>
                     </div>
                 </li>
                 <li class="clearfix">

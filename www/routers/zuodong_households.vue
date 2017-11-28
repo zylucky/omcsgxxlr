@@ -238,9 +238,13 @@
         },
         computed:{
             kzhbl_t(){
-                const bl = (parseInt(this.kzhsh) / parseInt(this.zhsh) * 100).toFixed(2);
-                this.kzhbl = bl;
-                return isNaN(bl) ? "" : bl;
+                if(this.kzhsh != '' && this.zhsh != ''){
+                    const bl = (parseInt(this.kzhsh) / parseInt(this.zhsh) * 100).toFixed(2);
+                    this.kzhbl = bl;
+                }else{
+                    this.kzhbl = "";
+                }
+                return this.kzhbl;
             }
         },
         mounted(){

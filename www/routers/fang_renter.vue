@@ -148,50 +148,51 @@
             modifyRent1(e){
                 const target = $(e.target), val = target.attr("rent");
                 let  _this=this;
-                Indicator.open({
-                    text: '删除中...',
-                    spinnerType: 'fading-circle'
-                });
+                MessageBox.confirm('确定删除此租户信息吗?').then(action => {
+                    Indicator.open({
+                        text: '删除中...',
+                        spinnerType: 'fading-circle'
+                    });
+                    this.$http.post(
+                        this.$api + "/yhcms/web/zdfyxx/deleteZhxx.do",
+                        {
+                            "parameters": {
+                                "id": val
+                            },
+                            "foreEndType": 2,
+                            "code": "300000031"
+                        }
+                    ).then(function (res) {
+                        Indicator.close();
+                        var result = JSON.parse(res.bodyText);
+                        console.log(result);
+                        if (result.success) {
+                            Toast({
+                                message: '删除成功',
+                                position: 'bottom',
+                                duration: 1000
+                            });
 
-                this.$http.post(
-                    this.$api + "/yhcms/web/zdfyxx/deleteZhxx.do",
-                    {
-                        "parameters": {
-                            "id": val
-                        },
-                        "foreEndType": 2,
-                        "code": "300000031"
-                    }
-                ).then(function (res) {
-                    Indicator.close();
-                    var result = JSON.parse(res.bodyText);
-                    console.log(result);
-                    if (result.success) {
+                            setTimeout(function(){
+                                window.location.reload();
+                                //location='/#/fang_renter/'+_this.id;
+
+                                // _this.$router.push({path:'/fang_renter/'+_this.id});
+
+                            },500);
+
+                        } else {
+                            Toast({
+                                message: '删除失败: ' + result.message,
+                                position: 'bottom'
+                            });
+                        }
+                    }, function (res) {
+                        Indicator.close();
                         Toast({
-                            message: '删除成功',
-                            position: 'bottom',
-                            duration: 1000
-                        });
-
-                        setTimeout(function(){
-                            window.location.reload();
-                            //location='/#/fang_renter/'+_this.id;
-
-                            // _this.$router.push({path:'/fang_renter/'+_this.id});
-
-                        },500);
-
-                    } else {
-                        Toast({
-                            message: '删除失败: ' + result.message,
+                            message: '删除失败! 请稍候再试',
                             position: 'bottom'
                         });
-                    }
-                }, function (res) {
-                    Indicator.close();
-                    Toast({
-                        message: '删除失败! 请稍候再试',
-                        position: 'bottom'
                     });
                 });
             }

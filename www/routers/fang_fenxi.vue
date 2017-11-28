@@ -5,39 +5,69 @@
     }
     .cwkz{font-size: 0.38rem !important;font-weight: 900;padding-top: 0.5rem !important;margin: auto;text-align:center;}
     .sssj{color: #999999;margin-top: 0.2rem !important;margin: auto;width: 1.5rem;}
-    .fyfxhx{width: 1.6rem;float: left;margin-left: 0.2rem;margin-top: 0.4rem;font-size:0.24rem;border-radius:5px;}
-    .ys_item_ul li{border: 1px solid #dbdadf;line-height: .4rem;}
+    .fyfxhx{width: 1.6rem;float: left;margin-left: 0.2rem;margin-top: 0.4rem;font-size:0.24rem;border-radius:5px;border: 1px solid rgb(137,217,226);line-height: .4rem !important;border-bottom: 1px solid rgb(137,217,226) !important;}
     .ys_item_con{width: 1.6rem;}
-    .hxff{color: rgb(166,166,166);}
+    /*.hxff{color: rgb(166,166,166);}*/
+    .hxff{color: rgb(69,110,114);}
     .qv{width: 1.6rem;text-align: center;}
-    .qvdjzq{color: rgb(166,166,166);}
-    .pfmdjzq{color: rgb(166,166,166);}
-    .pfmdjzh{color: rgb(254,122,14);}
-    .fyfxhxdjzh{background-color: rgb(255,214,170) !important;}
-    .fyfxhxdjzq{background-color: rgb(242,242,242) !important;}
-    .kztske{background-color:rgb(255,214,170);color:rgb(254,122,14);}
-    .kztszdcss{text-align: center;border: 1.5px solid rgb(254,122,14);line-height: 0.7rem;}
+    /*.qvdjzq{color: rgb(166,166,166);}
+    .pfmdjzq{color: rgb(166,166,166);}*/
+    .qvdjzq{color: rgb(69,110,114);}
+    .pfmdjzq{color: rgb(69,110,114);}
+    /*.pfmdjzh{color: rgb(254,122,14);}*/
+    .pfmdjzh{color: rgb(255,255,255);}
+    /*.fyfxhxdjzh{background-color: rgb(255,214,170) !important;}*/
+    .fyfxhxdjzh{background-color: rgb(69,110,114) !important;}
+    .fyfxhxdjzq{background-color: rgb(255,255,255) !important;}
+    /*.fyfxhxdjzq{background-color: rgb(242,242,242) !important;}*/
+    /*.kztske{background-color:rgb(255,214,170);color:rgb(254,122,14);}*/
+    .kztske{background-color:rgb(69,110,114);color:rgb(255,255,255);}
+    /*.kztszdcss{text-align: center;border: 1.5px solid rgb(254,122,14);line-height: 0.7rem;}*/
+    .kztszdcss{text-align: center;border: 1px solid rgb(69,110,114);line-height: 0.6rem;}
     .danwei{clear: both;margin-top: 0.2rem;font-size: 0.32rem;width: 1.6rem;float: right;color:rgb(130,130,130);}
     .jindtname{height:1rem !important;line-height:1rem;width:2.8rem !important;}
     .jindt{height:0.7rem !important;border: 1px solid black;line-height:0.7rem;margin-right:0rem !important;width:3.8rem !important;margin-top: 0.15rem;}
     .jindtpfb{border: 1px solid red;line-height: 0.5rem;height: 0.5rem;margin-top: 0.08rem;width: 50%;}
+    .mysjimg{width:1.5rem;margin-top: 1rem;margin-left: 3rem;}
+    .meiyshjzit{margin-top: 0.5rem;margin-left: 2rem;color: rgb(254,122,14);height: 3rem;   }
 </style>
 <template>
     <div>
-        <div style="background-color: white !important;height: 11.3rem;">
+        <div style="background-color: white !important;">
             <div class="cwkz"><span  v-text="topic"></span>空置房源数据展示</div>
             <div class="sssj">实时数据</div>
-            <div id="main" style="width:100%;height:9rem;"></div>
+            <div v-if="manxsh">
+                <div><img class="mysjimg" src="../resources/images/icons/fangzi.png"></div>
+                <div class="meiyshjzit">
+                    <div>抱歉！没有找到符合条件的</div>
+                    <div>相关数据，换个条件试试吧~</div>
+                </div>
+            </div>
+            <div v-else id="main" style="width:100%;height:7.5rem;"></div>
         </div>
-        <div style="background-color: white !important;height: 10.3rem;margin-top: 0.2rem;">
+        <div style="background-color: white !important;margin-top: 0.2rem;">
             <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>已入住企业类型占比</div>
             <div class="sssj">实时数据</div>
-            <div id="main1" style="width:100%;height:8rem;"></div>
+            <div v-if="manxsh1">
+                <div><img class="mysjimg" src="../resources/images/icons/fangzi.png"></div>
+                <div class="meiyshjzit">
+                    <div>抱歉！没有找到符合条件的</div>
+                    <div>相关数据，换个条件试试吧~</div>
+                </div>
+            </div>
+            <div v-else id="main1" style="width:100%;height:7rem;"></div>
         </div>
-        <div style="background-color: white !important;height: 10.3rem;margin-top: 0.2rem;">
+        <div style="background-color: white !important;margin-top: 0.2rem;">
             <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>八周市场均价走势</div>
             <div class="sssj" style="width: 2rem !important;">单位：元/㎡/天</div>
-            <div id="main2" style="width:100%;height:8rem;"></div>
+            <div v-if="manxsh2">
+                <div><img class="mysjimg" src="../resources/images/icons/fangzi.png"></div>
+                <div class="meiyshjzit">
+                    <div>抱歉！没有找到符合条件的</div>
+                    <div>相关数据，换个条件试试吧~</div>
+                </div>
+            </div>
+            <div v-else id="main2" style="width:100%;height:8rem;"></div>
         </div>
         <div style="background-color: white !important;margin-top: 0.2rem;">
             <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>与周边项目空置竞争房源对比</div>
@@ -96,22 +126,31 @@
             <ul style="clear: both;font-size: 0.36rem;margin-top: 3.5rem;">
                 <li>
                     <a href="javascript:;">
-                        <div @click="kztske($event)" class="ys_item_con fl kztszdcss kztske" style="width: 2.3rem;margin-left: 0.2rem;border-right:0px;border-bottom-left-radius:5px;border-top-left-radius:5px;">可租套数</div>
+                        <div @click="kztske($event)" class="ys_item_con fl kztszdcss kztske" style="width: 2.3rem;margin-left: 0.2rem;border-right:0px;border-bottom-left-radius:5px;border-top-left-radius:5px;font-size:0.32rem;">可租套数</div>
                     </a>
                 </li>
                 <li>
                     <a href="javascript:;">
-                        <div @click="kztssc($event)" class="ys_item_con fl kztszdcss" style="width: 2.3rem;border-right:0px;">市场均价</div>
+                        <div @click="kztssc($event)" class="ys_item_con fl kztszdcss" style="width: 2.3rem;border-right:0px;font-size:0.32rem;">市场均价</div>
                     </a>
                 </li>
                 <li>
                     <a href="javascript:;">
-                        <div @click="kztszq($event)" class="ys_item_con fl kztszdcss" style="width: 2.4rem;border-bottom-right-radius:5px;border-top-right-radius:5px;">平均销售周期</div>
+                        <div @click="kztszq($event)" class="ys_item_con fl kztszdcss" style="width: 2.4rem;border-bottom-right-radius:5px;border-top-right-radius:5px;font-size:0.32rem;">平均销售周期</div>
                     </a>
                 </li>
             </ul>
-            <div class="danwei">单位：套</div>
-            <div id="main3" style="width:100%;height:10rem;background-color: white;clear: both;"></div>
+            <div v-if="sctype == 1" class="danwei">单位：套</div>
+            <div v-if="sctype == 2" style="width: 2.6rem;" class="danwei">单位：元/㎡/天</div>
+            <div v-if="sctype == 3" class="danwei">单位：天</div>
+            <div v-if="manxsh3">
+                <div><img class="mysjimg" src="../resources/images/icons/fangzi.png"></div>
+                <div class="meiyshjzit">
+                    <div>抱歉！没有找到符合条件的</div>
+                    <div>相关数据，换个条件试试吧~</div>
+                </div>
+            </div>
+            <div v-else id="main3" style="width:100%;height:10rem;background-color: white;clear: both;"></div>
         </div>
     </div>
 </template>
@@ -151,7 +190,13 @@
                 scjjdata:[],
                 resuldata:{},
                 zhouqidata:[],
-
+                hxys:[],
+                sxys:[],
+                hxzxtys:[],
+                manxsh3:false,
+                manxsh2:false,
+                manxsh1:false,
+                manxsh:false,
             }
         },
         methods: {
@@ -168,39 +213,62 @@
                 this.$http.post(url,{"lpid":lpid}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    const result = JSON.parse(res.bodyText);
-                    that.topic = result.topic;//楼盘名称
-                    that.wdqfy = data.w4;//未到期房源
-                    that.swdqfy = data.w2;//45天内到期房源
-                    that.qsdqfy = data.w3;//90天内到期房源
-                    that.xxbq = data.w1;//信息不全
-                    that.kzfy = data.kzcount;//可出租房源(空置房源)
-                    that.wzfy = data.wzcount;//未知房源
-                    that.yzfy = data.yzcount;//已租房源
-                    if(this.kzfy != 0){
-                        this.tpdata.push({value:this.kzfy,name:'可出租房源'});
-                        this.tpdata1.push({value:this.kzfy,name:'空置房源'});
+                    if(data.total != 0){
+                        this.manxsh = false;
+                        const result = JSON.parse(res.bodyText);
+                        that.topic = result.topic;//楼盘名称
+                        that.wdqfy = data.w4;//未到期房源
+                        that.swdqfy = data.w2;//45天内到期房源
+                        that.qsdqfy = data.w3;//90天内到期房源
+                        that.xxbq = data.w1;//信息不全
+                        that.kzfy = data.kzcount;//可出租房源(空置房源)
+                        that.wzfy = data.wzcount;//未知房源
+                        that.yzfy = data.yzcount;//已租房源
+                        if(this.kzfy != 0){
+                            this.tpdata1.push({value:this.kzfy,name:'空置房源'});
+                            this.hxys.push('rgb(195,52,48)');//咖啡色
+                        }
+                        if(this.yzfy != 0){
+                            this.tpdata1.push({value:this.yzfy,name:'已租房源'});
+                            this.hxys.push('rgb(48,68,84)');//橘红色（未知房源）
+                        }
+                        if(this.wzfy != 0){
+                            this.tpdata1.push({value:this.wzfy,name:'未知房源'});
+                            this.hxys.push('rgb(96,161,169)');//红色（已租房源）
+                        }
+                        if(this.kzfy != 0){
+                            this.tpdata.push({value:this.kzfy,name:'可出租房源'});
+                            this.hxys.push('rgb(213,131,101)');//蓝色
+                        }
+                        if(this.wdqfy != 0){
+                            this.tpdata.push({value:this.wdqfy,name:'未到期房源'});
+                            this.hxys.push('rgb(146,199,176)');//深绿色
+                        }
+                        if(this.qsdqfy != 0){
+                            this.tpdata.push({value:this.qsdqfy,name:'90天内到\n期房源'});
+                            this.hxys.push('rgb(116,159,131)');
+                        }//橙色
+                        if(this.swdqfy != 0){
+                            this.tpdata.push({value:this.swdqfy,name:'45天内到\n期房源'});
+                            this.hxys.push('rgb(203,136,35)');//黄色
+                        }
+                        if(this.xxbq != 0){
+                            this.tpdata.push({value:this.xxbq,name:'信息不全'});
+                            this.hxys.push('rgb(189,163,155)');//草绿色
+                        }
+                        this.pic();
+                    }else{
+                        this.manxsh = true;
                     }
-                    if(this.wdqfy != 0){
-                        this.tpdata.push({value:this.wdqfy,name:'未到期房源'});
-                    }
-                    if(this.qsdqfy != 0){
-                        this.tpdata.push({value:this.qsdqfy,name:'90天内到期房源'});
-                    }
-                    if(this.swdqfy != 0){
-                        this.tpdata.push({value:this.swdqfy,name:'45天内到期房源'});
-                    }
-                    if(this.xxbq != 0){
-                        this.tpdata.push({value:this.xxbq,name:'信息不全'});
-                    }
-                    if(this.wzfy != 0){
-                        this.tpdata1.push({value:this.wzfy,name:'未知房源'});
-                    }
-                    if(this.yzfy != 0){
-                        this.tpdata1.push({value:this.yzfy,name:'已租房源'});
-                    }
+                    /*this.tpdata.push({value:this.kzfy,name:'可出租房源'});
+                    this.tpdata1.push({value:this.kzfy,name:'空置房源'});
+                    this.tpdata.push({value:this.wdqfy,name:'未到期房源'});
+                    this.tpdata.push({value:this.qsdqfy,name:'90天内到\n期房源'});
+                    this.tpdata.push({value:this.swdqfy,name:'45天内到\n期房源'});
+                    this.tpdata.push({value:this.xxbq,name:'信息不全'});
+                    this.tpdata1.push({value:this.wzfy,name:'未知房源'});
+                    this.tpdata1.push({value:this.yzfy,name:'已租房源'});*/
                     $('title').html(that.topic);
-                    this.pic();
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -208,28 +276,40 @@
                 this.$http.post(url1,{"lpid":lpid}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    if(data.jr != 0){
-                        this.yrzdata.push({value:data.jr,name:'金融'});
+                    if(data.total != 0){
+                        this.manxsh1 = false;
+                        if(data.jr != 0){
+                            this.yrzdata.push({value:data.jr,name:'金融'});
+                            this.sxys.push('rgb(194,53,49)');//
+                        }
+                        if(data.jy != 0){
+                            this.yrzdata.push({value:data.jy,name:'教育'});
+                            this.sxys.push('rgb(47,69,84)');
+                        }
+                        if(data.it != 0){
+                            this.yrzdata.push({value:data.it,name:'互联网'});
+                            this.sxys.push('rgb(97,160,168)');
+                        }
+                        if(data.xx != 0){
+                            this.yrzdata.push({value:data.xx,name:'休闲'});
+                            this.sxys.push('rgb(212,130,101)');
+                        }
+                        if(data.wh != 0){
+                            this.yrzdata.push({value:data.wh,name:'文化'});
+                            this.sxys.push('rgb(145,199,174)');
+                        }
+                        if(data.fdc != 0){
+                            this.yrzdata.push({value:data.fdc,name:'房地产'});
+                            this.sxys.push('rgb(116,159,131)');
+                        }
+                        if(data.qt != 0){
+                            this.yrzdata.push({value:data.qt,name:'其它'});
+                            this.sxys.push('rgb(202,134,34)');
+                        }
+                        this.shanx();
+                    }else{
+                        this.manxsh1 = true;
                     }
-                    if(data.jy != 0){
-                        this.yrzdata.push({value:data.jy,name:'教育'});
-                    }
-                    if(data.it != 0){
-                        this.yrzdata.push({value:data.it,name:'互联网'});
-                    }
-                    if(data.xx != 0){
-                        this.yrzdata.push({value:data.xx,name:'休闲'});
-                    }
-                    if(data.wh != 0){
-                        this.yrzdata.push({value:data.wh,name:'文化'});
-                    }
-                    if(data.fdc != 0){
-                        this.yrzdata.push({value:data.fdc,name:'房地产'});
-                    }
-                    if(data.qt != 0){
-                        this.yrzdata.push({value:data.qt,name:'其它'});
-                    }
-                    this.shanx();
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -237,40 +317,45 @@
                 this.$http.post(url2,{"lpid":lpid}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    const count = data.length;
-                    if(count >= 1){
-                        this.scjjdata.push({value:data[0].zxjnjg});
-                        this.zhouqidata.push({value:data[0].time1});
+                    if(data){
+                        this.manxsh2 = false;
+                        var count = data.length;
+                        if(count >= 1){
+                            this.scjjdata.push({value:data[0].zxjnjg});
+                            this.zhouqidata.push({value:data[0].time1});
+                        }
+                        if(count >= 2){
+                            this.scjjdata.push({value:data[1].zxjnjg});
+                            this.zhouqidata.push({value:data[1].time1});
+                        }
+                        if(count >= 3){
+                            this.scjjdata.push({value:data[2].zxjnjg});
+                            this.zhouqidata.push({value:data[2].time1});
+                        }
+                        if(count >= 4){
+                            this.scjjdata.push({value:data[3].zxjnjg});
+                            this.zhouqidata.push({value:data[3].time1});
+                        }
+                        if(count >= 5){
+                            this.scjjdata.push({value:data[4].zxjnjg});
+                            this.zhouqidata.push({value:data[4].time1});
+                        }
+                        if(count >= 6){
+                            this.scjjdata.push({value:data[5].zxjnjg});
+                            this.zhouqidata.push({value:data[5].time1});
+                        }
+                        if(count >= 7){
+                            this.scjjdata.push({value:data[6].zxjnjg});
+                            this.zhouqidata.push({value:data[6].time1});
+                        }
+                        if(count >= 8){
+                            this.scjjdata.push({value:data[7].zxjnjg});
+                            this.zhouqidata.push({value:data[7].time1});
+                        }
+                        this.zhex();
+                    }else{
+                        this.manxsh2 = true;
                     }
-                    if(count >= 2){
-                        this.scjjdata.push({value:data[1].zxjnjg});
-                        this.zhouqidata.push({value:data[1].time1});
-                    }
-                    if(count >= 3){
-                        this.scjjdata.push({value:data[2].zxjnjg});
-                        this.zhouqidata.push({value:data[2].time1});
-                    }
-                    if(count >= 4){
-                        this.scjjdata.push({value:data[3].zxjnjg});
-                        this.zhouqidata.push({value:data[3].time1});
-                    }
-                    if(count >= 5){
-                        this.scjjdata.push({value:data[4].zxjnjg});
-                        this.zhouqidata.push({value:data[4].time1});
-                    }
-                    if(count >= 6){
-                        this.scjjdata.push({value:data[5].zxjnjg});
-                        this.zhouqidata.push({value:data[5].time1});
-                    }
-                    if(count >= 7){
-                        this.scjjdata.push({value:data[6].zxjnjg});
-                        this.zhouqidata.push({value:data[6].time1});
-                    }
-                    if(count >= 8){
-                        this.scjjdata.push({value:data[7].zxjnjg});
-                        this.zhouqidata.push({value:data[7].time1});
-                    }
-                    this.zhex();
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -286,21 +371,19 @@
                         formatter: "{b}: {c} ({d}%)"
                     },
                     legend: {
-                        bottom: 1,
-                        left: 'center',
-                        data:['可出租房源','未到期房源','90天内到期房源','45天内到期房源','信息不全']
+                        bottom: 120,
+                        //x : 10,//控制标签种类的左右位置
+                        y : 290,//控制标签种类的上下位置
+                        data:['可出租房源','未到期房源','90天内到\n期房源','45天内到\n期房源','信息不全']
                     },
-                    grid: {
-                        left: '10%',
-                        containLabel: false,
-                    },
-                    //color:['red', 'green','yellow','blueviolet'],//设置扇形图固定的颜色
+                    color:this.hxys,//设置扇形图固定的颜色
                     series: [
                         {
                             name:'',
                             type:'pie',
                             selectedMode: 'single',
                             radius: [0, '30%'],
+                            center:['175','140'],//控制饼状图的位置
                             //radius: [0, '25%'],
                             label: {
                                 normal: {
@@ -318,10 +401,11 @@
                             name:'',
                             type:'pie',
                             radius: ['40%', '55%'],
+                            center:['175','140'],
                             //radius: ['30%', '45%'],
                             label: {
                                 normal: {
-                                    formatter: '{b|{b}:\n}{c}\n{per|{d}%}\n',
+                                    formatter: '{b|{b}:\n}{per|{d}%}\n',
                                     /*backgroundColor: '#eee',
                                      borderColor: '#aaa',*/
                                     borderWidth: 1,
@@ -372,15 +456,15 @@
                     },
                     legend: {
                         bottom: 10,
-                        left: 'center',
+                        y:'70%',
                         data: ['金融', '教育','互联网','休闲','文化','房地产','其它']
                     },
-                    //color:['red', 'green','yellow','blueviolet'],//设置扇形图固定的颜色
+                    color:this.sxys,//设置扇形图固定的颜色
                     series : [
                         {
                             type: 'pie',
                             radius : '55%',
-                            center: ['50%', '50%'],
+                            center: ['50%', '35%'],
                             data:this.yrzdata,
                             itemStyle: {
                                 emphasis: {
@@ -406,7 +490,7 @@
                     },
                     toolbox: {
                         show: true,
-                        feature: {
+                        /*feature: {
                             dataZoom: {
                                 yAxisIndex: 'none'
                             },
@@ -414,11 +498,11 @@
                             magicType: {type: ['line', 'bar']},
                             restore: {},
                             //saveAsImage: {}//控制保存按钮
-                        }
+                        }*/
                     },
                     xAxis: [{
                         axisLabel: {
-                            rotate: 30,
+                            rotate: 0,
                             interval: 0
                         },
                         type: 'category',
@@ -478,11 +562,21 @@
                     this.qqj = qvjian[0];
                     this.hqj = qvjian[1];
                 }
+                this.manxsh3 = false;
                 if(this.sctype == 2){
                     const url2 = this.$api + "/yhcms/web/jcsj/wxJnjxx.do";
                     this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
                         Indicator.close();
                         const data = JSON.parse(res.bodyText).data;
+                        const code = JSON.parse(res.bodyText).count;
+                        if(code == 1){
+                            this.manxsh3 = false;
+                            this.resuldata = data;
+                            //this.hxzxtys = data;
+                            this.zhuxing();
+                        }else{
+                            this.manxsh3 = true;
+                        }
                         /*for(var i=0;i<data.length;i++){
                             if(data[i].jnjg){
                                 var dgdata = data[i].jnjg;
@@ -492,8 +586,6 @@
                                 data[i].jnjg = data[i].jnjg + "%";
                             }
                         }*/
-                        this.resuldata = data;
-                        this.zhuxing();
                     }, (res)=>{
                         Indicator.close()
                     });
@@ -502,6 +594,14 @@
                     this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
                         Indicator.close();
                         const data = JSON.parse(res.bodyText).data;
+                        const code = JSON.parse(res.bodyText).count;
+                        if(code == 1){
+                            this.manxsh3 = false;
+                            this.resuldata = data;
+                            this.zhuxing();
+                        }else{
+                            this.manxsh3 = true;
+                        }
                         /*for(var i=0;i<data.length;i++){
                             if(data[i].xszq){
                                 var dgdata = data[i].xszq;
@@ -511,8 +611,6 @@
                                 data[i].xszq = data[i].xszq + "%";
                             }
                         }*/
-                        this.resuldata = data;
-                        this.zhuxing();
                     }, (res)=>{
                         Indicator.close()
                     });
@@ -520,7 +618,15 @@
                     const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
                     this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
                         Indicator.close();
-                        const data = JSON.parse(res.bodyText).data;
+                        const code = JSON.parse(res.bodyText).count;
+                        if(code == 1){
+                            this.manxsh3 = false;
+                            const data = JSON.parse(res.bodyText).data;
+                            this.resuldata = data;
+                            this.zhuxing();
+                        }else{
+                            this.manxsh3 = true;
+                        }
                         /*for(var i=0;i<data.length;i++){
                             if(data[i].kzcount){
                                 var dgdata = data[i].kzcount;
@@ -530,8 +636,6 @@
                                 data[i].kzcount = data[i].kzcount + "%";
                             }
                         }*/
-                        this.resuldata = data;
-                        this.zhuxing();
                     }, (res)=>{
                         Indicator.close()
                     });
@@ -540,6 +644,7 @@
             },
             //可租套数
             kztske(e){
+                this.manxsh3 = false;
                 this.sctype = 1;
                 //获取HTML超链接页面上的文字内容
                 const li = $(e.target).closest("div");
@@ -549,6 +654,14 @@
                 this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
+                    const code = JSON.parse(res.bodyText).count;
+                    if(code == 1){
+                        this.manxsh3 = false;
+                        this.resuldata = data;
+                        this.zhuxing();
+                    }else{
+                        this.manxsh3 = true;
+                    }
                     //计算百分比
                    /* for(var i=0;i<data.length;i++){
                         if(data[i].kzcount){
@@ -559,8 +672,6 @@
                             data[i].kzcount = data[i].kzcount + "%";
                         }
                     }*/
-                    this.resuldata = data;
-                    this.zhuxing();
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -568,6 +679,7 @@
             },
             //市场均价
             kztssc(e){
+                this.manxsh3 = false;
                 this.sctype = 2;
                 //获取HTML超链接页面上的文字内容
                 const li = $(e.target).closest("div");
@@ -577,8 +689,16 @@
                 this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
+                    const code = JSON.parse(res.bodyText).count;
+                    if(code == 1){
+                        this.manxsh3 = false;
+                        this.resuldata = data;
+                        this.zhuxing();
+                    }else{
+                        this.manxsh3 = true;
+                    }
                     //计算百分比
-                    for(var i=0;i<data.length;i++){
+                   /* for(var i=0;i<data.length;i++){
                         if(data[i].jnjg){
                             var dgdata = data[i].jnjg;
                             dgdata = parseInt(dgdata);
@@ -586,15 +706,14 @@
                             data[i].jnjg = dgdata*100;
                             data[i].jnjg = data[i].jnjg + "%";
                         }
-                    }
-                    this.resuldata = data;
-                    this.zhuxing();
+                    }*/
                 }, (res)=>{
                     Indicator.close()
                 });
             },
             //平均销售周期
             kztszq(e){
+                this.manxsh3 = false;
                 this.sctype = 3;
                 //获取HTML超链接页面上的文字内容
                 const li = $(e.target).closest("div");
@@ -604,6 +723,14 @@
                 this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
+                    const code = JSON.parse(res.bodyText).count;
+                    if(code == 1){
+                        this.manxsh3 = false;
+                        this.resuldata = data;
+                        this.zhuxing();
+                    }else{
+                        this.manxsh3 = true;
+                    }
                     //计算百分比
                     /*for(var i=0;i<data.length;i++){
                         if(data[i].xszq){
@@ -614,8 +741,6 @@
                             data[i].xszq = data[i].xszq + "%";
                         }
                     }*/
-                    this.resuldata = data;
-                    this.zhuxing();
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -705,7 +830,7 @@
                     series: [{
                         type: 'bar',
                         stack: 'chart',
-                        barMaxWidth: '20%',//柱子的宽度
+                        barMaxWidth: '30',//柱子的宽度
                         z: 3,
                         label: {
                             normal: {
@@ -719,7 +844,7 @@
                             normal:{
                                 //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
                                 color: function (params){
-                                    var colorList = ['rgb(164,205,238)','rgb(42,170,227)','rgb(25,46,94)','rgb(195,229,235)'];
+                                    var colorList = ['rgb(203,136,35)','rgb(96,161,169)','rgb(195,52,48)','rgb(97,188,148)','rgb(146,199,176)','rgb(213,131,101)','rgb(68,111,114)'];
                                     return colorList[params.dataIndex];
                                 },
                             },
@@ -733,8 +858,6 @@
                         data: Object.keys(builderJson.charts).map(function (key) {
                             return builderJson.charts[key];
                         }),
-                        barGap:'-100%',
-                        barCategoryGap:'40%',
                     }/*, {
                         type: 'bar',
                         stack: 'chart',
@@ -760,6 +883,7 @@
             },
         },
         mounted(){
+            this.manxsh3 = false;
            /* $("#tjts").live("click",function(){
                 var myChart = echarts.init(document.getElementById("main1"));
                 var url='${contextPath}/fyfjxx/getByZdid.do?vurlcode=${sessionScope.sUrlCode}&zdid='+zdfyid;
@@ -777,6 +901,14 @@
             this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
                 Indicator.close();
                 const data = JSON.parse(res.bodyText).data;
+                const code = JSON.parse(res.bodyText).count;
+                if(code == 1){
+                    this.manxsh3 = false;
+                    this.resuldata = data;
+                    this.zhuxing();
+                }else{
+                    this.manxsh3 = true;
+                }
                 /*for(var i=0;i<data.length;i++){
                     if(data[i].kzcount){
                         var dgdata = data[i].kzcount;
@@ -786,8 +918,6 @@
                         data[i].kzcount = data[i].kzcount + "%";
                     }
                 }*/
-                this.resuldata = data;
-                this.zhuxing();
             }, (res)=>{
                 Indicator.close()
             });

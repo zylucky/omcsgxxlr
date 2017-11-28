@@ -71,7 +71,7 @@
         </li>
         <div >
           <li class="clearfix">
-            <span class="ys_tit">所属行业：</span>
+            <span class="ys_tit zyzd">所属行业：</span>
             <div class="ys_item_con fl">
               <input type="text" value="" v-model="sshy" placeholder="请输入">
             </div>
@@ -152,11 +152,6 @@
                     const data1=data12.fyxx;
                     var b1=data1.fybh;
                     that.fybh=b1;
-                    if(data1.chqxz=='公寓'){
-                        $(".hy_class").css("display","none");
-                    }
-
-
                 }, (res)=>{
                     Indicator.close()
                 });

@@ -577,48 +577,44 @@
             delDhyyxx(e){
                 const target = $(e.target), val = target.attr("owner");
                 let  _this=this;
-                Indicator.open({
-                    text: '删除中...',
-                    spinnerType: 'fading-circle'
-                });
+                MessageBox.confirm('确定删除此物业公司吗?').then(action => {
+                    this.$http.post(
+                        this.$api + "/yhcms/web/lpjbxx/delWyxx.do",
+                        {
+                            "parameters": {
+                                "id": val
+                            },
+                            "foreEndType": 2,
+                            "code": "300000031"
+                        }
+                    ).then(function (res) {
+                        Indicator.close();
+                        var result = JSON.parse(res.bodyText);
+                        if (result.success) {
+                            Toast({
+                                message: '删除成功',
+                                position: 'bottom',
+                                duration: 1000
+                            });
+                            console.log(result);
+                            setTimeout(function(){
+                                window.location.reload();
+                            },500);
 
-                this.$http.post(
-                    this.$api + "/yhcms/web/lpjbxx/delWyxx.do",
-                    {
-                        "parameters": {
-                            "id": val
-                        },
-                        "foreEndType": 2,
-                        "code": "300000031"
-                    }
-                ).then(function (res) {
-                    Indicator.close();
-                    var result = JSON.parse(res.bodyText);
-                    if (result.success) {
+                        } else {
+                            Toast({
+                                message: '删除失败: ' + result.message,
+                                position: 'bottom'
+                            });
+                        }
+                    }, function (res) {
+                        Indicator.close();
                         Toast({
-                            message: '删除成功',
-                            position: 'bottom',
-                            duration: 1000
-                        });
-                        console.log(result);
-                        setTimeout(function(){
-                            window.location.reload();
-                        },500);
-
-                    } else {
-                        Toast({
-                            message: '删除失败: ' + result.message,
+                            message: '删除失败! 请稍候再试',
                             position: 'bottom'
                         });
-                    }
-                }, function (res) {
-                    Indicator.close();
-                    Toast({
-                        message: '删除失败! 请稍候再试',
-                        position: 'bottom'
                     });
                 });
-
             },
             qx_one3(){
                 window.location.reload();

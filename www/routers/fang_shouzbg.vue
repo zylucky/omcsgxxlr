@@ -5,13 +5,13 @@
     }
     .cwkz{font-size: 0.38rem !important;font-weight: 900;padding-top: 0.5rem !important;margin: auto;text-align:center;}
     .mysjimg{width:1.5rem;margin-top: 1rem;margin-left: 3rem;}
-    .meiyshjzit{margin-top: 0.5rem;margin-left: 2rem;color: rgb(254,122,14);height: 3rem;   }
+    .meiyshjzit{margin-top: 0.5rem;margin-left: 2rem;color: rgb(254,122,14);height: 2rem;   }
     .znfyys{line-height: 0.6rem;border:0px solid red;margin-left: 0.4rem;font-size: 0.32rem;}
     .pjjdt{width: 15%;margin-left: 0.2rem;}
     .pjjdthmd{border:1px solid #dddce1;width: 75%;margin-left: 20%;line-height: 0.8rem;position: relative;top:0.23rem;background-color:#dddce1;}
-    .lijj{line-height: 1.3rem !important;}
-    .pjjdtnr{height: 0.8rem;}
-    .imgdz{width: 0.7rem;margin-left:43%;}
+    .lijj{line-height: 1rem !important;border-bottom: 0px solid #dbdadf !important;}
+    .pjjdtnr{height: 0.6rem;}
+    .imgdz{width: 0.5rem;display: block;margin: 0px auto;line-height: 0.6rem;position: relative;top: 0.05rem;}
 </style>
 <template>
     <div>
@@ -28,7 +28,7 @@
                     <div>相关数据，换个条件试试吧~</div>
                 </div>
             </div>
-            <div v-else id="main1" style="width:100%;height:6.7rem;"></div>
+            <div v-else id="main1" style="width:100%;height:7rem;"></div>
             <div class="znfyys">他们对您的房源做出了如下评价：</div>
             <div>
                 <ul class="ys_item_ul mb60" style="margin-top: 0.1rem;font-size: 0.32rem;color: black;margin-bottom: 0.7rem !important;">
@@ -69,14 +69,14 @@
                         </div>
                     </li>
                     <li class="clearfix lijj">
-                        <div class="ys_item_con fl pjjdt">免租期 </div>
+                        <div class="ys_item_con fl pjjdt">格局 </div>
                         <div class="pjjdthmd">
                             <div class="pjjdtnr" id="mzq"><img v-show="shmzq" class="imgdz" src="../resources/images/icons/dz.png"></div>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div class="znfyys">其中，有<span style="color:rgb(255,0,0);font-weight: 600;" v-text="bsmynu">20</span>个客户对您的房源表示满意</div>
+            <div class="znfyys">其中，有<span style="color:rgb(255,0,0);font-weight: 600;" v-text="bsmynu">20</span>位客户对您的房源表示满意</div>
             <div class="znfyys" style="padding-bottom:0.8rem;">我们将为您持续跟进</div>
         </div>
     </div>
@@ -106,7 +106,7 @@
                 jj:'',//家具
                 lc:'',
                 jjxx:'',//价格
-                mzq:'',
+                mzq:'',//格局
                 shcg:false,
                 shhx:false,
                 shzx:false,
@@ -240,7 +240,7 @@
                     },
                     legend: {
                         bottom: 10,
-                        y:'70%',
+                        y:'75%',
                         data: ['金融', '教育','互联网','休闲','文化','房地产','其它']
                     },
                     color:this.sxys,//设置扇形图固定的颜色
@@ -248,7 +248,7 @@
                         {
                             type: 'pie',
                             radius : '55%',
-                            center: ['50%', '35%'],
+                            center: ['50%', '40%'],
                             data:this.hydata,
                             itemStyle: {
                                 emphasis: {

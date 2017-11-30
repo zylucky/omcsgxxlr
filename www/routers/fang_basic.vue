@@ -477,7 +477,7 @@
                     let shyt_t = new Set(this.shyt);
                     shyt_t.add(val);
                     this.shyt = [...shyt_t];
-
+                    alert(1111);
                     $(e.target).addClass('active');
                 }
             },
@@ -627,6 +627,7 @@
                         that.zjdj = data.zjdj;
                         let shyt = data.shyt ? data.shyt.split(";"):[];
                         that.shyt = shyt;
+                        console.log(that.shyt);
                         that.chwlx = data.chwlx;
                         console.log(this.sfshp);
                         console.log(this.shplx);

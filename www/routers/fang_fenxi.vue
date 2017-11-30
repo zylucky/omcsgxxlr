@@ -34,7 +34,7 @@
 <template>
     <div>
         <div style="background-color: white !important;">
-            <div class="cwkz"><span  v-text="topic"></span>空置房源数据展示</div>
+            <div class="cwkz"><span></span>空置房源数据展示</div>
             <div class="sssj">实时数据</div>
             <div v-if="manxsh">
                 <div><img class="mysjimg" src="../resources/images/icons/fangzi.png"></div>
@@ -46,7 +46,7 @@
             <div v-else id="main" style="width:100%;height:7.5rem;"></div>
         </div>
         <div style="background-color: white !important;margin-top: 0.2rem;">
-            <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>已入住企业类型占比</div>
+            <div class="cwkz" style="width: 5.3rem !important;"><span></span>已入住企业类型占比</div>
             <div class="sssj">实时数据</div>
             <div v-if="manxsh1">
                 <div><img class="mysjimg" src="../resources/images/icons/fangzi.png"></div>
@@ -58,7 +58,7 @@
             <div v-else id="main1" style="width:100%;height:7rem;"></div>
         </div>
         <div style="background-color: white !important;margin-top: 0.2rem;">
-            <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>八周市场均价走势</div>
+            <div class="cwkz" style="width: 5.3rem !important;"><span></span>八周市场均价走势</div>
             <div class="sssj" style="width: 2rem !important;">单位：元/㎡/天</div>
             <div v-if="manxsh2">
                 <div><img class="mysjimg" src="../resources/images/icons/fangzi.png"></div>
@@ -70,10 +70,36 @@
             <div v-else id="main2" style="width:100%;height:8rem;"></div>
         </div>
         <div style="background-color: white !important;margin-top: 0.2rem;">
-            <div class="cwkz" style="width: 5.3rem !important;"><span  v-text="topic"></span>与周边项目空置竞争房源对比</div>
+            <div class="cwkz" style="width: 5.3rem !important;"><span></span>周边项目空置竞争房源对比</div>
             <div class="sssj" style="width: 2rem !important;">实时数据</div>
             <div style="height:0.4rem;border-bottom:1px solid #dbdadf;"></div>
-            <ul class="ys_item_ul mb60" style="margin-top: 0.4rem;">
+            <ul class="ys_item_ul mb60" style="margin-top: 0.4rem;clear: both;">
+                <li class="clearfix fyfxhx fyfxhxdjzh" @click="fyfxchqxz1($event)">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl pfmdjzh" style="margin-left: -0.25rem;text-align: center;">写字楼 </div>
+                        <span class="chqxz" style="display: none;">1</span>
+                    </a>
+                </li>
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxchqxz1($event)">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">公寓 </div>
+                        <span class="chqxz" style="display: none;">2</span>
+                    </a>
+                </li>
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxchqxz1($event)">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">商务楼 </div>
+                        <span class="chqxz" style="display: none;">3</span>
+                    </a>
+                </li>
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxchqxz1($event)">
+                    <a href="javascript:;">
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">商业 </div>
+                        <span class="chqxz" style="display: none;">5</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="ys_item_ul mb60" style="margin-top: 0.4rem;clear: both;">
                 <li class="clearfix fyfxhx fyfxhxdjzh" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
                         <div class="ys_item_con fl pfmdjzh" style="margin-left: -0.25rem;text-align: center;">户型1 </div>
@@ -181,6 +207,7 @@
                 kzfy:'',//空置房源
                 wzfy:'',//未知房源
                 yzfy:'',//已租房源
+                chqnxz:1,//产权性质的数字
                 qqj:0,
                 hqj:100,
                 sctype:1,
@@ -360,6 +387,99 @@
                     Indicator.close()
                 });
             },
+            fyfxchqxz1(e){
+                //获取HTML超链接页面上的文字内容
+                const li = $(e.target).closest("li"), txt = $(li).find(".chqxz").text();
+                this.chqnxz = txt;
+                //加一个class样式
+                if(li.hasClass("fyfxhxdjzh")){
+
+                }else{
+                    li.addClass("fyfxhxdjzh");
+                    li.removeClass("fyfxhxdjzq").siblings().addClass("fyfxhxdjzq");
+                    li.children().children().addClass("pfmdjzh");
+                    li.siblings().children().children().removeClass("pfmdjzh").addClass("pfmdjzq");
+                }
+                li.siblings().removeClass("fyfxhxdjzh");
+                this.manxsh3 = false;
+                if(this.sctype == 2){
+                    const url2 = this.$api + "/yhcms/web/jcsj/wxJnjxx.do";
+                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
+                        Indicator.close();
+                        const data = JSON.parse(res.bodyText).data;
+                        const code = JSON.parse(res.bodyText).count;
+                        if(code == 1){
+                            this.manxsh3 = false;
+                            this.resuldata = data;
+                            //this.hxzxtys = data;
+                            this.zhuxing();
+                        }else{
+                            this.manxsh3 = true;
+                        }
+                        /*for(var i=0;i<data.length;i++){
+                         if(data[i].jnjg){
+                         var dgdata = data[i].jnjg;
+                         dgdata = parseInt(dgdata);
+                         dgdata = dgdata/(15);
+                         data[i].jnjg = dgdata*100;
+                         data[i].jnjg = data[i].jnjg + "%";
+                         }
+                         }*/
+                    }, (res)=>{
+                        Indicator.close()
+                    });
+                }else if(this.sctype == 3){
+                    const url2 = this.$api + "/yhcms/web/jcsj/wxXszq.do";
+                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
+                        Indicator.close();
+                        const data = JSON.parse(res.bodyText).data;
+                        const code = JSON.parse(res.bodyText).count;
+                        if(code == 1){
+                            this.manxsh3 = false;
+                            this.resuldata = data;
+                            this.zhuxing();
+                        }else{
+                            this.manxsh3 = true;
+                        }
+                        /*for(var i=0;i<data.length;i++){
+                         if(data[i].xszq){
+                         var dgdata = data[i].xszq;
+                         dgdata = parseInt(dgdata);
+                         dgdata = dgdata/(30);
+                         data[i].xszq = dgdata*100;
+                         data[i].xszq = data[i].xszq + "%";
+                         }
+                         }*/
+                    }, (res)=>{
+                        Indicator.close()
+                    });
+                }else{
+                    const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
+                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
+                        Indicator.close();
+                        const code = JSON.parse(res.bodyText).count;
+                        if(code == 1){
+                            this.manxsh3 = false;
+                            const data = JSON.parse(res.bodyText).data;
+                            this.resuldata = data;
+                            this.zhuxing();
+                        }else{
+                            this.manxsh3 = true;
+                        }
+                        /*for(var i=0;i<data.length;i++){
+                         if(data[i].kzcount){
+                         var dgdata = data[i].kzcount;
+                         dgdata = parseInt(dgdata);
+                         dgdata = dgdata/(20);
+                         data[i].kzcount = dgdata*100;
+                         data[i].kzcount = data[i].kzcount + "%";
+                         }
+                         }*/
+                    }, (res)=>{
+                        Indicator.close()
+                    });
+                }
+            },
             //环形图
             pic(){
                 // 基于准备好的dom，初始化echarts实例
@@ -377,30 +497,10 @@
                         data:['可出租房源','未到期房源','90天内到\n期房源','45天内到\n期房源','信息不全']
                     },
                     color:this.hxys,//设置扇形图固定的颜色
-                    series: [
-                        {
+                    series: [{
                             name:'',
                             type:'pie',
-                            selectedMode: 'single',
-                            radius: [0, '30%'],
-                            center:['175','140'],//控制饼状图的位置
-                            //radius: [0, '25%'],
-                            label: {
-                                normal: {
-                                    position: 'inner'
-                                }
-                            },
-                            labelLine: {
-                                normal: {
-                                    show: false
-                                }
-                            },
-                            data:this.tpdata1,
-                        },
-                        {
-                            name:'',
-                            type:'pie',
-                            radius: ['40%', '55%'],
+                            radius: ['35%', '50%'],
                             center:['175','140'],
                             //radius: ['30%', '45%'],
                             label: {
@@ -565,7 +665,7 @@
                 this.manxsh3 = false;
                 if(this.sctype == 2){
                     const url2 = this.$api + "/yhcms/web/jcsj/wxJnjxx.do";
-                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                         Indicator.close();
                         const data = JSON.parse(res.bodyText).data;
                         const code = JSON.parse(res.bodyText).count;
@@ -591,7 +691,7 @@
                     });
                 }else if(this.sctype == 3){
                     const url2 = this.$api + "/yhcms/web/jcsj/wxXszq.do";
-                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                         Indicator.close();
                         const data = JSON.parse(res.bodyText).data;
                         const code = JSON.parse(res.bodyText).count;
@@ -616,7 +716,7 @@
                     });
                 }else{
                     const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
-                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+                    this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                         Indicator.close();
                         const code = JSON.parse(res.bodyText).count;
                         if(code == 1){
@@ -651,7 +751,7 @@
                 //加一个class样式
                 li.addClass("kztske").parent().parent().siblings().children().children().removeClass("kztske");
                 const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
-                this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+                this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
                     const code = JSON.parse(res.bodyText).count;
@@ -686,7 +786,7 @@
                 //加一个class样式
                 li.addClass("kztske").parent().parent().siblings().children().children().removeClass("kztske");
                 const url2 = this.$api + "/yhcms/web/jcsj/wxJnjxx.do";
-                this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+                this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
                     const code = JSON.parse(res.bodyText).count;
@@ -720,7 +820,7 @@
                 //加一个class样式
                 li.addClass("kztske").parent().parent().siblings().children().children().removeClass("kztske");
                 const url2 = this.$api + "/yhcms/web/jcsj/wxXszq.do";
-                this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+                this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
                     const code = JSON.parse(res.bodyText).count;
@@ -898,7 +998,7 @@
             });*/
             this.getInitData();
             const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
-            this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj}).then((res)=>{
+            this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                 Indicator.close();
                 const data = JSON.parse(res.bodyText).data;
                 const code = JSON.parse(res.bodyText).count;

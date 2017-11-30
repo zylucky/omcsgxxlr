@@ -308,6 +308,8 @@
                 //品质弹窗隐藏
                 popQuality: false,
 
+                //yt_all: [{"name":"金融投资","id":"153"},{"name":"文化传媒","id":"161"},{"name":"教育培训","id":"152"},{"name":"休闲娱乐","id":"4"},{"name":"IT互联网","id":"5"},{"name":"机构组织","id":"6"},{"name":"专业服务","id":"7"},{"name":"贸易","id":"8"},{"name":"医药医疗","id":"9"},{"name":"多元化集团","id":"10"},{"name":"综合","id":"11"},{"name":"其它","id":"12"}]
+
 
             }
         },
@@ -418,11 +420,13 @@
                 const target = $(e.target), val = target.attr("value");
                 if(!val){return;}
                 if ($(e.target).hasClass('active')) {
+                    alert(2222);
                     let tsbq_t = new Set(this.tsbq);
                     tsbq_t.delete(val);
                     this.tsbq = [...tsbq_t];
                     $(e.target).removeClass('active');
                 } else {
+                    alert(3333);
                     let tsbq_t = new Set(this.tsbq);
                     tsbq_t.add(val);
                     this.tsbq = [...tsbq_t];
@@ -446,6 +450,10 @@
                     that.topic = data.topic;
                     that.address = data.address;
                     that.tsbq = data.tsbq.map((t)=>{return t.id});
+                    //that.tsbq = yt_all;
+                    /*let shyt = data.shyt ? data.shyt.split(";"):[];
+                    that.shyt = shyt;*/
+                    /*that.tsbq = data.tsbq ? data.tsbq.split(","):[];*/
                     that.kfsh = data.kfsh;
                     $('title').html(that.topic);
                     if(data.kprq!=''){

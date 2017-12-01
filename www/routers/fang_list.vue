@@ -83,6 +83,10 @@
           background: url("../resources/images/icons/basic_icon/basic22.png") no-repeat;
           background-size: .90rem .90rem;
         }
+        &.basic_24 {
+          background: url("../resources/images/icons/basic_icon/basic24.png") no-repeat;
+          background-size: .90rem .90rem;
+        }
       }
     }
   }
@@ -148,7 +152,7 @@
   .banc{background: url("../resources/images/2.png") no-repeat;
     background-size: .90rem .90rem;
   }
-  .hyfyshow{display: block !important;}
+  .hyfyshow{display: block !important;width: 65% !important;}
   .hyfysjshow{display: block !important;}
 
 </style>
@@ -218,7 +222,7 @@
                 </div>
               </div>
               <div class="filt-open" id="filter-feature" :class="{show:this.currentFilterTab=='feature'}">
-                <div class="warpper box-flex1 bg-white">
+                <div class="warpper box-flex1 bg-white" style="height: 3.2rem;">
                   <ul class="">
                     <li data-type="feature"
                         @click="searchChoose('','', '不限', $event)">
@@ -227,59 +231,48 @@
                     <!--<li v-for="item in featureArray" data-type="feature"
                         @click="searchChoose('','0', '非航远房源', $event)"><a href="javascript:;"></a>
                     </li>-->
-                    <li data-type="feature" @click="hyfy='1'">
+                    <li data-type="feature" @click="hyfy='1';searchSubArea('非航远房源', $event)">
                       <a href="javascript:;">非航远房源</a>
                     </li>
                     <li data-type="feature"
                         @click="searchChoose('','1', '航远房源', $event)">
                       <a href="javascript:;">航远房源</a>
                     </li>
+
+                    <!--<div id="price_filter" class="warpper2 box-flex1 bg-white">
+                      <ul class="price-ul cut-height" :class="{show:this.curTab=='f'}">
+                        <li v-for="item in subFeature" data-type="feature"
+                            @click="searchChoose(item.id,'',item.name, $event)">
+                          <a href="javascript:;">{{item.name}}</a></li>
+                      </ul>
+                    </div>-->
+                    <!--<div id="position_filter" class="warpper2 box-flex1 bg-white" :class="{choose:this.hyfy=='1'}">
+                      <ul class="price-ul cut-height" :class="{show:this.positionType=='a'}">
+                        <li data-type="positionA" @click="where='不限';subBuesiness=[];searchChoose('','','不限', $event)"><a href="javascript:;">不限</a></li>
+                        <li v-for="item in govDistrictArray" data-type="positionA"
+                            @click="searchSubArea(item.fdcode, $event)">
+                          <a href="javascript:;">{{item.fdname}}</a></li>
+                      </ul>
+                    </div>-->
+                    <!--第二级-->
+                    <div id="position_filter" class="warpper2 box-flex1 bg-white" :class="{hyfyshow:this.hyfy!=''}" style="display: none;height: 4rem;">
+                      <ul class="">
+                        <li v-for="item in govDistrictArray" data-type="positionA"
+                            @click="searchSubArea(item.fdcode, $event)">
+                          <a href="javascript:;">{{item.fdname}}</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <!--第三级-->
+                    <div id="position_filter" class="warpper2 box-flex1 bg-white" :class="{hyfysjshow:this.hyfy!=''&&this.hyfysj!=''}" style="display: none;width: 40%;height: 3.5rem;">
+                      <ul class="">
+                        <li v-for="item in govDistrictArraysj" data-type="positionA"
+                            @click="searchSubAreasjsj(item.fdcode, $event)">
+                          <a href="javascript:;">{{item.fdname}}</a>
+                        </li>
+                      </ul>
+                    </div>
                   </ul>
-                  <!--<div id="price_filter" class="warpper2 box-flex1 bg-white">
-                    <ul class="price-ul cut-height" :class="{show:this.curTab=='f'}">
-                      <li v-for="item in subFeature" data-type="feature"
-                          @click="searchChoose(item.id,'',item.name, $event)">
-                        <a href="javascript:;">{{item.name}}</a></li>
-                    </ul>
-                  </div>-->
-                  <!--<div id="position_filter" class="warpper2 box-flex1 bg-white" :class="{choose:this.hyfy=='1'}">
-                    <ul class="price-ul cut-height" :class="{show:this.positionType=='a'}">
-                      <li data-type="positionA" @click="where='不限';subBuesiness=[];searchChoose('','','不限', $event)"><a href="javascript:;">不限</a></li>
-                      <li v-for="item in govDistrictArray" data-type="positionA"
-                          @click="searchSubArea(item.fdcode, $event)">
-                        <a href="javascript:;">{{item.fdname}}</a></li>
-                    </ul>
-                  </div>-->
-                  <!--第二级-->
-                  <div id="position_filter" class="warpper2 box-flex1 bg-white" :class="{hyfyshow:this.hyfy!=''}" style="display: none;">
-                    <ul class="">
-                      <li v-for="item in govDistrictArray" data-type="positionA"
-                          @click="searchSubArea(item.fdcode, $event)">
-                        <a href="javascript:;">{{item.fdname}}</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <!--第三级-->
-                  <div id="position_filter" class="warpper2 box-flex1 bg-white" :class="{hyfyshow:this.hyfy!=''}" style="display: none;">
-                    <ul class="">
-                      <li v-for="item in govDistrictArraysj" data-type="positionA"
-                          @click="searchSubArea(item.fdcode, $event)">
-                        <a href="javascript:;">{{item.fdname}}</a>
-                      </li>
-                    </ul>
-                    <ul class="">
-                      <li v-for="item in govDistrictArraysj" data-type="positionA"
-                          @click="searchSubArea(item.fdcode, $event)">
-                        <a href="javascript:;">{{item.fdname}}</a>
-                      </li>
-                    </ul>
-                    <ul class="">
-                      <li v-for="item in govDistrictArraysj" data-type="positionA"
-                          @click="searchSubArea(item.fdcode, $event)">
-                        <a href="javascript:;">{{item.fdname}}</a>
-                      </li>
-                    </ul>
-                  </div>
                 </div>
               </div>
             </div>
@@ -380,8 +373,8 @@
           <span>房源状态</span>
         </router-link>
         <router-link class="bulid_msg_item"  :to="{path:'/fang_shouzbg/'+fyid}" style="height: 1.7rem;">
-          <i class="basic_14" style="margin: .1rem auto .1rem;"></i>
-          <span>售中报告</span>
+          <i class="basic_24" style="margin: .1rem auto .1rem;"></i>
+          <span>销售报告</span>
         </router-link>
         <a class="bulid_msg_item" href="#" @click.stop.prevent="toDetail">
           <i class="basic_09" style="margin: .1rem auto .1rem;"></i>
@@ -417,8 +410,10 @@
         data () {
             return {
                 govDistrictArray:[{fdcode:"0",fdname: "不限"},{fdcode:"1",fdname: "有效"},{fdcode:"2",fdname: "暂缓"},{fdcode:"3",fdname: "无效"}],
-                govDistrictArraysj:[{fdcode:"0",fdname: "不限"},{fdcode:"1",fdname: "45天内到期"},{fdcode:"2",fdname: "90天内到期"},{fdcode:"3",fdname: "当前空置"}],
+                govDistrictArraysj:[],
                 subBuesiness:[],
+                fhyfyejv:'',
+                fhyfyejv1:'',
                 fyid: "",
                 lpid: "",
                 zdid:"",
@@ -512,6 +507,80 @@
 
 
             },
+            searchSubAreasjsj(code,e){
+                /*this.hyfy = '';*/
+                this.hystate = 0;
+                const li = $(e.target).closest("li"), txt = $(li).find("a").text();
+                li.addClass("highlight").siblings().removeClass("highlight");
+                $('h2.area-h').html(txt);
+                this.currentFilterTab = 'nth';
+                Indicator.open({
+                    text: '',
+                    spinnerType: 'fading-circle'
+                });
+                if(this.fhyfyejv == '不限'){
+                    this.fhyfyejv = 0;
+                    this.fhyfyejv1 = 0;
+                }
+                if(code == 0){
+                    this.fhyfyejv1 = code;
+                }
+                if(this.fhyfyejv == 1){
+                    this.fhyfyejv1 = code;
+                }
+                if(this.fhyfyejv == 2){
+                    if(code == 1){
+                        this.fhyfyejv1 = 4;
+                    }else if(code == 2){
+                        this.fhyfyejv1 = 5;
+                    }else if(code == 3){
+                        this.fhyfyejv1 = 6;
+                    }else if(code == 4){
+                        this.fhyfyejv1 = 7;
+                    }
+                }
+                if(this.fhyfyejv == 3){
+                    if(code == 1){
+                        this.fhyfyejv1 = 8;
+                    }else if(code == 2){
+                        this.fhyfyejv1 = 9;
+                    }
+                }
+                /*this.fhyfyejv1 = "";
+                this.fhyfyejv = "";*/
+                this.resultData = [];
+                this.para.curr_page = 1;
+                this.getData();
+            },
+            searchSubArea(code,e){
+                this.hyfysj = "a";
+                const li = $(e.target).closest("li"), txt = $(li).find("a").text();
+                li.addClass("highlight").siblings().removeClass("highlight");
+                $('h2.area-h').html(txt);
+                if(code == '非航远房源'){
+                    $('h2.area-h').html('非航远房源');
+                }
+                if(code == 0){
+                    this.govDistrictArraysj = [];
+                    this.fhyfyejv = '0';
+                    this.fhyfyejv1 = '0';
+                    var val = 0;
+                    var value = '非航远房源';
+                    this.searchChoose(code, val, value, e);
+                }
+                if(code == 1){
+                    this.govDistrictArraysj = [{fdcode:"0",fdname: "不限"},{fdcode:"1",fdname: "45天内到期"},{fdcode:"2",fdname: "90天内到期"},{fdcode:"3",fdname: "当前空置"}];
+                    this.fhyfyejv = code;
+                }
+                if(code == 2){
+                    this.govDistrictArraysj = [{fdcode:"0",fdname: "不限"},{fdcode:"1",fdname: "业主直租"},{fdcode:"2",fdname: "资产公司压房或转租"},{fdcode:"3",fdname: "纠纷中"},{fdcode:"4",fdname: "意向不明确"}];
+                    this.fhyfyejv = code;
+                }
+                if(code == 3){
+                    this.govDistrictArraysj = [{fdcode:"0",fdname: "不限"},{fdcode:"1",fdname: "无业主电话"},{fdcode:"2",fdname: "业主电话无效"}];
+                    this.fhyfyejv = code;
+                }
+            },
             tebqqxpd(){
                 let user22 = JSON.parse(localStorage.getItem('cook'));
                 const url = this.$api + "/yhcms/web/wxqx/getFyxxqx.do";
@@ -581,7 +650,9 @@
                 }, 200);
             },
             searchChoose: function (code, val, value, e) {
-                this.hyfy = '';
+                if(val == 1){
+                    this.hyfy = '';
+                }
                 switch ($(e.target).closest('li').attr('data-type')) {
                     case 'district':
                         $('h2.district-h').html(value);
@@ -614,13 +685,17 @@
                             this.fhystate = code;
                         }
                         break;
+                    case 'positionA':
+                        this.hystate = '0';
+                        break;
                     default:
                 }
-                const li = $(e.target).closest("li");
+                const li = $(e.target).closest("li"), txt = $(li).find("a").text();
                 li.addClass("highlight").siblings().removeClass("highlight");
-
+                this.where = txt;
+                /*const li = $(e.target).closest("li");
+                li.addClass("highlight").siblings().removeClass("highlight");*/
                 console.log(this.where);
-
                 this.currentFilterTab = 'nth';
                 Indicator.open({
                     text: '',
@@ -643,6 +718,8 @@
                         "fybh": this.fybh,
                         "fyid": "",
                         "hystate": this.hystate,
+                        "gjstate": this.fhyfyejv,
+                        "gjstate1": this.fhyfyejv1,
                         "fhystate": this.fhystate,
                         "bussiness": this.business,
                         "fq": this.fq,

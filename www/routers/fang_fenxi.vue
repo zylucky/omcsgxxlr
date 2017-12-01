@@ -30,6 +30,8 @@
     .jindtpfb{border: 1px solid red;line-height: 0.5rem;height: 0.5rem;margin-top: 0.08rem;width: 50%;}
     .mysjimg{width:1.5rem;margin-top: 1rem;margin-left: 3rem;}
     .meiyshjzit{margin-top: 0.5rem;margin-left: 2rem;color: rgb(254,122,14);height: 3rem;   }
+    .fyfexiimg{line-height: .4rem !important;}
+    .fyfxxzl{width: 1.6rem;float: left;margin-left: 0.2rem;margin-top: 0.4rem;font-size:0.24rem;border-radius:5px;border: 0px solid rgb(137,217,226);border-bottom: 0px solid rgb(137,217,226) !important;}
 </style>
 <template>
     <div>
@@ -43,7 +45,7 @@
                     <div>相关数据，换个条件试试吧~</div>
                 </div>
             </div>
-            <div v-else id="main" style="width:100%;height:7.5rem;"></div>
+            <div v-else id="main" style="width:100%;height:8.5rem;"></div>
         </div>
         <div style="background-color: white !important;margin-top: 0.2rem;">
             <div class="cwkz" style="width: 5.3rem !important;"><span></span>已入住企业类型占比</div>
@@ -73,33 +75,69 @@
             <div class="cwkz" style="width: 5.3rem !important;"><span></span>周边项目空置竞争房源对比</div>
             <div class="sssj" style="width: 2rem !important;">实时数据</div>
             <div style="height:0.4rem;border-bottom:1px solid #dbdadf;"></div>
-            <ul class="ys_item_ul mb60" style="margin-top: 0.4rem;clear: both;">
-                <li class="clearfix fyfxhx fyfxhxdjzh" @click="fyfxchqxz1($event)">
+            <div style="font-size: 0.32rem;font-weight: 600;margin-top: 0.3rem;margin-left: 0.24rem;">性质</div>
+            <ul class="ys_item_ul mb60" style="margin-top: 0rem;clear: both;">
+                <!--<li class="clearfix fyfxhx fyfxhxdjzh" @click="fyfxchqxz1($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl pfmdjzh" style="margin-left: -0.25rem;text-align: center;">写字楼 </div>
+                        <div class="ys_item_con fl pfmdjzh" style="margin-left: -0.25rem;text-align: center;"><img class="fyfexiimg" src="../resources/images/fangyfx/1.png"> </div>
+                        <span class="chqxz" style="display: none;">1</span>
+                    </a>
+                </li>-->
+                <li class="clearfix fyfxxzl" @click="fyfxchqxz1($event)">
+                    <a href="javascript:;">
+                        <div v-if="fyfxxzlpd">
+                            <div style="margin-left: -0.25rem;text-align: center;"><img class="fyfexiimg" style="width: 0.6rem;" src="../resources/images/fangyfx/2-3.png"></div>
+                            <div class="ys_item_con fl hxff " style="margin-left: -0.25rem;text-align: center;line-height: .6rem;color:rgb(137,217,226);">写字楼 </div>
+                        </div>
+                        <div v-else>
+                            <div style="margin-left: -0.25rem;text-align: center;"><img class="fyfexiimg" style="width: 0.6rem;" src="../resources/images/fangyfx/1.png"></div>
+                            <div class="ys_item_con fl hxff " style="margin-left: -0.25rem;text-align: center;line-height: .6rem;color:rgb(69,110,114); ">写字楼 </div>
+                        </div>
                         <span class="chqxz" style="display: none;">1</span>
                     </a>
                 </li>
-                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxchqxz1($event)">
+                <li class="clearfix fyfxxzl fyfxhxdjzq" @click="fyfxchqxz1($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">公寓 </div>
+                        <div v-if="fyfxgypd">
+                            <div style="margin-left: -0.2rem;text-align: center;"><img class="fyfexiimg" style="width: 0.53rem;" src="../resources/images/fangyfx/2.png"></div>
+                            <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;line-height: .6rem;color:rgb(137,217,226);">公寓 </div>
+                        </div>
+                        <div v-else>
+                            <div style="margin-left: -0.2rem;text-align: center;"><img class="fyfexiimg" style="width: 0.53rem;" src="../resources/images/fangyfx/1-1.png"></div>
+                            <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;line-height: .6rem;color:rgb(69,110,114);">公寓 </div>
+                        </div>
                         <span class="chqxz" style="display: none;">2</span>
                     </a>
                 </li>
-                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxchqxz1($event)">
+                <li class="clearfix fyfxxzl fyfxhxdjzq" @click="fyfxchqxz1($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">商务楼 </div>
+                        <div v-if="fyfxswlpd">
+                            <div style="margin-left: -0.25rem;text-align: center;"><img class="fyfexiimg" style="width: 0.45rem;" src="../resources/images/fangyfx/2-1.png"></div>
+                            <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;line-height: .6rem;color:rgb(137,217,226);">商务楼 </div>
+                        </div>
+                        <div v-else>
+                            <div style="margin-left: -0.25rem;text-align: center;"><img class="fyfexiimg" style="width: 0.48rem;" src="../resources/images/fangyfx/1-2.png"></div>
+                            <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;line-height: .6rem;color:rgb(69,110,114);">商务楼 </div>
+                        </div>
                         <span class="chqxz" style="display: none;">3</span>
                     </a>
                 </li>
-                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxchqxz1($event)">
+                <li class="clearfix fyfxxzl fyfxhxdjzq" @click="fyfxchqxz1($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">商业 </div>
+                        <div v-if="fyfxsypd">
+                            <div style="margin-left: -0.25rem;text-align: center;"><img class="fyfexiimg" style="width: 0.55rem;" src="../resources/images/fangyfx/2-2.png"></div>
+                            <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;line-height: .6rem;color:rgb(137,217,226);">商业 </div>
+                        </div>
+                        <div v-else>
+                            <div style="margin-left: -0.25rem;text-align: center;"><img class="fyfexiimg" style="width: 0.52rem;" src="../resources/images/fangyfx/1-3.png"></div>
+                            <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;line-height: .6rem;color:rgb(69,110,114);">商业 </div>
+                        </div>
                         <span class="chqxz" style="display: none;">5</span>
                     </a>
                 </li>
             </ul>
-            <ul class="ys_item_ul mb60" style="margin-top: 0.4rem;clear: both;">
+            <div style="clear: both;font-size: 0.32rem;font-weight: 600;margin-top: 2.2rem;margin-left: 0.24rem;">面积</div>
+            <ul class="ys_item_ul mb60" style="margin-top: -0.2rem;clear: both;">
                 <li class="clearfix fyfxhx fyfxhxdjzh" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
                         <div class="ys_item_con fl pfmdjzh" style="margin-left: -0.25rem;text-align: center;">户型1 </div>
@@ -207,6 +245,10 @@
                 kzfy:'',//空置房源
                 wzfy:'',//未知房源
                 yzfy:'',//已租房源
+                fyfxxzlpd:false,
+                fyfxgypd:true,
+                fyfxswlpd:true,
+                fyfxsypd:true,
                 chqnxz:1,//产权性质的数字
                 qqj:0,
                 hqj:100,
@@ -392,15 +434,30 @@
                 const li = $(e.target).closest("li"), txt = $(li).find(".chqxz").text();
                 this.chqnxz = txt;
                 //加一个class样式
-                if(li.hasClass("fyfxhxdjzh")){
-
-                }else{
-                    li.addClass("fyfxhxdjzh");
-                    li.removeClass("fyfxhxdjzq").siblings().addClass("fyfxhxdjzq");
-                    li.children().children().addClass("pfmdjzh");
-                    li.siblings().children().children().removeClass("pfmdjzh").addClass("pfmdjzq");
+                if(txt == 1){
+                    this.fyfxxzlpd = false;
+                    this.fyfxgypd = true;
+                    this.fyfxswlpd = true;
+                    this.fyfxsypd = true;
                 }
-                li.siblings().removeClass("fyfxhxdjzh");
+                if(txt == 2){
+                    this.fyfxxzlpd = true;
+                    this.fyfxgypd = false;
+                    this.fyfxswlpd = true;
+                    this.fyfxsypd = true;
+                }
+                if(txt == 3){
+                    this.fyfxxzlpd = true;
+                    this.fyfxgypd = true;
+                    this.fyfxswlpd = false;
+                    this.fyfxsypd = true;
+                }
+                if(txt == 5){
+                    this.fyfxxzlpd = true;
+                    this.fyfxgypd = true;
+                    this.fyfxswlpd = true;
+                    this.fyfxsypd = false;
+                }
                 this.manxsh3 = false;
                 if(this.sctype == 2){
                     const url2 = this.$api + "/yhcms/web/jcsj/wxJnjxx.do";
@@ -488,12 +545,12 @@
                 var option = {
                     tooltip: {
                         trigger: 'item',
-                        formatter: "{b}: {c} ({d}%)"
+                        /*formatter: "{b}: {c} ({d}%)"*/
                     },
                     legend: {
                         bottom: 120,
                         //x : 10,//控制标签种类的左右位置
-                        y : 290,//控制标签种类的上下位置
+                        y : '80%',//控制标签种类的上下位置
                         data:['可出租房源','未到期房源','90天内到\n期房源','45天内到\n期房源','信息不全']
                     },
                     color:this.hxys,//设置扇形图固定的颜色
@@ -501,12 +558,13 @@
                             name:'',
                             type:'pie',
                             radius: ['35%', '50%'],
-                            center:['175','140'],
+                            center:['50%','40%'],//环形图位置的参数
                             //radius: ['30%', '45%'],
                             label: {
                                 normal: {
-                                    formatter: '{b|{b}:\n}{per|{d}%}\n',
-                                    /*backgroundColor: '#eee',
+                                    /*formatter: '{b|{b}:\n}{c}\n{per|{d}%}\n',*/
+                                    formatter: '\n{b|{b}:\n}{c}\n{per|{d}%}\n',
+                                    /*backgroundColor: '#eee',//图上大的背景色
                                      borderColor: '#aaa',*/
                                     borderWidth: 1,
                                     borderRadius: 4,
@@ -556,7 +614,7 @@
                     },
                     legend: {
                         bottom: 10,
-                        y:'70%',
+                        y:'80%',
                         data: ['金融', '教育','互联网','休闲','文化','房地产','其它']
                     },
                     color:this.sxys,//设置扇形图固定的颜色
@@ -565,6 +623,12 @@
                             type: 'pie',
                             radius : '55%',
                             center: ['50%', '35%'],
+                            label: {
+                                normal: {
+                                    /*formatter: '{b|{b}:\n}{c}\n{per|{d}%}\n',*/
+                                    formatter: '\n{b}:\n{c}\n{d}%\n',
+                                }
+                            },
                             data:this.yrzdata,
                             itemStyle: {
                                 emphasis: {

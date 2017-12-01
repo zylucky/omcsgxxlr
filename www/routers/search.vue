@@ -254,7 +254,8 @@
                 hotArray:[
                     /*{name:"望京soho"},
                     {name:"盈科中心"}*/
-                    {name:"住邦2000"}
+                    {name:"住邦2000"},
+                    {name:"SOHO现代城"}
                 ],
                 resultData: [],
                 rt: "",

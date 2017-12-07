@@ -218,11 +218,9 @@
                         }
                         that.fkfs = data.fkfs;
                         that.lxfs = data.lxfs;
-                        if(chqxz!='公寓'){
-                            that.gsrs = data.gsrs;
-                            that.jyhj = data.jyhj;
-                            that.sshy = data.sshy;
-                        }
+                        that.gsrs = data.gsrs;
+                        that.jyhj = data.jyhj;
+                        that.sshy = data.sshy;
                         //只有查看和空白字段添加的权限
                         if(this.qxzt == 20 || this.qxzt == 30 || this.qxzt == 46){
                             this.topicqx = true;

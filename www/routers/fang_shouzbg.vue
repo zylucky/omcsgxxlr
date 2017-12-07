@@ -171,9 +171,21 @@
                             this.hydata.push({value:data.ytdata.fdc,name:'房地产'});
                             this.sxys.push('rgb(116,159,131)');
                         }
+                        if(data.ytdata.ly != 0){
+                            this.hydata.push({value:data.ytdata.ly,name:'旅游'});
+                            this.sxys.push('rgb(202,134,34)');
+                        }
+                        if(data.ytdata.my != 0){
+                            this.hydata.push({value:data.ytdata.my,name:'贸易'});
+                            this.sxys.push('rgb(189,162,154)');
+                        }
+                        if(data.ytdata.yl != 0){
+                            this.hydata.push({value:data.ytdata.yl,name:'医疗'});
+                            this.sxys.push('rgb(110,112,116)');
+                        }
                         if(data.ytdata.qt != 0){
                             this.hydata.push({value:data.ytdata.qt,name:'其它'});
-                            this.sxys.push('rgb(202,134,34)');
+                            this.sxys.push('rgb(84,101,116)');
                         }
                         this.shanx();
                         //给页面加背景色和宽度
@@ -241,7 +253,7 @@
                     legend: {
                         bottom: 10,
                         y:'75%',
-                        data: ['金融', '教育','互联网','休闲','文化','房地产','其它']
+                        data: ['金融', '教育','互联网','休闲','文化','房地产','旅游','贸易','医疗','其它']
                     },
                     color:this.sxys,//设置扇形图固定的颜色
                     series : [

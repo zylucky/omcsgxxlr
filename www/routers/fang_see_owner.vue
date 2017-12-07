@@ -45,8 +45,8 @@
                 </li>-->
                 <li v-for="(ph,idx) in phone" class="clearfix">
                     <span class="ys_tit zyzd">联系方式：</span>
-                    <div class="ys_item_con fl pos pos_a">
-                        <input type="text" :value="ph.phone" :readonly="true" onfocus="this.blur()" v-model="ph.phone" placeholder="请输入">
+                    <div class="ys_item_con fl pos pos_a"><!-- :value="ph.phone"-->
+                        <input type="text" :readonly="true" onfocus="this.blur()" v-model="ph.phone" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix pr">
@@ -76,10 +76,10 @@
                 <li class="clearfix pr bg_gray">
                     <span>家庭主要成员</span>
                 </li>
-                <li v-for="(cy, index) in jtcy" class="clearfix">
-                    <input type="text" :value="cy.name" v-model="cy.name" :readonly="true" onfocus="this.blur()"  placeholder="姓名" class="ys_tit border_right mr10">
-                    <div class="ys_item_con fl pos pos_b">
-                        <input type="text" :value="cy.rel" :readonly="true" onfocus="this.blur()" v-model="cy.rel" placeholder="关系">
+                <li v-for="(cy, index) in jtcy" class="clearfix"><!-- :value="cy.name"-->
+                    <input type="text" v-model="cy.name" :readonly="true" onfocus="this.blur()"  placeholder="姓名" class="ys_tit border_right mr10">
+                    <div class="ys_item_con fl pos pos_b"><!-- :value="cy.rel"-->
+                        <input type="text" :readonly="true" onfocus="this.blur()" v-model="cy.rel" placeholder="关系">
                     </div>
                 </li>
                 <li class="clearfix pr">
@@ -98,8 +98,8 @@
                 <div class="gsdivclass showClass" >
                     <li v-for="(gs1,idxx) in gsname" class="clearfix pr">
                         <span class="ys_tit w224">公司名称：</span>
-                        <div class="ys_item_con fl ">
-                            <input type="text" :value="gs1.name" :readonly="true" onfocus="this.blur()" v-model="gs1.name" placeholder="请输入">
+                        <div class="ys_item_con fl "> <!--:value="gs1.name"-->
+                            <input type="text" :readonly="true" onfocus="this.blur()" v-model="gs1.name" placeholder="请输入">
                         </div>
                     </li>
 
@@ -119,8 +119,8 @@
                 </li>
                 <li v-for="(gs,idx) in yzqygs" class="clearfix pr">
                     <span class="ys_tit w224">亲友公司：</span>
-                    <div class="ys_item_con fl pos pos_c">
-                        <input type="text" :value="gs.name" :readonly="true" onfocus="this.blur()" v-model="gs.name" placeholder="请输入">
+                    <div class="ys_item_con fl pos pos_c"><!-- :value="gs.name"-->
+                        <input type="text" :readonly="true" onfocus="this.blur()" v-model="gs.name" placeholder="请输入">
                     </div>
                 </li>
             </ul>

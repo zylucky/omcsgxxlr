@@ -420,13 +420,11 @@
                 const target = $(e.target), val = target.attr("value");
                 if(!val){return;}
                 if ($(e.target).hasClass('active')) {
-                    alert(2222);
                     let tsbq_t = new Set(this.tsbq);
                     tsbq_t.delete(val);
                     this.tsbq = [...tsbq_t];
                     $(e.target).removeClass('active');
                 } else {
-                    alert(3333);
                     let tsbq_t = new Set(this.tsbq);
                     tsbq_t.add(val);
                     this.tsbq = [...tsbq_t];

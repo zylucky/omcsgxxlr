@@ -175,9 +175,9 @@
                     const data=data12.zhxx;
                     that.fybh=data1.fybh;
                     var chqxz=data1.chqxz;
-                    if(chqxz=='公寓'){
+                   /* if(chqxz=='公寓'){
                         $(".hy_class").css("display","none");
-                    }
+                    }*/
                     if(data!=''){
                         that.id=data.id;
                         that.topic = data.topic;
@@ -202,11 +202,9 @@
                         }
                         that.fkfs = data.fkfs;
                         that.lxfs = data.lxfs;
-                        if(chqxz!='公寓'){
-                            that.gsrs = data.gsrs;
-                            that.jyhj = data.jyhj;
-                            that.sshy = data.sshy;
-                        }
+                         that.gsrs = data.gsrs;
+                         that.jyhj = data.jyhj;
+                         that.sshy = data.sshy;
                     }
                 }, (res)=>{
                     Indicator.close()

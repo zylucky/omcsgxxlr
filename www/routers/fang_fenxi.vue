@@ -57,7 +57,7 @@
                     <div>相关数据，换个条件试试吧~</div>
                 </div>
             </div>
-            <div v-else id="main1" style="width:100%;height:7rem;"></div>
+            <div v-else id="main1" style="width:100%;height:9.5rem;"></div>
         </div>
         <div style="background-color: white !important;margin-top: 0.2rem;">
             <div class="cwkz" style="width: 5.3rem !important;"><span></span>八周市场均价走势</div>
@@ -245,6 +245,7 @@
                 kzfy:'',//空置房源
                 wzfy:'',//未知房源
                 yzfy:'',//已租房源
+                kongzhi:'',
                 fyfxxzlpd:false,
                 fyfxgypd:true,
                 fyfxswlpd:true,
@@ -257,8 +258,24 @@
                 tpdata1:[],
                 yrzdata:[],
                 scjjdata:[],
+                scjjgydata:[],
+                scjjswldata:[],
+                scjjsydata:[],
                 resuldata:{},
+                resuldata1:[],
+                resuldata2:[],
+                resuldata3:[],
+                resuldata4:[],
+                resuldata5:[],
+                resuldata6:[],
+                resuldata7:[],
+                resuldata8:[],
+                resuldata9:[],
+                resuldata10:[],
                 zhouqidata:[],
+                zhouqigydata:[],
+                zhouqiswldata:[],
+                zhouqisydata:[],
                 hxys:[],
                 sxys:[],
                 hxzxtys:[],
@@ -371,9 +388,22 @@
                             this.yrzdata.push({value:data.fdc,name:'房地产'});
                             this.sxys.push('rgb(116,159,131)');
                         }
+                        if(data.ly != 0){
+                            this.yrzdata.push({value:data.ly,name:'旅游'});
+                            this.sxys.push('rgb(202,134,34)');
+                        }
+                        if(data.my != 0){
+                            this.yrzdata.push({value:data.my,name:'贸易'});
+                            this.sxys.push('rgb(189,162,154)');
+                        }
+                        if(data.yl != 0){
+                            this.yrzdata.push({value:data.yl,name:'医疗'});
+                            this.sxys.push('rgb(110,112,116)');
+                        }
+
                         if(data.qt != 0){
                             this.yrzdata.push({value:data.qt,name:'其它'});
-                            this.sxys.push('rgb(202,134,34)');
+                            this.sxys.push('rgb(84,101,116)');
                         }
                         this.shanx();
                     }else{
@@ -385,42 +415,151 @@
                 const url2 = this.$api + "/yhcms/web/jcsj/wxFjxx.do";
                 this.$http.post(url2,{"lpid":lpid}).then((res)=>{
                     Indicator.close();
-                    const data = JSON.parse(res.bodyText).data;
-                    if(data){
+                    const data = JSON.parse(res.bodyText);
+                    if(data.data){
+
                         this.manxsh2 = false;
-                        var count = data.length;
-                        if(count >= 1){
-                            this.scjjdata.push({value:data[0].zxjnjg});
-                            this.zhouqidata.push({value:data[0].time1});
+                        if(data.data){
+                            var count = data.data.length;
+                            if(count >= 1){
+                                this.scjjdata.push({value:data.data[0].zxjnjg});
+                                this.zhouqidata.push({value:data.data[0].time1});
+                            }
+                            if(count >= 2){
+                                this.scjjdata.push({value:data.data[1].zxjnjg});
+                                this.zhouqidata.push({value:data.data[1].time1});
+                            }
+                            if(count >= 3){
+                                this.scjjdata.push({value:data.data[2].zxjnjg});
+                                this.zhouqidata.push({value:data.data[2].time1});
+                            }
+                            if(count >= 4){
+                                this.scjjdata.push({value:data.data[3].zxjnjg});
+                                this.zhouqidata.push({value:data.data[3].time1});
+                            }
+                            if(count >= 5){
+                                this.scjjdata.push({value:data.data[4].zxjnjg});
+                                this.zhouqidata.push({value:data.data[4].time1});
+                            }
+                            if(count >= 6){
+                                this.scjjdata.push({value:data.data[5].zxjnjg});
+                                this.zhouqidata.push({value:data[5].time1});
+                            }
+                            if(count >= 7){
+                                this.scjjdata.push({value:data.data[6].zxjnjg});
+                                this.zhouqidata.push({value:data.data[6].time1});
+                            }
+                            if(count >= 8){
+                                this.scjjdata.push({value:data.data[7].zxjnjg});
+                                this.zhouqidata.push({value:data.data[7].time1});
+                            }
                         }
-                        if(count >= 2){
-                            this.scjjdata.push({value:data[1].zxjnjg});
-                            this.zhouqidata.push({value:data[1].time1});
+                        if(data.data2){
+                            var count2 = data.data2.length;
+                            if(count2 >= 1){
+                                this.scjjgydata.push({value:data.data2[0].zxjnjg});
+                                this.zhouqigydata.push({value:data.data2[0].time1});
+                            }
+                            if(count2 >= 2){
+                                this.scjjgydata.push({value:data.data2[1].zxjnjg});
+                                this.zhouqigydata.push({value:data.data2[1].time1});
+                            }
+                            if(count2 >= 3){
+                                this.scjjgydata.push({value:data.data2[2].zxjnjg});
+                                this.zhouqigydata.push({value:data.data2[2].time1});
+                            }
+                            if(count2 >= 4){
+                                this.scjjgydata.push({value:data.data2[3].zxjnjg});
+                                this.zhouqigydata.push({value:data.data2[3].time1});
+                            }
+                            if(count2 >= 5){
+                                this.scjjgydata.push({value:data.data2[4].zxjnjg});
+                                this.zhouqigydata.push({value:data.data2[4].time1});
+                            }
+                            if(count2 >= 6){
+                                this.scjjgydata.push({value:data.data2[5].zxjnjg});
+                                this.zhouqigydata.push({value:data2[5].time1});
+                            }
+                            if(count2 >= 7){
+                                this.scjjgydata.push({value:data.data2[6].zxjnjg});
+                                this.zhouqigydata.push({value:data.data2[6].time1});
+                            }
+                            if(count2 >= 8){
+                                this.scjjgydata.push({value:data.data2[7].zxjnjg});
+                                this.zhouqigydata.push({value:data.data2[7].time1});
+                            }
                         }
-                        if(count >= 3){
-                            this.scjjdata.push({value:data[2].zxjnjg});
-                            this.zhouqidata.push({value:data[2].time1});
+                        if(data.data3){
+                            var count3 = data.data3.length;
+                            if(count3 >= 1){
+                                this.scjjswldata.push({value:data.data3[0].zxjnjg});
+                                this.zhouqiswldata.push({value:data.data3[0].time1});
+                            }
+                            if(count3 >= 2){
+                                this.scjjswldata.push({value:data.data3[1].zxjnjg});
+                                this.zhouqiswldata.push({value:data.data3[1].time1});
+                            }
+                            if(count3 >= 3){
+                                this.scjjswldata.push({value:data.data3[2].zxjnjg});
+                                this.zhouqiswldata.push({value:data.data3[2].time1});
+                            }
+                            if(count3 >= 4){
+                                this.scjjswldata.push({value:data.data3[3].zxjnjg});
+                                this.zhouqiswldata.push({value:data.data3[3].time1});
+                            }
+                            if(count3 >= 5){
+                                this.scjjswldata.push({value:data.data3[4].zxjnjg});
+                                this.zhouqiswldata.push({value:data.data3[4].time1});
+                            }
+                            if(count3 >= 6){
+                                this.scjjswldata.push({value:data.data3[5].zxjnjg});
+                                this.zhouqiswldata.push({value:data3[5].time1});
+                            }
+                            if(count3 >= 7){
+                                this.scjjswldata.push({value:data.data3[6].zxjnjg});
+                                this.zhouqiswldata.push({value:data.data3[6].time1});
+                            }
+                            if(count3 >= 8){
+                                this.scjjswldata.push({value:data.data3[7].zxjnjg});
+                                this.zhouqiswldata.push({value:data.data3[7].time1});
+                            }
                         }
-                        if(count >= 4){
-                            this.scjjdata.push({value:data[3].zxjnjg});
-                            this.zhouqidata.push({value:data[3].time1});
+                        if(data.data5){
+                            var count5 = data.data5.length;
+                            if(count5 >= 1){
+                                this.scjjsydata.push({value:data.data5[0].zxjnjg});
+                                this.zhouqisydata.push({value:data.data5[0].time1});
+                            }
+                            if(count5 >= 2){
+                                this.scjjsydata.push({value:data.data5[1].zxjnjg});
+                                this.zhouqisydata.push({value:data.data5[1].time1});
+                            }
+                            if(count5 >= 3){
+                                this.scjjsydata.push({value:data.data5[2].zxjnjg});
+                                this.zhouqisydata.push({value:data.data5[2].time1});
+                            }
+                            if(count5 >= 4){
+                                this.scjjsydata.push({value:data.data5[3].zxjnjg});
+                                this.zhouqisydata.push({value:data.data5[3].time1});
+                            }
+                            if(count5 >= 5){
+                                this.scjjsydata.push({value:data.data5[4].zxjnjg});
+                                this.zhouqisydata.push({value:data.data5[4].time1});
+                            }
+                            if(count5 >= 6){
+                                this.scjjsydata.push({value:data.data5[5].zxjnjg});
+                                this.zhouqisydata.push({value:data5[5].time1});
+                            }
+                            if(count5 >= 7){
+                                this.scjjsydata.push({value:data.data5[6].zxjnjg});
+                                this.zhouqisydata.push({value:data.data5[6].time1});
+                            }
+                            if(count5 >= 8){
+                                this.scjjsydata.push({value:data.data5[7].zxjnjg});
+                                this.zhouqisydata.push({value:data.data5[7].time1});
+                            }
                         }
-                        if(count >= 5){
-                            this.scjjdata.push({value:data[4].zxjnjg});
-                            this.zhouqidata.push({value:data[4].time1});
-                        }
-                        if(count >= 6){
-                            this.scjjdata.push({value:data[5].zxjnjg});
-                            this.zhouqidata.push({value:data[5].time1});
-                        }
-                        if(count >= 7){
-                            this.scjjdata.push({value:data[6].zxjnjg});
-                            this.zhouqidata.push({value:data[6].time1});
-                        }
-                        if(count >= 8){
-                            this.scjjdata.push({value:data[7].zxjnjg});
-                            this.zhouqidata.push({value:data[7].time1});
-                        }
+
                         this.zhex();
                     }else{
                         this.manxsh2 = true;
@@ -467,7 +606,29 @@
                         const code = JSON.parse(res.bodyText).count;
                         if(code == 1){
                             this.manxsh3 = false;
-                            this.resuldata = data;
+                            this.resuldata1 = [];
+                            this.resuldata2 = [];
+                            this.resuldata3 = [];
+                            this.resuldata4 = [];
+                            this.resuldata5 = [];
+                            this.resuldata6 = [];
+                            this.resuldata7 = [];
+                            this.resuldata8 = [];
+                            this.resuldata9 = [];
+                            this.resuldata10 = [];
+                            this.kongzhi = "均价";
+                            if(data){
+                                for(var i=0;i<data.length;i++){
+                                    this.resuldata1[i] = data[i].topic;
+                                }
+                                for(var i=0;i<data.length;i++){
+                                    if(data[i].jnjg == 0){
+
+                                    }else{
+                                        this.resuldata2[i] = data[i].jnjg;
+                                    }
+                                }
+                            }
                             //this.hxzxtys = data;
                             this.zhuxing();
                         }else{
@@ -493,7 +654,29 @@
                         const code = JSON.parse(res.bodyText).count;
                         if(code == 1){
                             this.manxsh3 = false;
-                            this.resuldata = data;
+                            this.resuldata1 = [];
+                            this.resuldata2 = [];
+                            this.resuldata3 = [];
+                            this.resuldata4 = [];
+                            this.resuldata5 = [];
+                            this.resuldata6 = [];
+                            this.resuldata7 = [];
+                            this.resuldata8 = [];
+                            this.resuldata9 = [];
+                            this.resuldata10 = [];
+                            this.kongzhi = "销售周期";
+                            if(data){
+                                for(var i=0;i<data.length;i++){
+                                    this.resuldata1[i] = data[i].topic;
+                                }
+                                for(var i=0;i<data.length;i++){
+                                    if(data[i].xszq == 0){
+
+                                    }else{
+                                        this.resuldata2[i] = data[i].xszq;
+                                    }
+                                }
+                            }
                             this.zhuxing();
                         }else{
                             this.manxsh3 = true;
@@ -517,8 +700,55 @@
                         const code = JSON.parse(res.bodyText).count;
                         if(code == 1){
                             this.manxsh3 = false;
-                            const data = JSON.parse(res.bodyText).data;
-                            this.resuldata = data;
+                            this.resuldata1 = [];
+                            this.resuldata2 = [];
+                            this.resuldata3 = [];
+                            this.resuldata4 = [];
+                            this.resuldata5 = [];
+                            this.resuldata6 = [];
+                            this.resuldata7 = [];
+                            this.resuldata8 = [];
+                            this.resuldata9 = [];
+                            this.resuldata10 = [];
+                            this.resuldata7 = ['空置', '45天内到期','90天内到期'];
+                            this.kongzhi = "空置";
+                            const data = JSON.parse(res.bodyText);
+                            if(data.data){
+                                for(var i=0;i<data.data.length;i++){
+                                    this.resuldata1[i] = data.data[i].topic;
+                                }
+                                for(var i=0;i<data.data.length;i++){
+                                    if(data.data[i].count == 0){
+
+                                    }else{
+                                        this.resuldata2[i] = data.data[i].count;
+                                    }
+                                }
+                            }
+                            if(data.data2){
+                                for(var i=0;i<data.data2.length;i++){
+                                    this.resuldata3[i] = data.data2[i].topic;
+                                }
+                                for(var i=0;i<data.data2.length;i++){
+                                    if(data.data2[i].count == 0){
+
+                                    }else{
+                                        this.resuldata4[i] = data.data2[i].count;
+                                    }
+                                }
+                            }
+                            if(data.data3){
+                                for(var i=0;i<data.data3.length;i++){
+                                    this.resuldata5[i] = data.data3[i].topic;
+                                }
+                                for(var i=0;i<data.data3.length;i++){
+                                    if(data.data3[i].count == 0){
+
+                                    }else{
+                                        this.resuldata6[i] = data.data3[i].count;
+                                    }
+                                }
+                            }
                             this.zhuxing();
                         }else{
                             this.manxsh3 = true;
@@ -615,14 +845,14 @@
                     legend: {
                         bottom: 10,
                         y:'80%',
-                        data: ['金融', '教育','互联网','休闲','文化','房地产','其它']
+                        data: ['金融', '教育','互联网','休闲','文化','房地产','旅游','贸易','医疗','其它']
                     },
                     color:this.sxys,//设置扇形图固定的颜色
                     series : [
                         {
                             type: 'pie',
                             radius : '55%',
-                            center: ['50%', '35%'],
+                            center: ['50%', '40%'],
                             label: {
                                 normal: {
                                     /*formatter: '{b|{b}:\n}{c}\n{per|{d}%}\n',*/
@@ -651,6 +881,9 @@
                 var option = {
                     tooltip: {
                         trigger: 'axis'
+                    },
+                    legend: {
+                        data:['写字楼','公寓','商务楼','商业']
                     },
                     toolbox: {
                         show: true,
@@ -682,9 +915,57 @@
                     },
                     series: [
                         {
-                            name:'市场均价',
+                            name:'写字楼',
                             type:'line',
                             data:this.scjjdata,
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine: {
+                                data: [
+                                    {type: 'average', name: '平均值'}
+                                ]
+                            }
+                        },
+                        {
+                            name:'公寓',
+                            type:'line',
+                            data:this.scjjgydata,
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine: {
+                                data: [
+                                    {type: 'average', name: '平均值'}
+                                ]
+                            }
+                        },
+                        {
+                            name:'商务楼',
+                            type:'line',
+                            data:this.scjjswldata,
+                            markPoint: {
+                                data: [
+                                    {type: 'max', name: '最大值'},
+                                    {type: 'min', name: '最小值'}
+                                ]
+                            },
+                            markLine: {
+                                data: [
+                                    {type: 'average', name: '平均值'}
+                                ]
+                            }
+                        },
+                        {
+                            name:'商业',
+                            type:'line',
+                            data:this.scjjsydata,
                             markPoint: {
                                 data: [
                                     {type: 'max', name: '最大值'},
@@ -735,7 +1016,29 @@
                         const code = JSON.parse(res.bodyText).count;
                         if(code == 1){
                             this.manxsh3 = false;
-                            this.resuldata = data;
+                            this.resuldata1 = [];
+                            this.resuldata2 = [];
+                            this.resuldata3 = [];
+                            this.resuldata4 = [];
+                            this.resuldata5 = [];
+                            this.resuldata6 = [];
+                            this.resuldata7 = [];
+                            this.resuldata8 = [];
+                            this.resuldata9 = [];
+                            this.resuldata10 = [];
+                            this.kongzhi = "均价";
+                            if(data){
+                                for(var i=0;i<data.length;i++){
+                                    this.resuldata1[i] = data[i].topic;
+                                }
+                                for(var i=0;i<data.length;i++){
+                                    if(data[i].jnjg == 0){
+
+                                    }else{
+                                        this.resuldata2[i] = data[i].jnjg;
+                                    }
+                                }
+                            }
                             //this.hxzxtys = data;
                             this.zhuxing();
                         }else{
@@ -754,14 +1057,36 @@
                         Indicator.close()
                     });
                 }else if(this.sctype == 3){
-                    const url2 = this.$api + "/yhcms/web/jcsj/wxXszq.do";
+                        const url2 = this.$api + "/yhcms/web/jcsj/wxXszq.do";
                     this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                         Indicator.close();
                         const data = JSON.parse(res.bodyText).data;
                         const code = JSON.parse(res.bodyText).count;
                         if(code == 1){
                             this.manxsh3 = false;
-                            this.resuldata = data;
+                            this.resuldata1 = [];
+                            this.resuldata2 = [];
+                            this.resuldata3 = [];
+                            this.resuldata4 = [];
+                            this.resuldata5 = [];
+                            this.resuldata6 = [];
+                            this.resuldata7 = [];
+                            this.resuldata8 = [];
+                            this.resuldata9 = [];
+                            this.resuldata10 = [];
+                            this.kongzhi = "销售周期";
+                            if(data){
+                                for(var i=0;i<data.length;i++){
+                                    this.resuldata1[i] = data[i].topic;
+                                }
+                                for(var i=0;i<data.length;i++){
+                                    if(data[i].xszq == 0){
+
+                                    }else{
+                                        this.resuldata2[i] = data[i].xszq;
+                                    }
+                                }
+                            }
                             this.zhuxing();
                         }else{
                             this.manxsh3 = true;
@@ -784,9 +1109,56 @@
                         Indicator.close();
                         const code = JSON.parse(res.bodyText).count;
                         if(code == 1){
+                            this.resuldata1 = [];
+                            this.resuldata2 = [];
+                            this.resuldata3 = [];
+                            this.resuldata4 = [];
+                            this.resuldata5 = [];
+                            this.resuldata6 = [];
+                            this.resuldata7 = [];
+                            this.resuldata8 = [];
+                            this.resuldata9 = [];
+                            this.resuldata10 = [];
+                            this.resuldata7 = ['空置', '45天内到期','90天内到期'];
+                            this.kongzhi = "空置";
                             this.manxsh3 = false;
-                            const data = JSON.parse(res.bodyText).data;
-                            this.resuldata = data;
+                            const data = JSON.parse(res.bodyText);
+                            if(data.data){
+                                for(var i=0;i<data.data.length;i++){
+                                    this.resuldata1[i] = data.data[i].topic;
+                                }
+                                for(var i=0;i<data.data.length;i++){
+                                    if(data.data[i].count == 0){
+
+                                    }else{
+                                        this.resuldata2[i] = data.data[i].count;
+                                    }
+                                }
+                            }
+                            if(data.data2){
+                                for(var i=0;i<data.data2.length;i++){
+                                    this.resuldata3[i] = data.data2[i].topic;
+                                }
+                                for(var i=0;i<data.data2.length;i++){
+                                    if(data.data2[i].count == 0){
+
+                                    }else{
+                                        this.resuldata4[i] = data.data2[i].count;
+                                    }
+                                }
+                            }
+                            if(data.data3){
+                                for(var i=0;i<data.data3.length;i++){
+                                    this.resuldata5[i] = data.data3[i].topic;
+                                }
+                                for(var i=0;i<data.data3.length;i++){
+                                    if(data.data3[i].count == 0){
+
+                                    }else{
+                                        this.resuldata6[i] = data.data3[i].count;
+                                    }
+                                }
+                            }
                             this.zhuxing();
                         }else{
                             this.manxsh3 = true;
@@ -817,11 +1189,58 @@
                 const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
                 this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                     Indicator.close();
-                    const data = JSON.parse(res.bodyText).data;
+                    const data = JSON.parse(res.bodyText);
                     const code = JSON.parse(res.bodyText).count;
                     if(code == 1){
                         this.manxsh3 = false;
-                        this.resuldata = data;
+                        this.resuldata1 = [];
+                        this.resuldata2 = [];
+                        this.resuldata3 = [];
+                        this.resuldata4 = [];
+                        this.resuldata5 = [];
+                        this.resuldata6 = [];
+                        this.resuldata7 = [];
+                        this.resuldata8 = [];
+                        this.resuldata9 = [];
+                        this.resuldata10 = [];
+                        this.resuldata7 = ['空置', '45天内到期','90天内到期'];
+                        this.kongzhi = "空置";
+                        if(data.data){
+                            for(var i=0;i<data.data.length;i++){
+                                this.resuldata1[i] = data.data[i].topic;
+                            }
+                            for(var i=0;i<data.data.length;i++){
+                                if(data.data[i].count == 0){
+
+                                }else{
+                                    this.resuldata2[i] = data.data[i].count;
+                                }
+                            }
+                        }
+                        if(data.data2){
+                            for(var i=0;i<data.data2.length;i++){
+                                this.resuldata3[i] = data.data2[i].topic;
+                            }
+                            for(var i=0;i<data.data2.length;i++){
+                                if(data.data2[i].count == 0){
+
+                                }else{
+                                    this.resuldata4[i] = data.data2[i].count;
+                                }
+                            }
+                        }
+                        if(data.data3){
+                            for(var i=0;i<data.data3.length;i++){
+                                this.resuldata5[i] = data.data3[i].topic;
+                            }
+                            for(var i=0;i<data.data3.length;i++){
+                                if(data.data3[i].count == 0){
+
+                                }else{
+                                    this.resuldata6[i] = data.data3[i].count;
+                                }
+                            }
+                        }
                         this.zhuxing();
                     }else{
                         this.manxsh3 = true;
@@ -856,7 +1275,29 @@
                     const code = JSON.parse(res.bodyText).count;
                     if(code == 1){
                         this.manxsh3 = false;
-                        this.resuldata = data;
+                        this.resuldata1 = [];
+                        this.resuldata2 = [];
+                        this.resuldata3 = [];
+                        this.resuldata4 = [];
+                        this.resuldata5 = [];
+                        this.resuldata6 = [];
+                        this.resuldata7 = [];
+                        this.resuldata8 = [];
+                        this.resuldata9 = [];
+                        this.resuldata10 = [];
+                        this.kongzhi = "均价";
+                        if(data){
+                            for(var i=0;i<data.length;i++){
+                                this.resuldata1[i] = data[i].topic;
+                            }
+                            for(var i=0;i<data.length;i++){
+                                if(data[i].jnjg == 0){
+
+                                }else{
+                                    this.resuldata2[i] = data[i].jnjg;
+                                }
+                            }
+                        }
                         this.zhuxing();
                     }else{
                         this.manxsh3 = true;
@@ -890,7 +1331,29 @@
                     const code = JSON.parse(res.bodyText).count;
                     if(code == 1){
                         this.manxsh3 = false;
-                        this.resuldata = data;
+                        this.resuldata1 = [];
+                        this.resuldata2 = [];
+                        this.resuldata3 = [];
+                        this.resuldata4 = [];
+                        this.resuldata5 = [];
+                        this.resuldata6 = [];
+                        this.resuldata7 = [];
+                        this.resuldata8 = [];
+                        this.resuldata9 = [];
+                        this.resuldata10 = [];
+                        this.kongzhi = "销售周期";
+                        if(data){
+                            for(var i=0;i<data.length;i++){
+                                this.resuldata1[i] = data[i].topic;
+                            }
+                            for(var i=0;i<data.length;i++){
+                                if(data[i].xszq == 0){
+
+                                }else{
+                                    this.resuldata2[i] = data[i].xszq;
+                                }
+                            }
+                        }
                         this.zhuxing();
                     }else{
                         this.manxsh3 = true;
@@ -910,7 +1373,8 @@
                 });
             },
             //柱形图
-            zhuxing(){
+            zhuxing1(){
+                /*alert(1111);
                 // 基于准备好的dom，初始化echarts实例
                 var myChart = echarts.init(document.getElementById('main3'));
                 // 指定图表的配置项和数据
@@ -932,6 +1396,9 @@
                 ctx.fillText(waterMarkText, 0, 0);
 
                 var option = {
+                    legend: {
+                        data: []
+                    },
                     backgroundColor: {
                         type: 'pattern',
                         backgroundColor: '#FFFFFF',
@@ -955,7 +1422,7 @@
                     xAxis: {
                         type: 'value',
                         max: builderJson.all,
-                        //show: false,//false是不显示x轴
+                        show: false,//false是不显示x轴
                         axisTick: {width:10},//length后面这个数字用来设置坐标轴刻度的长度
                         splitLine: {
                             show: false
@@ -964,22 +1431,22 @@
                     yAxis:{
                         type: 'category',
                         data: Object.keys(builderJson.charts),
-                        /*axisLine: {
+                        /!*axisLine: {
                             lineStyle: {
                                 color:'white',//坐标轴的颜色
                             }
-                        },*/
-                        /*axisLine: {
+                        },*!/
+                        axisLine: {
                             lineStyle: {
                                 type: 'solid',
                                 color:'#fff',
                                 width:'2'
                             }
-                        },*/
-                        /*//去掉坐标轴刻度线
+                        },
+                        /!*!//去掉坐标轴刻度线
                         axisTick: {
                             show: false
-                        },*/
+                        },*!/
                         axisLabel: {
                             interval: 0,
                             maxInterval:2,
@@ -1022,7 +1489,7 @@
                         data: Object.keys(builderJson.charts).map(function (key) {
                             return builderJson.charts[key];
                         }),
-                    }/*, {
+                    }/!*, {
                         type: 'bar',
                         stack: 'chart',
                         silent: true,
@@ -1034,13 +1501,162 @@
                         data: Object.keys(builderJson.charts).map(function (key) {
                             return builderJson.all - builderJson.charts[key];
                         })
-                    }*/],
+                    }*!/],
                     //控制边距　
-                    /*grid: {
+                    /!*grid: {
                         left: '0%',
                         right:'10%',
                         containLabel: true,
-                    },*/
+                    },*!/
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);*/
+
+
+
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main3'));
+                var option = {
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        data: []
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis:  {
+                        type: 'value',
+                        show: false,//false是不显示x轴
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: this.resuldata7,
+                        //去掉y轴但会显示y轴的值
+                        axisLine: {
+                            lineStyle: {
+                                type: 'solid',
+                                color:'#fff',
+                                width:'2'
+                            }
+                        },
+                        axisLabel: {
+                            interval: 0,
+                            maxInterval:2,
+                            minInterval:1,
+                            rotate: 0,
+                            color: '#000000',//坐标值得具体的颜色
+                        },
+                    },
+                    series: [
+                        {
+                            name: '空置',
+                            type: 'bar',
+                            stack: '总量',
+                            barMaxWidth: '30',//柱子的宽度
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: this.resuldata8
+                        },
+                    ]
+                };
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            },
+            zhuxing(){
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main3'));
+                var option = {
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    legend: {
+                        data: this.resuldata7
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis:  {
+                        type: 'value',
+                        show: false,//false是不显示x轴
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: this.resuldata1,
+                        //去掉y轴但会显示y轴的值
+                        axisLine: {
+                            lineStyle: {
+                                type: 'solid',
+                                color:'#fff',
+                                width:'2'
+                            }
+                        },
+                        axisLabel: {
+                            interval: 0,
+                            maxInterval:2,
+                            minInterval:1,
+                            rotate: 0,
+                            color: '#000000',//坐标值得具体的颜色
+                        },
+                    },
+                    series: [
+                        {
+                            name: this.kongzhi,
+                            type: 'bar',
+                            stack: '总量',
+                            barMaxWidth: '30',//柱子的宽度
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: this.resuldata2
+                        },
+                        {
+                            name: '45天内到期',
+                            type: 'bar',
+                            stack: '总量',
+                            barMaxWidth: '30',//柱子的宽度
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: this.resuldata4
+                        },
+                        {
+                            name: '90天内到期',
+                            type: 'bar',
+                            stack: '总量',
+                            barMaxWidth: '30',//柱子的宽度
+                            label: {
+                                normal: {
+                                    show: true,
+                                    position: 'insideRight'
+                                }
+                            },
+                            data: this.resuldata6
+                        },
+                    ]
                 };
                 // 使用刚指定的配置项和数据显示图表。
                 myChart.setOption(option);
@@ -1064,11 +1680,58 @@
             const url2 = this.$api + "/yhcms/web/jcsj/wxFxxx.do";
             this.$http.post(url2,{"lpid":this.lpid,"m1":this.qqj,"m2":this.hqj,"chqxz":this.chqnxz}).then((res)=>{
                 Indicator.close();
-                const data = JSON.parse(res.bodyText).data;
+                const data = JSON.parse(res.bodyText);
                 const code = JSON.parse(res.bodyText).count;
                 if(code == 1){
                     this.manxsh3 = false;
-                    this.resuldata = data;
+                    this.resuldata1 = [];
+                    this.resuldata2 = [];
+                    this.resuldata3 = [];
+                    this.resuldata4 = [];
+                    this.resuldata5 = [];
+                    this.resuldata6 = [];
+                    this.resuldata7 = [];
+                    this.resuldata8 = [];
+                    this.resuldata9 = [];
+                    this.resuldata10 = [];
+                    this.resuldata7 = ['空置', '45天内到期','90天内到期'];
+                    this.kongzhi = "空置";
+                    if(data.data){
+                        for(var i=0;i<data.data.length;i++){
+                            this.resuldata1[i] = data.data[i].topic;
+                        }
+                        for(var i=0;i<data.data.length;i++){
+                            if(data.data[i].count == 0){
+
+                            }else{
+                                this.resuldata2[i] = data.data[i].count;
+                            }
+                        }
+                    }
+                    if(data.data2){
+                        for(var i=0;i<data.data2.length;i++){
+                            this.resuldata3[i] = data.data2[i].topic;
+                        }
+                        for(var i=0;i<data.data2.length;i++){
+                            if(data.data2[i].count == 0){
+
+                            }else{
+                                this.resuldata4[i] = data.data2[i].count;
+                            }
+                        }
+                    }
+                    if(data.data3){
+                        for(var i=0;i<data.data3.length;i++){
+                            this.resuldata5[i] = data.data3[i].topic;
+                        }
+                        for(var i=0;i<data.data3.length;i++){
+                            if(data.data3[i].count == 0){
+
+                            }else{
+                                this.resuldata6[i] = data.data3[i].count;
+                            }
+                        }
+                    }
                     this.zhuxing();
                 }else{
                     this.manxsh3 = true;

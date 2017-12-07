@@ -1,3 +1,4 @@
+<script src="../../../omcxsxxlr/www/main.js"></script>
 <style scoped lang="less">
   @import "../resources/css/reset.css";
   @import "../resources/css/base.less";

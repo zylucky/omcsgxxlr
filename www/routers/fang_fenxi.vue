@@ -140,50 +140,50 @@
             <ul class="ys_item_ul mb60" style="margin-top: -0.2rem;clear: both;">
                 <li class="clearfix fyfxhx fyfxhxdjzh" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl pfmdjzh" style="margin-left: -0.25rem;text-align: center;">户型1 </div>
+                        <div class="ys_item_con fl pfmdjzh" style="margin-left: -0.25rem;text-align: center;">面积 </div>
                         <span class="qv pfmdjzh">0-100</span><span class="pfmdjzh">㎡</span>
                     </a>
                 </li>
                 <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型2 </div>
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">面积 </div>
                         <span class="qv qvdjzq">101-200</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
                 <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型3 </div>
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">面积 </div>
                         <span class="qv qvdjzq">201-300</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
                 <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型4 </div>
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">面积 </div>
                         <span class="qv qvdjzq">301-400</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
                 <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型5 </div>
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">面积 </div>
                         <span class="qv qvdjzq">401-500</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
                 <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型6 </div>
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">面积 </div>
                         <span class="qv qvdjzq">501-600</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
                 <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型7 </div>
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">面积 </div>
                         <span class="qv qvdjzq">601-1000</span><span class="pfmdjzq">㎡</span>
                     </a>
                 </li>
-                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)">
+                <li class="clearfix fyfxhx fyfxhxdjzq" @click="fyfxhxsj($event)" style="line-height: 0.8rem !important;">
                     <a href="javascript:;">
-                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;">户型8 </div>
-                        <span class="qv qvdjzq">1000</span><span class="pfmdjzq">㎡以上</span>
+                        <div class="ys_item_con fl hxff" style="margin-left: -0.25rem;text-align: center;"> </div>
+                        <span class="qv qvdjzq"></span><span class="pfmdjzq">其他面积</span>
                     </a>
                 </li>
             </ul>

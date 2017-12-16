@@ -599,7 +599,11 @@
                         window.history.go(-1);
                         return;
                     }else if(data.ryzt == 4){
-                        this.fygjqx = false;
+                        if(data.qxzt == 41 || data.qxzt == 45 || data.qxzt == 47 || data.qxzt == 43){
+                            this.fygjqx = true;
+                        }else{
+                            this.fygjqx = false;
+                        }
                     }else if(data.fyzt == 1){
                         this.fygjqx = false;
                     }else if(data.qxzt == 20 || data.qxzt == 30){
@@ -607,6 +611,7 @@
                     }else{
                         this.fygjqx = true;
                     }
+
                     if(data.qxzt == 45 && data.ryzt == 5){
                         MessageBox('提示',"此用户不属于收购部人员！");
                         this.$router.push({path: '/login'});

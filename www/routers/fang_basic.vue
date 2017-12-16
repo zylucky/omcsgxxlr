@@ -477,7 +477,6 @@
                     let shyt_t = new Set(this.shyt);
                     shyt_t.add(val);
                     this.shyt = [...shyt_t];
-                    alert(1111);
                     $(e.target).addClass('active');
                 }
             },

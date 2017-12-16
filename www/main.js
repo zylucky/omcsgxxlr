@@ -12,15 +12,15 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.use(MintUI);
 
-//Vue.prototype.$prefix = "http://47.92.145.21:81" //图片前缀（47的图片服务器）
-Vue.prototype.$prefix = "http://116.62.68.26:81" //图片前缀（116的图片服务器）
+Vue.prototype.$prefix = "http://47.92.145.21:81" //图片前缀（47的图片服务器）
+//Vue.prototype.$prefix = "http://116.62.68.26:81" //图片前缀（116的图片服务器）
 
 // 测试环境
 //Vue.prototype.$api = "http://192.168.0.222:8080" //api地址
 
 // 生产环境
-//Vue.prototype.$api = "http://omc.urskongjian.com" //api地址线上
-Vue.prototype.$api = "http://116.62.68.26:8080" //api地址116的服务地址
+Vue.prototype.$api = "http://omc.urskongjian.com" //api地址线上
+//Vue.prototype.$api = "http://116.62.68.26:8080" //api地址116的服务地址
 //Vue.prototype.$api = "http://yhcms.tunnel.qydev.com" //api地址本地
 
 Vue.config.debug = true;// 开启debug模式
@@ -357,7 +357,7 @@ router.beforeEach(function(to, from, next){
                 }else{
                     next({path: '/login'});
                 }
-                $.post("http://116.62.68.26:8080/yhcms/web/wxqx/getSgLogin.do", {
+                $.post("http://omc.urskongjian.com/yhcms/web/wxqx/getSgLogin.do", {
                         "foreEndType": 2,
                         "code": "300000045",
                         "cookie": user22.sjs,

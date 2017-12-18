@@ -153,7 +153,7 @@ var router = new VueRouter({
         component: require('./routers/fang_basic.vue')
     },
     {
-        path: '/fang_genjin/:fyid',
+        path: '/fang_genjin/:lpid/:fyid',
         component: require('./routers/fang_genjin.vue')
     },
     {

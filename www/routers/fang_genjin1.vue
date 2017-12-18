@@ -19,21 +19,16 @@
 <template>
     <div class="all_elements">
         <div class="build_top ele_wrap">
-            <ul class="ys_item_ul mb60" style="margin:0.4rem 0.2rem;">
-                <div class="analy_item" style="padding: 0;line-height: 0.8rem;padding-left: 0.4rem;">
-                    <div class="analy_content">
-                        <div v-text="lpname" style="color: black;font-weight: 500;font-size: 0.36rem;"></div>
-                    </div>
-                </div>
-                <!--<li class="clearfix">
-                    <span class="ys_tit w170" style="width: 2rem !important;">房源租售情况：</span>
-                    <div class="ys_item_con fl">
-                        <label class="mr20"><input type="radio"  value="1" v-model="fyzsqk" name="fang_sale">出租</label>
-                        <label class="mr20"><input type="radio" value="2" v-model="fyzsqk"  name="fang_sale">出售</label>
-                        <label class="mr20"><input type="radio" value="3" v-model="fyzsqk"  name="fang_sale">可租可售</label>
-                    </div>
-                </li>-->
-                <li class="clearfix" style="margin-top: 0.4rem;">
+            <ul class="ys_item_ul mb60">
+                <!-- <li class="clearfix">
+                     <span class="ys_tit w170" style="width: 2rem !important;">房源租售情况：</span>
+                     <div class="ys_item_con fl">
+                         <label class="mr20"><input type="radio"  value="1" v-model="fyzsqk" name="fang_sale">出租</label>
+                         <label class="mr20"><input type="radio" value="2" v-model="fyzsqk"  name="fang_sale">出售</label>
+                         <label class="mr20"><input type="radio" value="3" v-model="fyzsqk"  name="fang_sale">可租可售</label>
+                     </div>
+                 </li>-->
+                <li class="clearfix">
                     <span class="ys_tit w170" style="width: 2rem !important;">是否精耕：</span>
                     <div class="ys_item_con fl">
                         <label class="mr20"><input type="radio" value="1" v-model="sfjg" name="shifu_jing">是</label>
@@ -98,8 +93,6 @@
             return {
                 "id": "",
                 "fyid": "",//房源id
-                lpid:'',
-                lpname:'',
                 bezhu:'',//备注
                 fyzsqk:'',//房源租售情况
                 sfjg:'',//是否精耕
@@ -242,25 +235,13 @@
             },
             getInitData(){
                 const fyid = this.$route.params.fyid;
-                const lpid = this.$route.params.lpid;
-                this.lpid = lpid;
                 this.fyid = fyid;
-
                 Indicator.open({
                     text: '',
                     spinnerType: 'fading-circle'
                 });
-                const url1 = this.$api + "/yhcms/web/zdfyxx/getZdfyxx.do";
-                let that = this;
-                this.$http.post(url1, {"parameters":{"id":this.fyid, "lpid": lpid},"foreEndType":2,"code":"300000064"}).then((res)=>{
-                        Indicator.close();
-                        const topic=JSON.parse(res.bodyText).topic;
-                        const topic1=JSON.parse(res.bodyText).data.jbxx;
-                        this.lpname = topic + "   " + topic1.zdh + '-' + topic1.fybh;
-                }, (res)=>{
-                    Indicator.close()
-                });
                 const url = this.$api + "/yhcms/web/zdfyxx/getGjzt.do";
+                let that = this;
                 this.$http.post(url, {"fyid":fyid}).then((res)=>{
                     Indicator.close();
                     const data=JSON.parse(res.bodyText).data;
@@ -333,13 +314,13 @@
                     this.fygjztxl = 3;
                 }
                 /*setTimeout(function(){
-                    if(_this.sfshp==1){
-                        $(".splxDiv").css("display","block");
-                    }else if(_this.sfshp==0){
-                        $(".splxDiv").css("display","none");
+                 if(_this.sfshp==1){
+                 $(".splxDiv").css("display","block");
+                 }else if(_this.sfshp==0){
+                 $(".splxDiv").css("display","none");
 
-                    }
-                },1);*/
+                 }
+                 },1);*/
             },
             zhAction(){
                 console.log("aaa "+this.sfzh);

@@ -369,7 +369,7 @@
           <i class="basic_13" style="margin: .2rem auto .1rem;"></i>
           <span>注册信息</span>
         </router-link>
-        <router-link class="bulid_msg_item"  :to="{path:'/fang_genjin/'+fyid}" style="height: 1.7rem;" v-show="fygjqx">
+        <router-link class="bulid_msg_item"  :to="{path:'/fang_genjin/'+ this.lpid + '/' +fyid}" style="height: 1.7rem;" v-show="fygjqx">
           <i class="basic_22" style="margin: .1rem auto .1rem;"></i>
           <span>房源状态</span>
         </router-link>

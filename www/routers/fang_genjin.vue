@@ -14,15 +14,20 @@
         position: relative;
     }
     .shyt{width:100% !important}
-
+.clearfix{line-height: 0.8rem !important;}
 </style>
 <template>
     <div class="all_elements">
         <div class="build_top ele_wrap">
             <ul class="ys_item_ul mb60" style="margin:0.4rem 0.2rem;">
-                <div class="analy_item" style="padding: 0;line-height: 0.8rem;padding-left: 0.4rem;">
+
+                <!--box-shadow: 1px 1px 3px rgb(196,195,200);给边控加阴影（不是很明显的那种阴影）
+                border-radius:5px;给边控加圆角-->
+
+                <div class="analy_item" style="padding: 0;line-height: 0.8rem;padding-left: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
                     <div class="analy_content">
-                        <div v-text="lpname" style="color: black;font-weight: 500;font-size: 0.36rem;"></div>
+                        <span v-text="lpname" style="color: black;font-weight: 500;font-size: 0.36rem;"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span v-text="zdhname" style="color: black;font-weight: 500;font-size: 0.36rem;"></span>
                     </div>
                 </div>
                 <!--<li class="clearfix">
@@ -33,36 +38,39 @@
                         <label class="mr20"><input type="radio" value="3" v-model="fyzsqk"  name="fang_sale">可租可售</label>
                     </div>
                 </li>-->
-                <li class="clearfix" style="margin-top: 0.4rem;">
-                    <span class="ys_tit w170" style="width: 2rem !important;">是否精耕：</span>
-                    <div class="ys_item_con fl">
-                        <label class="mr20"><input type="radio" value="1" v-model="sfjg" name="shifu_jing">是</label>
-                        <label class="mr20" style="margin-left: .25rem;"><input type="radio" value="2" v-model="sfjg"  name="shifu_jing">否</label>
-                    </div>
-                </li>
-                <li class="clearfix">
-                    <span class="ys_tit w170" style="width: 2rem !important;">房源跟进状态：</span>
+                <!--<li class="clearfix" style="margin-top: 0.4rem;">
+                    <span class="ys_tit w170" style="width: 2rem !important;">房源状态：</span>
                     <div class="ys_item_con fl">
                         <label class="mr20" @click="sfspAction($event)"><input type="radio"  value="1" v-model="fygjzt" name="fangyuan_stat">有效</label>
                         <label class="mr20" @click="sfspAction($event)"><input type="radio" value="2" v-model="fygjzt"  name="fangyuan_stat">暂缓</label>
                         <label class="mr20" @click="sfspAction($event)"><input type="radio" value="3" v-model="fygjzt"  name="fangyuan_stat">无效</label>
                     </div>
-                </li>
-                <li class="clearfix pr" v-show="fygjlxsfxs">
-                    <span class="ys_tit" style="width: 2rem !important;">房源跟进状态：</span>
+                </li>-->
+                <li class="clearfix pr" style="margin-top: 0.4rem;font-size: 0.32rem;border-top-left-radius:5px;border-top-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);">
+                    <span class="ys_tit" style="width: 2rem !important;padding-left: 0.2rem;">房源状态：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model.trim="fygjlx"  onfocus="this.blur()" placeholder="请选择" @click="openBtype">
+                        <input type="text" value="" v-model.trim="fygjzt" style="width: 20%;margin-left: 0.4rem;font-size: 0.32rem;" onfocus="this.blur()" placeholder="请选择" @click="openBtype">
+                        <input type="text" value="" v-model.trim="fygjlx" style="width: 50%;font-size: 0.32rem;" onfocus="this.blur()" placeholder="请选择" @click="openBtype">
                         <i class="right_arrow" @click="openBtype">&gt;</i>
                     </div>
                 </li>
-                <div class="analy_item">
-                    <span class="analy_tit db mb10">备注</span>
-                    <div class="analy_content">
-                        <textarea name="" cols="30" rows="10" v-model="bezhu" placeholder="请输入"></textarea>
+                <li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);">
+                    <span class="ys_tit w170" style="width: 2rem !important;padding-left: 0.2rem;">是否精耕：</span>
+                    <div class="ys_item_con fl">
+                        <input type="text" value="" v-model.trim="sfjg" onfocus="this.blur()" placeholder="请选择" style="padding-left:34%;font-size: 0.32rem;width: 80%;" @click="openDecorationType">
+                        <!--<label class="mr20"><input type="radio" value="1" v-model="sfjg" name="shifu_jing">是</label>
+                        <label class="mr20" style="margin-left: .25rem;"><input type="radio" value="2" v-model="sfjg"  name="shifu_jing">否</label>-->
+                        <i class="right_arrow" @click="openDecorationType">&gt;</i>
+                    </div>
+                </li>
+                <div class="analy_item" style="font-size: 0.32rem;padding: 0;margin-top: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
+                    <span class="analy_tit db" style="padding-left: 0.45rem;line-height: 0.8rem;">备注</span>
+                    <div class="analy_content" style="width: 7.1rem;height: 2rem;background-color: rgb(241,241,241);">
+                        <textarea name="" cols="30" rows="10" v-model="bezhu" placeholder="请输入备注信息" style="padding-left: 0.4rem;font-size: 0.32rem;background-color: rgb(241,241,241);height: 2.6rem;"></textarea>
                     </div>
                 </div>
             </ul>
-            <a href="javascript:;" class="ys_default_btn mb80" @click="saveInfo">保存</a>
+            <a href="javascript:;" class="ys_default_btn mb80" style="margin-top: 50%;" @click="saveInfo">保存</a>
         </div>
 
         <!--商铺类型-->
@@ -71,9 +79,16 @@
                 <span class="mint-datetime-action mint-datetime-cancel" @click="sureBtype">取消</span>
                 <span class="mint-datetime-action mint-datetime-confirm" @click="sureBtype">确定</span>
             </div>
-            <mt-picker :slots="slots_bType" v-if="fygjztxl == 1" @change="selectLevel"></mt-picker>
-            <mt-picker :slots="slots_bType1" v-if="fygjztxl == 2" @change="selectLevel"></mt-picker>
-            <mt-picker :slots="slots_bType2" v-if="fygjztxl == 3" @change="selectLevel"></mt-picker>
+            <!--<mt-picker :slots="slots_bType" @change="selectLevel"></mt-picker>-->
+            <mt-picker :slots="slots" @change="selectLevel"></mt-picker>
+        </mt-popup>
+        <!--商铺类型-->
+        <mt-popup v-model.trim="popupVisible2" position="bottom" class="mint-popup-4">
+            <div class="picker-toolbar">
+                <span class="mint-datetime-action mint-datetime-cancel" @click="sureBtype2">取消</span>
+                <span class="mint-datetime-action mint-datetime-confirm" @click="sureBtype2">确定</span>
+            </div>
+            <mt-picker :slots="slots_quality" @change="selectLevel2"></mt-picker>
         </mt-popup>
     </div>
 </template>
@@ -100,34 +115,47 @@
                 "fyid": "",//房源id
                 lpid:'',
                 lpname:'',
+                zdhname:'',
                 bezhu:'',//备注
                 fyzsqk:'',//房源租售情况
                 sfjg:'',//是否精耕
                 fygjzt:'',//房源跟进状态
                 fygjlx:'',//房源跟进类型
+                fygjlx1:'',
                 fygjztxl:'',//跟进状态类型的选择的判断
                 fygjlxsfxs:'',//根据跟进状态来判断是否显示跟进状态类型
                 statuess:'',
                 popupVisible:false,
                 popupVisible2:false,
-                slots_bType: [
+                slots1:['45天内到期','90天内到期', '当前空置'],
+                slots2:['业主直租','资产公司压房或转租','纠纷中','意向不明确'],
+                slots3:['无业主电话','业主电话无效'],
+                slots: [
                     {
-                        values: ['45天内到期','90天内到期', '当前空置'],
+                        flex: 1,
+                        values: ['请选择','有效','暂缓','无效'],
+                        className: 'slot1',
+                        textAlign: 'right'
+                    },{
+                        flex: 1,
+                        values: ['请选择'],
+                        className: 'slot3',
+                        textAlign: 'left'
                     }
                 ],
-                slots_bType1: [
+                slots_quality: [
                     {
-                        values: ['业主直租','资产公司压房或转租','纠纷中','意向不明确'],
-                    }
-                ],
-                slots_bType2: [
-                    {
-                        values: ['无业主电话','业主电话无效'],
+                        values: ['请选择','是', '否'],
                     }
                 ],
             }
         },
         methods: {
+            onValuesChange(picker, values) {
+                if (values[0] > values[1]) {
+                    picker.setSlotValue(1, values[0]);
+                }
+            },
             openPicker() {
                 this.$refs.picker.open();
             },
@@ -149,11 +177,20 @@
             },
             //选择赋值
             selectLevel(picker, values) {
-                if(this.statuess == 1){
-                    this.statuess = 2;
-                }else{
-                    this.fygjlx = values[0];
+                if(values[0] == "请选择"){
+                    this.slots[1].values = ['请选择'];
                 }
+                if(values[0] == "有效"){
+                    this.slots[1].values = this.slots1;
+                }
+                if(values[0] == "暂缓"){
+                    this.slots[1].values = this.slots2;
+                }
+                if(values[0] == "无效"){
+                    this.slots[1].values = this.slots3;
+                }
+                this.fygjzt = values[0];
+                this.fygjlx = values[1];
 
             },
 
@@ -168,7 +205,7 @@
             },
             //选择赋值2
             selectLevel2(picker, values) {
-                this.zxsp = values[0];
+                this.sfjg = values[0];
             },
 
             //日期转换
@@ -245,7 +282,6 @@
                 const lpid = this.$route.params.lpid;
                 this.lpid = lpid;
                 this.fyid = fyid;
-
                 Indicator.open({
                     text: '',
                     spinnerType: 'fading-circle'
@@ -256,7 +292,9 @@
                         Indicator.close();
                         const topic=JSON.parse(res.bodyText).topic;
                         const topic1=JSON.parse(res.bodyText).data.jbxx;
-                        this.lpname = topic + "   " + topic1.zdh + '-' + topic1.fybh;
+                        this.lpname = topic;
+                        this.zdhname = topic1.zdh + '-' + topic1.fybh;
+                        console.log(this.lpname);
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -266,13 +304,27 @@
                     const data=JSON.parse(res.bodyText).data;
                     if(data){
                         this.bezhu = data.bzh;
-                        this.fygjzt = data.gjzt1;
+                        if(data.gjzt1 == 1){
+                            this.fygjzt = "有效";
+                        }else if(data.gjzt1 == 2){
+                            this.fygjzt = "暂缓";
+                        }else if(data.gjzt1 == 3){
+                            this.fygjzt = "无效";
+                        }else{
+                            this.fygjzt = "请选择";
+                        }
                         this.fygjlx = data.gjzt2;
+                        if(data.jgzt == 1){
+                            data.jgzt = "是";
+                        }else if(data.jgzt == 2){
+                            data.jgzt = "否";
+                        }else{
+                            data.jgzt = "请选择";
+                        }
                         this.sfjg = data.jgzt;
                         this.fyzsqk = data.zszt;
                         this.id = data.id;
                         if(data.gjzt1){
-                            this.fygjlxsfxs = true;
                             if(data.gjzt1 == 1){
                                 this.fygjztxl = 1;
                                 if(this.fygjlx == 1){
@@ -309,19 +361,13 @@
                                     this.fygjlx = "业主电话无效";
                                 }
                             }
-                            this.statuess = 1;
-                        }else{
-                            this.fygjlxsfxs = false;
                         }
-                    }else{
-                        this.fygjlxsfxs = false;
                     }
                 }, (res)=>{
                     Indicator.close()
                 });
             },
             sfspAction(e){
-                this.fygjlxsfxs = true;
                 const target = $(e.target), val = target.attr("value");
                 if(val == 1){
                     this.fygjztxl = 1;
@@ -405,13 +451,30 @@
                             //_this.$router.push({path: '/index'})
                         }, 1000);
                     }else{
+                        if(this.sfjg == "是"){
+                            var sfjg = 1;
+                        }else if(this.sfjg == "否"){
+                            var sfjg = 2;
+                        }else{
+                            var sfjg = '';
+                        }
+                        if(this.fygjzt == "有效"){
+                            var fygjzt = 1;
+                        }else if(this.fygjzt == "暂缓"){
+                            var fygjzt = 2;
+                        }else if(this.fygjzt == "无效"){
+                            var fygjzt = 3;
+                        }else{
+                            var fygjzt = '';
+                        }
+                        //this.fygjlx = 1;
                         Indicator.open({
                             text: '保存中...',
                             spinnerType: 'fading-circle'
                         });
                         this.$http.post(
                             this.$api + "/yhcms/web/zdfyxx/saveFyzt.do",
-                            {"parameters":{"bzh":this.bezhu,"fyid":this.fyid,"gjzt1":this.fygjzt,"gjzt2":level1[this.fygjlx],"id":this.id,"jgzt":this.sfjg,"zszt":this.fyzsqk}}
+                            {"parameters":{"bzh":this.bezhu,"fyid":this.fyid,"gjzt1":fygjzt,"gjzt2":level1[this.fygjlx],"id":this.id,"jgzt":sfjg,"zszt":this.fyzsqk}}
                         ).then(function (res) {
                             Indicator.close();
                             var result = JSON.parse(res.bodyText);

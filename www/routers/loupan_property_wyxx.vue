@@ -519,6 +519,8 @@
                 });
             },
             modifyDhyyxxck(e){
+                this.$router.push({path: '/information_insert'});
+                //_this.$router.push({path:'/loupan_property_wlyyxx/'+_this.lpid});
                 this.wnameqx1 = true;
                 this.wnameqx2 = true;
                 this.wnameqx3 = true;

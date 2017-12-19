@@ -65,6 +65,11 @@ var router = new VueRouter({
         component: require('./routers/loupan_property_dhyyxx.vue')
     },
     {
+        path: '/loupan_property_wyxxsee/:lpid/:val',
+        component: require('./routers/loupan_property_wyxxsee.vue')
+    },
+
+    {
         path: '/loupan_property_wyxx/:lpid',
         component: require('./routers/loupan_property_wyxx.vue')
     },

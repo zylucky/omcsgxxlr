@@ -519,62 +519,16 @@
                 });
             },
             modifyDhyyxxck(e){
-                this.$router.push({path: '/information_insert'});
                 //_this.$router.push({path:'/loupan_property_wlyyxx/'+_this.lpid});
-                this.wnameqx1 = true;
+                /*this.wnameqx1 = true;
                 this.wnameqx2 = true;
                 this.wnameqx3 = true;
                 this.glzdqx = false;
-                this.wyqdqx = false;
+                this.wyqdqx = false;*/
+                alert(22222);
                 const target = $(e.target), val = target.attr("owner");
-                const url = this.$api + "/yhcms/web/lpjbxx/getLpdetWy.do";
-                let that = this;
-                this.$http.post(url, {"parameters":{ "id":val,"lpid":this.lpid},"foreEndType":2,"code":"300000033"}).then((res)=>{
-                    Indicator.close()
-                    const data1 = JSON.parse(res.bodyText).data;
-                    $("input").attr('placeholder',"");
-                    const data = data1.wyxx;
-                    that.optionsgssx = data1.zdhs;
-                    this.showShadow=1;
-                    this.id=data.id;
-                    this.wname3=data.wygs;
-                    this.wname5=data.wyphone;
-                    this.wtel3=data.wyaddress;
-                    this.glzd=data.glzd;
-                    //console.log(data.glzd);
-                    setTimeout(function(){
-                        var zds=data.glzd.substring(1,(data.glzd.length)-1);
-                        var arraycheckdel1="";
-                        var del="";
-                        var checkdel = document.getElementsByName("xzzdh");//获取所有名为‘checkdel’的值
-                        //循环checkdel
-                        for ( var i = 0; i < checkdel.length; i++) {
-                            del= checkdel[i].id;
-                            var zd1="";
-                            var zdss= zds.split(";");
-                            var io=0;
-                            for( var t = 0; t < zdss.length; t++) {
-                                zd1= zdss[t];
-                                if(zd1==del){
-                                    io=1;
-                                }
-                            }
-                            if(io==1){
-                                checkdel[i].checked = true;
-                                arraycheckdel1+= checkdel[i].getAttribute('value') + ";";
-                            }
-                        }
-                        console.log(arraycheckdel1.substring(0,(arraycheckdel1.length-1))+"aaa");
-                        $("#wtel6").removeAttr("readonly");
-                        //赋值产权性质
-                        var wt=arraycheckdel1.substring(0,(arraycheckdel1.length-1));
-                        that.wtel6=wt;
-                        $("#wtel6").attr("readonly","readonly");
-                    }, 100);
-
-                }, (res)=>{
-                    Indicator.close()
-                });
+                this.$router.push({path: '/loupan_property_wyxxsee/'+ this.lpid+'/'+val});
+                alert(33333);
             },
             delDhyyxx(e){
                 const target = $(e.target), val = target.attr("owner");

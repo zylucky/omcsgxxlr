@@ -391,7 +391,7 @@
                 ],
                 slots_bType2: [
                     {
-                        values: ['精装交付','装修升级中A级', '装修升级中B级', '可租待升级不可看房','可租待升级可看房(提前电话联系)','预租不可看房','预租可看房'],
+                        values: ['精装交付','精装升级中A级', '精装升级中B级', '可租待升级不可看房','可租待升级可看房(提前电话联系)','预租不可看房','预租可看房'],
                     }
                 ],
                 yt_all: [{"name":"金融投资","id":"1"},{"name":"文化传媒","id":"2"},{"name":"教育培训","id":"3"},{"name":"休闲娱乐","id":"4"},{"name":"IT互联网","id":"5"},{"name":"机构组织","id":"6"},{"name":"专业服务","id":"7"},{"name":"贸易","id":"8"},{"name":"医药医疗","id":"9"},{"name":"多元化集团","id":"10"},{"name":"综合","id":"11"},{"name":"其它","id":"12"}]
@@ -576,10 +576,10 @@
                             that.zxsp = "精装交付";
                         }
                         if(data.zxsp==2){
-                            that.zxsp = "装修升级中A级";
+                            that.zxsp = "精装升级中A级";
                         }
                         if(data.zxsp==3){
-                            that.zxsp = "装修升级中B级";
+                            that.zxsp = "精装升级中B级";
                         }
                         if(data.zxsp==4){
                             that.zxsp = "可租待升级不可看房";
@@ -1106,7 +1106,6 @@
                     text: '保存中...',
                     spinnerType: 'fading-circle'
                 });
-
                 this.$http.post(
                     this.$api + "/yhcms/web/zdfyxx/saveZdfyxx.do",
                     {

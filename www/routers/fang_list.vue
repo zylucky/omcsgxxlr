@@ -591,27 +591,11 @@
                     const meg = JSON.parse(res.bodyText).message;
                     this.ryzt = data.ryzt;
                     this.qxzt = data.qxzt;
-                    if(data.qxzt == 2){
-                        MessageBox('提示',"此用户已被禁用，请联系管理员！");
-                        this.$router.push({path: '/login'});
-                    }else if(data.qxzt == 0){
-                        MessageBox('提示',meg);
-                        window.history.go(-1);
-                        return;
-                    }else if(data.ryzt == 4){
-                        if(data.qxzt == 41 || data.qxzt == 45 || data.qxzt == 47 || data.qxzt == 43){
-                            this.fygjqx = true;
-                        }else{
-                            this.fygjqx = false;
-                        }
-                    }else if(data.fyzt == 1){
-                        this.fygjqx = false;
-                    }else if(data.qxzt == 20 || data.qxzt == 30){
+                    if(data.fyzt == 1){
                         this.fygjqx = false;
                     }else{
                         this.fygjqx = true;
                     }
-
                     if(data.qxzt == 45 && data.ryzt == 5){
                         MessageBox('提示',"此用户不属于收购部人员！");
                         this.$router.push({path: '/login'});

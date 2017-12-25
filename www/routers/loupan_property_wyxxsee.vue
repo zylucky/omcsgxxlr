@@ -1,5 +1,5 @@
 <style scoped lang="less">
-
+    @import "../resources/css/website/detail.less";
     @import "../resources/css/reset.css";
     @import "../resources/css/base.less";
     .show{
@@ -84,104 +84,122 @@
     }
     .bjt{
         background-image: url('../resources/images/1.png') !important;
+
     }
+
+
+
+
+
+.wac{
+    background: url("../resources/images/loupan/wuyegongsi.png") no-repeat;
+    background-size: 100% 100%;
+    height: 5rem;
+}
+.kefu{
+    background: url("../resources/images/loupan/wuyegongsi.png") no-repeat;
+    background-size: 100% 100%;
+    height: 1.1rem;
+    width: 1.2rem;
+}
+.meidian{
+    background-color: rgb(161,185,245);
+    height: 1.1rem;
+    width: 1.2rem;
+}
+.wyegongsi{margin-left: 0.5rem;}
+.zhouqi{width: 87%;margin-top: 0.3rem;background-color: white;opacity:0.9;padding-top: 0.3rem;border-radius:5px;}
+.gunglizd{color:rgb(150,150,150);font-size: 0.3rem !important;}
+.gungil2{height: 0.6rem;}
+.jianzzq{margin-left:0rem !important;}
 </style>
 <template>
-    <div class="all_elements" style="height: 12.27rem;overflow: scroll;">
-
-
-        <div class="alla_elements" style="width:100%;height: 11.45rem;overflow: scroll;">
-            <div class="build_top">
-                <table class="ys_item_ul mb20" style="width:100%;border-collapse: collapse;">
-                    <tr><td colspan="3" style="background-color: white;height: .2rem;"></td></tr>
-                    <tr style="text-align:center;background-color: rgb(206,206,206);height: .7rem;">
-                        <td style="width: 2.4rem;text-align: left !important;padding: 5px;padding-left: 20px;">物业公司</td>
-                        <td style="width: 2.7rem;text-align: left !important;padding: 10px 25px">物业电话</td>
-                        <td>操作</td>
-                    </tr>
-                    <tr v-for="datum in data" class="clearfix pr" style="text-align:center;border-bottom: 1px solid rgb(206,206,206);">
-                        <td style="text-align: left !important;padding: 5px;padding-left: 20px;"> <span class="ys_tit" style="">{{datum.wygs}}</span></td>
-                        <td style="text-align: left !important;padding: 10px 25px"> <span>{{datum.wyphone}}</span></td>
-                        <td v-if="xgsqqx == 1">
-                            <i class="" :owner="datum.id" @click="modifyDhyyxx($event)">修改</i>&nbsp;&nbsp;&nbsp;
-                            <i class="" :owner="datum.id" @click="modifyDhyyxxck($event)">查看</i>
-                        </td>
-                        <td v-else-if="xgsqqx == 2">
-                            <i class="" :owner="datum.id" @click="modifyDhyyxx($event)">修改</i>
-                            <i class="" :owner="datum.id" @click="modifyDhyyxxck($event)">查看</i>
-                            <i class="" :owner="datum.id" @click="delDhyyxx($event)">删除</i>
-                        </td>
-                        <td v-else>
-                            <i class="" :owner="datum.id" @click="modifyDhyyxxck($event)">查看</i>&nbsp;&nbsp;&nbsp;
-                        </td>
-                    </tr>
-                </table>
-
-            </div>
-        </div>
-
-        <div class="tab tab3" :class="this.showTab==2?'show':'hide'" >
-            <div class="tc pt20 bjt" style="position: fixed;bottom: 0px;width: 100%;height: 1rem;" @click="showShadow1" v-if="tjwygsqx">
-                <a href="javascript:;" class="cl_link f30" style="position: relative;bottom: 0.1rem;">+添加物业公司</a>
-            </div>
-            <div class="tc pt20 bjt" style="position: fixed;bottom: 0px;width: 100%;height: 1rem;" v-else>
-            </div>
-        </div>
-        <div class="shadow-p" :class="this.showShadow==1?'show':'hide'">
-            <div class="info-tab three" :class="this.showTab==2?'show':'hide'">
-                <p class="clearfix" v-if="!wnameqx1">
-                    <label class="zyzd">物业公司名称:</label>
-                    <input type="text" value="" name="wname3" id="wname3" v-model="wname3" placeholder="请输入" />
-                </p>
-                <p class="clearfix" v-else>
-                    <label class="zyzd">物业公司名称:</label>
-                    <input type="text" value="" readonly onfocus="this.blur()" name="wname3" id="wname3" v-model="wname3" placeholder="请输入" />
-                </p>
-                <p class="clearfix" v-if="!wnameqx2">
-                    <label >联系方式:</label>
-                    <input type="text" style="width: 2.58rem;" value="" name="wname5" id="wname5" v-model="wname5" placeholder="请输入" />
-                </p>
-                <p class="clearfix" v-else>
-                    <label >联系方式:</label>
-                    <input type="text" style="width: 2.58rem;" value="" readonly onfocus="this.blur()" name="wname5" id="wname5" v-model="wname5" placeholder="请输入" />
-                </p>
-                <p class="clearfix" v-if="!wnameqx3">
-                    <label >物业地址:</label>
-                    <input type="text" style="width: 2.58rem;" value="" name="wtel3" id="wtel3" v-model="wtel3" placeholder="请输入" />
-
-                </p>
-                <p class="clearfix" v-else>
-                    <label >物业地址:</label>
-                    <input type="text" style="width: 2.58rem;" value="" readonly onfocus="this.blur()" name="wtel3" id="wtel3" v-model="wtel3" placeholder="请输入" />
-
-                </p>
-                <p class="clearfix" style="clear: both;" v-if="glzdqx">
-                    <label class="zyzd">管理座栋:</label>
-                    <input type="text" style="width: 2.58rem;" value="" name="wtel6" id="wtel6" v-model="wtel6" placeholder="请选择" @click="glzdAction" readonly="readonly" onfocus="this.blur()"/>
-                    <input type="hidden" value="" name="glzd" id="glzd" v-model="glzd" placeholder="请选择"/>
-                </p>
-                <p class="clearfix" style="clear: both;" v-else>
-                    <label class="zyzd">管理座栋:</label>
-                    <input type="text" style="width: 2.58rem;" value="" name="wtel6" id="wtel6" v-model="wtel6" placeholder="请选择" readonly="readonly" onfocus="this.blur()"/>
-                    <input type="hidden" value="" name="glzd" id="glzd" v-model="glzd" placeholder="请选择"/>
-                </p>
-
-                <div class="glzdClass" style="width:5rem;display:none;height: 1.5rem;overflow: scroll;display:inline-block;" v-show="glzdqx">
-                    <li v-for="zdl in optionsgssx" class="clearfix pr" style="list-style:none;width:1.5rem;display:inline-block;">
-                        <input type="checkbox" :value="zdl.zdh"  :id="zdl.id" class="checkbox" name="xzzdh" />
-                        <label>{{zdl.zdh}}</label>
-                    </li>
-                    <span @click="checkTj" style="border: 1px solid rgb(58, 148, 248);position: fixed;left: 5.4rem;top: 6.8rem;padding: .05rem;background-color: rgb(58, 148, 248);color:#ffffff;border-radius:0.4em;">确定</span>
+    <div class="all_elements">
+        <div class="alla_elements"">
+            <div class="build_top wac">
+                <div class="item clearfix">
+                    <div class="wyegongsi" style="color: white;padding-top: 0.5rem;">
+                        <div style="font-size: 0.4rem;">{{wname3}}</div>
+                        <div style="font-size: 0.36rem;margin-top: 0.2rem;">联系电话:{{wname5}}</div>
+                    </div>
+                    <div class="house_msg_content wyegongsi zhouqi">
+                        <!--<span class="gunglizd gungil2" style="">简装周期：<i class="jianzzq" v-text="jzzhouq" style="color:#5b5b5b;"></i></span>
+                        <span class="gunglizd gungil2">中装周期：<i class="jianzzq" v-text="zzzhouq" style="color:#5b5b5b;"></i></span>
+                        <span class="gunglizd gungil2">大装周期：<i class="jianzzq" v-text="dzzhouq" style="color:#5b5b5b;"></i></span>
+                        <span class="gunglizd gungil2">物业分级：<i class="jianzzq" v-text="wysort" style="color:#5b5b5b;"></i></span>-->
+                        <div class="gunglizd" style="clear: both;">
+                            <span class="gunglizd" style="width: 28%;color:#5b5b5b;">管理座栋：</span>
+                            <span class="" style="width: 75%;float: right;"><i class="jianzzq" v-text="glzdh" style="color: black;"></i></span>
+                        </div>
+                        <div class="gunglizd" style="clear: both;margin-top: 0.3rem;min-height:3.7rem;">
+                            <span class="gunglizd" style="width: 28%;color:#5b5b5b;">物业地址：</span>
+                            <span class="" style="width: 75%;float: right;"><i class="jianzzq" v-text="addresswy" style="color:black;"></i></span>
+                        </div>
+                        <!--<div class="gunglizd" style="min-height:1.7rem;clear: both;margin-top: 0.3rem;">
+                            <span class="gunglizd" style="width: 28%;color:#5b5b5b;">备注信息：</span>
+                            <span style="width: 75%;float: right;margin-bottom:0.3rem;"><i class="jianzzq" v-text="beizhu" style="color:#5b5b5b;"></i></span>
+                        </div>-->
+                        <div style="clear: both;"></div>
+                    </div>
+                    <!--<div class="zhouqi house_msg_content" style="height: 4.45rem;margin-top: 0.2rem;margin-left: 0.5rem;">
+                        <span class="gunglizd gungil2" style="width: 80%;">姓名：<i class="jianzzq" v-text="name" style="color:#5b5b5b;"></i></span>
+                        <span class="gunglizd gungil2" style="width: 80%;">电话：<i class="jianzzq" v-text="phone" style="color:#5b5b5b;"></i></span>
+                        <span class="gunglizd gungil2" style="width: 80%;">微信：<i class="jianzzq" v-text="wexin" style="color:#5b5b5b;"></i></span>
+                        <span class="gunglizd gungil2" style="width: 80%;">提供人：<i class="jianzzq" v-text="tigr" style="color:#5b5b5b;"></i></span>
+                        <span class="gunglizd gungil2" style="width: 80%;">备注：<i class="jianzzq" v-text="beizhukefu" style="color:#5b5b5b;"></i></span>
+                        <div class="kefu" style="position:relative;top:-4.02rem;left:5.1rem;clear: both;border-top-right-radius:5px;" rel="客服" @click="kefu($event)" v-if="kefuif1">
+                            <a href="javascript:;" rel="客服" >
+                                <img src="../resources/images/loupan/1.png" rel="客服"  style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;">
+                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="客服" >客服</div>
+                            </a>
+                        </div>
+                        <div class="meidian" style="position:relative;top:-4.02rem;left:5.1rem;clear: both;border-top-right-radius:5px;" rel="客服" @click="kefu($event)" v-else>
+                            <a href="javascript:;" rel="客服">
+                                <img src="../resources/images/loupan/1-1.png" rel="客服" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;">
+                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="客服">客服</div>
+                            </a>
+                        </div>
+                        <div class="kefu" style="position:relative;top:-4.02rem;left:5.1rem;margin-top: 1px;" rel="二装" @click="kefu($event)" v-if="kefuif2">
+                            <a href="javascript:;" rel="二装">
+                                <img src="../resources/images/loupan/2.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="二装">
+                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="二装">二装</div>
+                            </a>
+                        </div>
+                        <div class="meidian" style="position:relative;top:-4.02rem;left:5.1rem;margin-top: 1px;" rel="二装" @click="kefu($event)" v-else>
+                            <a href="javascript:;" rel="二装">
+                                <img src="../resources/images/loupan/2-2.png" style="width: 0.55rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="二装">
+                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="二装">二装</div>
+                            </a>
+                        </div>
+                        <div class="kefu" style="position:relative;top:-4.02rem;left:5.1rem;margin-top: 1px;" rel="安保" @click="kefu($event)" v-if="kefuif3">
+                            <a href="javascript:;" rel="安保">
+                                <img src="../resources/images/loupan/3.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="安保">
+                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="安保">安保</div>
+                            </a>
+                        </div>
+                        <div class="meidian" style="position:relative;top:-4.02rem;left:5.1rem;margin-top: 1px;" rel="安保" @click="kefu($event)" v-else>
+                            <a href="javascript:;" rel="安保">
+                                <img src="../resources/images/loupan/3-3.png" style="width: 0.45rem;margin-left: 0.4rem;margin-top: 0.1rem;" rel="安保">
+                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="安保">安保</div>
+                            </a>
+                        </div>
+                        <div class="kefu" style="position:relative;top:-4.02rem;left:5.1rem;border-bottom-right-radius:5px;margin-top: 1px;" rel="楼管" @click="kefu($event)" v-if="kefuif4">
+                            <a href="javascript:;" rel="楼管">
+                                <img src="../resources/images/loupan/4.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="楼管">
+                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="楼管">楼管</div>
+                            </a>
+                        </div>
+                        <div class="meidian" style="position:relative;top:-4.02rem;left:5.1rem;border-bottom-right-radius:5px;margin-top: 1px;" rel="楼管" @click="kefu($event)" v-else>
+                            <a href="javascript:;" rel="楼管">
+                                <img src="../resources/images/loupan/4-4.png" style="width: 0.5rem;margin-left: 0.35rem;margin-top: 0.1rem;" rel="楼管">
+                                <div style="display: flex;align-items: center;justify-content: center;color: white;margin-top: 0.05rem;font-size: 0.32rem;" rel="楼管">楼管</div>
+                            </a>
+                        </div>
+                    </div>
+-->
                 </div>
-                <div v-if="wyqdqx">
-                    <button class="sure" @click="add_one3" style="background-color: rgb(58, 148, 248);">确定</button>
-                    <button class="sure" @click="qx_one3" style="background-color: rgb(58, 148, 248);">取消</button>
-                </div>
-                <div v-else>
-                    <button class="sure" @click="qx_one3" style="background-color: rgb(58, 148, 248);">返回</button>
-                </div>
-
             </div>
+
         </div>
     </div>
 </template>
@@ -203,7 +221,39 @@
             return {
                 lpid:"",
                 id:"",
+                jzzhouq:'',
+                zzzhouq:'',
+                dzzhouq:'',
+                wysort:'',
+                beizhu:'',
+                addresswy:'',
+                glzdh:'',
+                name:'',
+                phone:'',
+                wexin:'',
+                tigr:'',
+                beizhukefu:'',
+                kefuif1:true,
+                kefuif2:false,
+                kefuif3:false,
+                kefuif4:false,
+
+
+
                 vid:"",
+                kprq:"",
+                zc:"",
+                wyf:"",
+                gnf:"",
+                tcwsl:"",
+
+
+
+
+
+
+                tcf:"",
+                wlgs:"",
                 showTab:2,
                 showShadow:0,
                 wname:"",
@@ -226,31 +276,69 @@
             }
         },
         methods: {
+            kefu(e){
+                const target = $(e.target), txt = target.attr("rel");
+                if(txt == "客服"){
+                    this.kefuif1 = true;
+                    this.kefuif2 = false;
+                    this.kefuif3 = false;
+                    this.kefuif4 = false;
+                }
+                if(txt == "二装"){
+                    this.kefuif1 = false;
+                    this.kefuif2 = true;
+                    this.kefuif3 = false;
+                    this.kefuif4 = false;
+                }
+                if(txt == "安保"){
+                    this.kefuif1 = false;
+                    this.kefuif2 = false;
+                    this.kefuif3 = true;
+                    this.kefuif4 = false;
+                }
+                if(txt == "楼管"){
+                    this.kefuif1 = false;
+                    this.kefuif2 = false;
+                    this.kefuif3 = false;
+                    this.kefuif4 = true;
+                }
+
+            },
             getInitData(){
                 console.log(this.tjwygsqx+"getInitData");
                 //   管理座栋    和pc 端作比较      这个比较麻烦
                 // 添加物业公司的时候要把 楼盘下的所有的座栋查询出来  getLpdetWy   glzd存放的是座栋的ID,如： ";1;2;"
-                const lpid = this.$route.params.lpid;
+                this.lpid = this.$route.params.lpid;
                 this.vid = this.$route.params.val;
-                alert(11111);
-
-
-
-
-
-
                 const url = this.$api + "/yhcms/web/lpjbxx/getLpdetWy.do";
                 let that = this;
-                this.$http.post(url, {"parameters":{ "id":val,"lpid":this.lpid},"foreEndType":2,"code":"300000033"}).then((res)=>{
+                this.$http.post(url, {"parameters":{ "id":this.vid,"lpid":this.lpid},"foreEndType":2,"code":"300000033"}).then((res)=>{
                     Indicator.close()
                     const data1 = JSON.parse(res.bodyText).data;
                     $("input").attr('placeholder',"");
                     const data = data1.wyxx;
                     that.optionsgssx = data1.zdhs;
-                    this.showShadow=1;
+                    //this.showShadow=1;
                     this.id=data.id;
                     this.wname3=data.wygs;
                     this.wname5=data.wyphone;
+                    this.jzzhouq = data.jztime == '' ? '暂无数据' : data.jztime+"天";
+                    this.zzzhouq = data.zztime == '' ? '暂无数据' : data.zztime+"天";
+                    this.dzzhouq = data.dztime == '' ? '暂无数据' : data.dztime+"天";
+                    this.wysort = data.wysort == '' ? '暂无数据' : data.wysort;
+                    this.beizhu = data.bzh == '' ? '暂无数据' : data.bzh;
+                    this.addresswy = data.wyaddress == '' ? '暂无数据' : data.wyaddress;
+                    this.name = data1.wy1.name;
+                    this.phone = data1.wy1.phone;
+                    this.wexin = data1.wy1.wxcard;
+                    this.tigr = data1.wy1.depart+"-"+data1.wy1.person;
+                    this.beizhukefu = data1.wy1.bzh;
+
+
+
+
+
+
                     this.wtel3=data.wyaddress;
                     this.glzd=data.glzd;
                     //console.log(data.glzd);
@@ -276,7 +364,8 @@
                                 arraycheckdel1+= checkdel[i].getAttribute('value') + ";";
                             }
                         }
-                        console.log(arraycheckdel1.substring(0,(arraycheckdel1.length-1))+"aaa");
+
+                        console.log(arraycheckdel1.substring(0,(arraycheckdel1.length-1))+"fff");
                         $("#wtel6").removeAttr("readonly");
                         //赋值产权性质
                         var wt=arraycheckdel1.substring(0,(arraycheckdel1.length-1));
@@ -293,73 +382,26 @@
 
 
 
-                alert(this.vid);
-                this.lpid = lpid;
                 Indicator.open({
                     text: '',
                     spinnerType: 'fading-circle'
                 });
                 const url1 = this.$api + "/yhcms/web/lpjbxx/getLpWy.do";
-                this.$http.post(url1, {"parameters":{ "lpid":lpid},"foreEndType":2,"code":"300000033"}).then((res)=>{
-                    Indicator.close()
-                    const data = JSON.parse(res.bodyText).data;
+                this.$http.post(url1, {"parameters":{ "lpid":this.lpid},"foreEndType":2,"code":"300000033"}).then((res)=>{
+                    Indicator.close();
+                    const data2 = JSON.parse(res.bodyText).data;
                     const topic = JSON.parse(res.bodyText).topic;
-                    that.data = data;
+                    for(var i=0;i<data2.length;i++){
+                        if(data2[i].id == this.vid){
+                            this.glzdh = data2[i].zdh == '' ? '暂无数据' : data2[i].zdh.replace(/;/g,"、");//此处replace的第一个参数为正则表达式，/g是全文匹配标识。
+                        }
+                    }
                     $('title').html(topic);
                 }, (res)=>{
                     Indicator.close()
                 });
 
             },
-            /*getInitDatanei(){
-             const target = $(e.target), val = target.attr("owner");
-             const url = this.$api + "/yhcms/web/lpjbxx/getLpdetWy.do";
-             let that = this;
-             this.$http.post(url, {"parameters":{ "id":val,"lpid":this.lpid},"foreEndType":2,"code":"300000033"}).then((res)=>{
-             Indicator.close()
-             const data1 = JSON.parse(res.bodyText).data;
-             const data = data1.wyxx;
-             that.optionsgssx = data1.zdhs;
-             this.showShadow=1;
-             this.id=data.id;
-             this.wname3=data.wygs;
-             this.wname5=data.wyphone;
-             this.wtel3=data.wyaddress;
-             this.glzd=data.glzd;
-             //console.log(data.glzd);
-             //只有查看和空白字段添加的权限
-             if(this.qxzt == 20 || this.qxzt == 30 || this.qxzt == 42){
-             this.tjwygsqx = false;
-             if(this.wname3 != "" && this.wname5 != "" && this.wtel3 != "" && this.optionsgssx.length != 0){
-             this.xgsqqx = false;
-             this.wyqdqx = false;
-             }else{
-             this.xgsqqx = 1;
-             this.wyqdqx = true;
-             }
-             this.wnameqx1 = true;
-             if(this.wname3 == ""){
-             this.wnameqx1 = false;
-             }
-             this.wnameqx2 = true;
-             if(this.wname5 == ""){
-             this.wnameqx2 = false;
-             }
-             this.wnameqx3 = true;
-             if(this.wtel3 == ""){
-             this.wnameqx3 = false;
-             }
-             this.glzdqx = false;
-             if(this.this.optionsgssx.length == 0){
-             this.glzdqx = true;
-             }
-             }
-
-             }, (res)=>{
-             Indicator.close()
-             });
-             },*/
-
             tebqqxpd(){
                 console.log(this.tjwygsqx+"tebqqxpd");
                 Indicator.open({
@@ -535,7 +577,7 @@
                                 arraycheckdel1+= checkdel[i].getAttribute('value') + ";";
                             }
                         }
-                        console.log(arraycheckdel1.substring(0,(arraycheckdel1.length-1))+"aaa");
+                        console.log(arraycheckdel1.substring(0,(arraycheckdel1.length-1))+"qqq");
                         $("#wtel6").removeAttr("readonly");
                         //赋值产权性质
                         var wt=arraycheckdel1.substring(0,(arraycheckdel1.length-1));
@@ -618,7 +660,7 @@
                                 arraycheckdel1+= checkdel[i].getAttribute('value') + ";";
                             }
                         }
-                        console.log(arraycheckdel1.substring(0,(arraycheckdel1.length-1))+"aaa");
+                        console.log(arraycheckdel1.substring(0,(arraycheckdel1.length-1))+"eee");
                         $("#wtel6").removeAttr("readonly");
                         //赋值产权性质
                         var wt=arraycheckdel1.substring(0,(arraycheckdel1.length-1));

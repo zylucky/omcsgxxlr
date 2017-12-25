@@ -46,6 +46,8 @@
             <!--<router-link :to="{path:'/list2'}" id="first_list_link">房源列表</router-link>
             <a href="javascript:;">房源信息采集</a>
             <a href="javascript:;">待办任务</a>-->
+            <a href="javascript:;" @click="loupan_zidian">楼盘字典</a>
+            <a href="javascript:;" @click="yixing_genjin">意向跟进</a>
             <a href="javascript:;" @click="modify_pwd">修改密码</a>
           </div>
         </div>
@@ -146,6 +148,34 @@
           left: "75%"
         }, 150);
 
+      },
+      loupan_zidian(){
+          if(window.location.href.indexOf("index") != -1 || window.location.href.lastIndexOf("/") != -1){
+              $('.sidenav').animate({
+                  left: '-100%'
+              }, 150, function () {
+                  $('.sidenav').hide();
+              });
+              $("#section").animate({
+                  left: '0'
+              }, 150);
+              $(".section").animate({
+                  left: '0'
+              }, 150);
+              this.popupVisible = false;
+          }else{
+
+          }
+          $("#zhezhao").remove();
+          $('html').removeAttr("style");
+          $("body").removeAttr("style");
+          this.$router.push({path:'/'});
+      },
+      yixing_genjin(){
+          $("#zhezhao").remove();
+          $('html').removeAttr("style");
+          $("body").removeAttr("style");
+          this.$router.push({path:'/yixing_genjin'});
       },
       modify_pwd(){
           $("#zhezhao").remove();

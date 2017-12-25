@@ -525,10 +525,8 @@
                 this.wnameqx3 = true;
                 this.glzdqx = false;
                 this.wyqdqx = false;*/
-                alert(22222);
                 const target = $(e.target), val = target.attr("owner");
                 this.$router.push({path: '/loupan_property_wyxxsee/'+ this.lpid+'/'+val});
-                alert(33333);
             },
             delDhyyxx(e){
                 const target = $(e.target), val = target.attr("owner");

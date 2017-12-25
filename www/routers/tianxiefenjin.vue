@@ -14,70 +14,25 @@
         position: relative;
     }
     .shyt{width:100% !important}
-.clearfix{line-height: 0.8rem !important;}
+    .clearfix{line-height: 0.8rem !important;}
 </style>
 <template>
     <div class="all_elements">
         <div class="build_top ele_wrap">
             <ul class="ys_item_ul mb60" style="margin:0.4rem 0.2rem;">
-
-                <!--box-shadow: 1px 1px 3px rgb(196,195,200);给边控加阴影（不是很明显的那种阴影）
-                border-radius:5px;给边控加圆角-->
-
                 <div class="analy_item" style="padding: 0;line-height: 0.8rem;padding-left: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
                     <div class="analy_content">
                         <span v-text="lpname" style="color: black;font-weight: 500;font-size: 0.36rem;"></span>&nbsp;&nbsp;&nbsp;&nbsp;
                         <span v-text="zdhname" style="color: black;font-weight: 500;font-size: 0.36rem;"></span>
                     </div>
                 </div>
-                <!--<li class="clearfix">
-                    <span class="ys_tit w170" style="width: 2rem !important;">房源租售情况：</span>
-                    <div class="ys_item_con fl">
-                        <label class="mr20"><input type="radio"  value="1" v-model="fyzsqk" name="fang_sale">出租</label>
-                        <label class="mr20"><input type="radio" value="2" v-model="fyzsqk"  name="fang_sale">出售</label>
-                        <label class="mr20"><input type="radio" value="3" v-model="fyzsqk"  name="fang_sale">可租可售</label>
-                    </div>
-                </li>-->
-                <!--<li class="clearfix" style="margin-top: 0.4rem;">
-                    <span class="ys_tit w170" style="width: 2rem !important;">房源状态：</span>
-                    <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfspAction($event)"><input type="radio"  value="1" v-model="fygjzt" name="fangyuan_stat">有效</label>
-                        <label class="mr20" @click="sfspAction($event)"><input type="radio" value="2" v-model="fygjzt"  name="fangyuan_stat">暂缓</label>
-                        <label class="mr20" @click="sfspAction($event)"><input type="radio" value="3" v-model="fygjzt"  name="fangyuan_stat">无效</label>
-                    </div>
-                </li>-->
-                <li class="clearfix pr" style="margin-top: 0.4rem;font-size: 0.32rem;border-top-left-radius:5px;border-top-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;border-bottom: 0px solid #dbdadf;">
-                    <span class="ys_tit" style="width: 2rem !important;padding-left: 0.2rem;">房源状态：</span>
-                    <div class="ys_item_con fl">
-                        <input type="text" value="" v-model.trim="fygjzt" style="width: 20%;margin-left: 0.4rem;font-size: 0.32rem;" onfocus="this.blur()" placeholder="" @click="openBtype">
-                        <input type="text" value="" v-model.trim="fygjlx" style="width: 50%;font-size: 0.32rem;" onfocus="this.blur()" placeholder="请选择" @click="openBtype">
-                        <i class="right_arrow" @click="openBtype">&gt;</i>
-                    </div>
-                </li>
-                <li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;">
-                    <span class="ys_tit w170" style="width: 2rem !important;padding-left: 0.2rem;">是否精耕：</span>
-                    <div class="ys_item_con fl">
-                        <input type="text" value="" v-model.trim="sfjg" onfocus="this.blur()" placeholder="请选择" style="padding-left:34%;font-size: 0.32rem;width: 80%;" @click="openDecorationType">
-                        <!--<label class="mr20"><input type="radio" value="1" v-model="sfjg" name="shifu_jing">是</label>
-                        <label class="mr20" style="margin-left: .25rem;"><input type="radio" value="2" v-model="sfjg"  name="shifu_jing">否</label>-->
-                        <i class="right_arrow" @click="openDecorationType">&gt;</i>
-                    </div>
-                </li>
-                <li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;">
-                    <span class="ys_tit w170" style="width: 2rem !important;padding-left: 0.2rem;">合作意向：</span>
-                    <div class="ys_item_con fl">
-                        <input type="text" value="" v-model.trim="hzyx" onfocus="this.blur()" placeholder="请选择" style="padding-left:34%;font-size: 0.32rem;width: 80%;" @click="openDecorationTypeHzyx">
-                        <i class="right_arrow" @click="openDecorationTypeHzyx">&gt;</i>
-                    </div>
-                </li>
                 <div class="analy_item" style="font-size: 0.32rem;padding: 0;margin-top: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
-                    <span class="analy_tit db" style="padding-left: 0.45rem;line-height: 0.8rem;">备注</span>
                     <div class="analy_content" style="width: 7.1rem;height: 2rem;background-color: rgb(241,241,241);">
-                        <textarea name="" cols="30" rows="10" v-model="bezhu" placeholder="请输入备注信息" style="padding-left: 0.4rem;font-size: 0.32rem;background-color: rgb(241,241,241);height: 2.6rem;"></textarea>
+                        <textarea name="" cols="30" rows="10" v-model="bezhu" placeholder="请输入跟进记录..." style="padding-left: 0.4rem;font-size: 0.32rem;background-color: rgb(241,241,241);height: 2.6rem;"></textarea>
                     </div>
                 </div>
             </ul>
-            <a href="javascript:;" class="ys_default_btn mb80" style="margin-top: 50%;" @click="saveInfo">保存</a>
+            <a href="javascript:;" class="ys_default_btn mb80" style="margin-top: 50%;" @click="saveInfo">添加</a>
         </div>
 
         <!--商铺类型-->
@@ -329,12 +284,12 @@
                 const url1 = this.$api + "/yhcms/web/zdfyxx/getZdfyxx.do";
                 let that = this;
                 this.$http.post(url1, {"parameters":{"id":this.fyid, "lpid": lpid},"foreEndType":2,"code":"300000064"}).then((res)=>{
-                        Indicator.close();
-                        const topic=JSON.parse(res.bodyText).topic;
-                        const topic1=JSON.parse(res.bodyText).data.jbxx;
-                        this.lpname = topic;
-                        this.zdhname = topic1.zdh + '-' + topic1.fybh;
-                        console.log(this.lpname);
+                    Indicator.close();
+                    const topic=JSON.parse(res.bodyText).topic;
+                    const topic1=JSON.parse(res.bodyText).data.jbxx;
+                    this.lpname = topic;
+                    this.zdhname = topic1.zdh + '-' + topic1.fybh;
+                    console.log(this.lpname);
                 }, (res)=>{
                     Indicator.close()
                 });
@@ -419,13 +374,13 @@
                     this.fygjztxl = 3;
                 }
                 /*setTimeout(function(){
-                    if(_this.sfshp==1){
-                        $(".splxDiv").css("display","block");
-                    }else if(_this.sfshp==0){
-                        $(".splxDiv").css("display","none");
+                 if(_this.sfshp==1){
+                 $(".splxDiv").css("display","block");
+                 }else if(_this.sfshp==0){
+                 $(".splxDiv").css("display","none");
 
-                    }
-                },1);*/
+                 }
+                 },1);*/
             },
             zhAction(){
                 console.log("aaa "+this.sfzh);

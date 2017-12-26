@@ -429,6 +429,7 @@
                 window.history.go(-1);
             },
             saveInfo(){
+                this.$router.push({path: '/genjinjilu/'+this.fyid});
                 const _this = this;
                 if(this.fygjzt != "" && !this.fygjlx){
                     Toast({

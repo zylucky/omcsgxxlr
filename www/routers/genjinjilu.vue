@@ -251,7 +251,7 @@
 
             },
             saveOwnerData(){
-                alert(111111);
+                this.$router.push({path: '/tianxiefenjin/'+this.fyid});
             },
             toDetail(){
                 const _this = this;

@@ -35,19 +35,19 @@ var router = new VueRouter({
       /*component: require('./routers/fang_photo.vue')*/
     },
     {
-      path: '/yixing_genjin',//意向业主跟进列表
+      path: '/yixing_genjin/:lpid/:fyid',//意向业主跟进列表
       component: require('./routers/yixing_genjin.vue')
     },
     {
-        path: '/genjingongdan',//意向业主跟进工单
+        path: '/genjingongdan/:lpid/:fyid',//意向业主跟进工单
         component: require('./routers/genjingongdan.vue')
     },
     {
-      path: '/tianxiefenjin',//填写跟进
+      path: '/tianxiefenjin/:fyid',//填写跟进
       component: require('./routers/tianxiefenjin.vue')
     },
     {
-      path: '/genjinjilu',//跟进记录
+      path: '/genjinjilu/:fyid',//跟进记录
       component: require('./routers/genjinjilu.vue')
     },
     {

@@ -77,6 +77,23 @@
                     </div>
                 </div>
             </ul>
+            <div v-show="baocunzhih" style="background-color: #000;z-index:12;position: absolute;top:0;height:120%;opacity:0.8;overflow:hidden;">
+                <div style="padding: 0.5rem;margin: 0.2rem;color: white;margin-top: 50%;font-size: 0.34rem;">
+                    <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已根据业主意向确认为代收房源，是否去填写跟进信息，若稍后填写可在“我的任务”中查看代收房源列表。
+                    </div>
+                    <a href="javascript:;" @click="xiazaq">
+                        <div style="float: left;width: 2rem;line-height: 0.8rem;margin-left: 0.5rem;background-color: #999999;padding-left: 0.5rem;margin-top: 0.2rem;">
+                            现在去
+                        </div>
+                    </a>
+                    <a href="javascript:;" @click="shaohzaq">
+                        <div style="float: right;width: 2rem;line-height: 0.8rem;margin-right: 1rem;background-color: #999999;padding-left: 0.3rem;margin-top: 0.2rem;">
+                            稍后再去
+                        </div>
+                    </a>
+                </div>
+            </div>
             <a href="javascript:;" class="ys_default_btn mb80" style="margin-top: 50%;" @click="saveInfo">保存</a>
         </div>
 
@@ -134,12 +151,13 @@
                 bezhu:'',//备注
                 fyzsqk:'',//房源租售情况
                 sfjg:'',//是否精耕
-                hzyx:'',//合作意向
+                hzyx:'aaa',//合作意向
                 fygjzt:'',//房源跟进状态
                 fygjlx:'',//房源跟进类型
                 fygjlx1:'',
                 fygjztxl:'',//跟进状态类型的选择的判断
                 fygjlxsfxs:'',//根据跟进状态来判断是否显示跟进状态类型
+                baocunzhih:false,
                 statuess:'',
                 popupVisible:false,
                 popupVisible2:false,
@@ -173,6 +191,12 @@
             }
         },
         methods: {
+            xiazaq(){
+                this.$router.push({path: '/genjingongdan/'+this.lpid+'/'+this.fyid});
+            },
+            shaohzaq(){
+                this.$router.push({path: '/fang_list/' + this.lpid});
+            },
             onValuesChange(picker, values) {
                 if (values[0] > values[1]) {
                     picker.setSlotValue(1, values[0]);
@@ -204,18 +228,20 @@
                     this.fygjzt = "";
                 }
                 if(values[0] == "有效"){
+                    alert(1111);
                     this.slots[1].values = this.slots1;
                     this.fygjzt = values[0];
                 }
                 if(values[0] == "暂缓"){
+                    alert(222);
                     this.slots[1].values = this.slots2;
                     this.fygjzt = values[0];
                 }
                 if(values[0] == "无效"){
+                    alert(4444);
                     this.slots[1].values = this.slots3;
                     this.fygjzt = values[0];
                 }
-
                 this.fygjlx = values[1];
 
             },
@@ -524,10 +550,13 @@
                                     message: '保存成功',
                                     duration: 1000
                                 });
-                                setTimeout(function () {
-                                    //history.go(-1);
-                                    _this.$router.push({path: '/genjingongdan'})
-                                }, 1000);
+                                if(this.hzyx == ""){
+                                    setTimeout(function () {
+                                        history.go(-1);
+                                    }, 1000);
+                                }else{
+                                    this.baocunzhih = true;
+                                }
                             } else {
                                 Toast({
                                     message: '保存失败: ' + result.message,

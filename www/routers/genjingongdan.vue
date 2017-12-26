@@ -198,7 +198,7 @@
             </ul>
             <div>
                 <a href="javascript:;" style="width: 50%;margin: 0;float: left;" class="ys_default_btn" @click="saveBuildMsg">保存</a>
-                <a href="javascript:;" style="width: 50%;margin: 0;float: right;" class="ys_default_btn" @click="saveBuildMsg">保存并填写跟进</a>
+                <a href="javascript:;" style="width: 50%;margin: 0;float: right;" class="ys_default_btn" @click="saveBuildMsg2">保存并填写跟进</a>
             </div>
             <!--<a href="javascript:;" class="ys_default_btn mb80" v-if="saveqx" @click="saveBuildMsg">保存</a>-->
             <!--<a href="javascript:;" class="ys_default_btn mb80" v-else @click="fanhui">返回</a>-->
@@ -855,7 +855,11 @@
             fanhui(){
                 window.history.go(-1);
             },
+            saveBuildMsg2(){
+                this.$router.push({path: '/tianxiefenjin/'+this.fyid});
+            },
             saveBuildMsg(){
+                this.$router.push({path: '/yixing_genjin/'+this.$route.params.lpid+'/'+this.$route.params.fyid});
                 var _this = this;
                 if(this.topic==''){
                     MessageBox('提示', '请填写楼盘名称');

@@ -298,7 +298,7 @@
                   <img v-else :src="$prefix + '/upload/2017-08-27/6404b4de960b81fc5403c870aefcea34.png'">
                 </dt>
                 <dd class="supply_msg_box" @click="shadowShow">
-                  <dl>
+                  <dl style="width:5rem;">
                     <dd class="supply_house">{{item.topic}}&nbsp;&nbsp;{{item.zdh}}&nbsp;-&nbsp;{{item.fybh}}</dd>
                     <dd class="supply_color ellipsis">{{item.fjmj}}㎡</dd>
                     <dd>
@@ -307,6 +307,7 @@
                       </dl>
                     </dd>
                     <span class="banc" v-if="item.zlzt == '航远'" style="position: relative;left:3.7rem;top: -1.2rem;width:50px;height:50px;display:block;"></span>
+                    <dd v-if="item.hzyx != 0" class="supply_color ellipsis" style="margin-top: -0.8rem;margin-left: 3.5rem;color: red;font-size: 0.3rem;">跟进中</dd>
                   </dl>
                 </dd>
               </dl>

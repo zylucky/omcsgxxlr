@@ -39,7 +39,7 @@ var router = new VueRouter({
       component: require('./routers/yixing_genjin.vue')
     },
     {
-        path: '/genjingongdan/:lpid/:fyid',//意向业主跟进工单
+        path: '/genjingongdan/:fyyzid/:fyid',//意向业主跟进工单
         component: require('./routers/genjingongdan.vue')
     },
     {

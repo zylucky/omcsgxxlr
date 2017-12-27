@@ -8,40 +8,59 @@
     <div class="all_elements">
         <div class="build_top">
             <ul class="ys_item_ul mb60">
-                <li class="clearfix">
+                <div class="analy_item" style="padding: 0;line-height: 0.8rem;float: left;width: 77.3%;">
+                    <div class="analy_content" style="margin-top: 0.4rem;">
+                        <span v-text="lpname" style="color: black;font-weight: 500;font-size: 0.36rem;"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span v-text="zdhname" style="color: black;font-weight: 500;font-size: 0.36rem;"></span>
+                    </div>
+                </div>
+                <div class="analy_item" style="padding: 0;line-height: 0.8rem;float: right;height: 1.22rem;">
+                    <div class="" style="width: 1.5rem;margin-right: 0.2rem;margin-top: 0.3rem;padding-left: 0.4rem;background-color: #007aff;">
+                        <a href="javascript:;" style="color: white;">编辑</a>
+                    </div>
+                </div>
+                <li class="clearfix" style="clear: both;">
                     <span class="ys_tit">对接人：</span>
-                    <div class="ys_item_con fl" v-if="duijie" @click="duijiere($event)" rel="1"><a href="javascript:;">业主</a></div>
-                    <div class="ys_item_con fl" v-else @click="duijiere($event)" rel="2"><a href="javascript:;">代理人</a></div>
+                    <div class="ys_item_con fl" v-if="duijie" @click="duijiere($event)" v-text="duijierid" rel="1"></div>
+                    <div class="ys_item_con fl" v-else @click="duijiere($event)" v-text="duijierid" rel="2"></div>
+                    <!--<div v-if="duijierenif">
+                        <div class="ys_item_con fl" v-if="duijie" @click="duijiere($event)" rel="1"><a href="javascript:;">业主</a></div>
+                        <div class="ys_item_con fl" v-else @click="duijiere($event)" rel="2"><a href="javascript:;">代理人</a></div>
+                    </div>
+                    <div v-if="duijierenif">
+                        <div class="ys_item_con fl" v-if="duijie" rel="1"><a href="javascript:;">业主</a></div>
+                        <div class="ys_item_con fl" v-else rel="2"><a href="javascript:;">代理人</a></div>
+                    </div>-->
                 </li>
                 <li class="clearfix pr">
                     <span class="ys_tit">对接人姓名：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lppz" readonly placeholder="请选择对接人" @click="openQuality">
+                        <input type="text" value="" v-model="djrid" readonly placeholder="请选择对接人" @click="openQuality">
                         <i class="right_arrow" @click="openQuality">&gt;</i>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">对接人电话：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lpsjgs" placeholder="请输入">
+                        <input type="text" value="" v-model="phone" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix pr">
                     <span class="ys_tit">对接人性别：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lppz" readonly placeholder="请选择对接人性别" @click="openQuality2">
+                        <input type="text" value="" v-model="xb" readonly placeholder="请选择对接人性别" @click="openQuality2">
                         <i class="right_arrow" @click="openQuality2">&gt;</i>
                     </div>
                 </li>
                 <li class="clearfix">
-                    <span class="ys_tit">对接居住地：</span>
+                    <span class="ys_tit">对接人居住地：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lpsjgs" placeholder="请输入">
+                        <input type="text" value="" v-model="xaddress" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">性格特征：</span>
-                    <div class="ys_item_con fl"><a href="javascript:;">{{tsbq_t}}</a></div>
+                    <div class="ys_item_con fl"><a href="javascript:;">{{xgbq}}</a></div>
                 </li>
                 <li class="clearfix bg_gray">
                     <div class="xgbq ys_item_con fl" @click="selectTag($event)">
@@ -74,13 +93,13 @@
                 <li class="clearfix pr">
                     <span class="ys_tit">对接人年龄：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lpsjgs" placeholder="请输入">
+                        <input type="text" value="" v-model="year" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">从事行业：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lpsjgs" placeholder="请输入">
+                        <input type="text" value="" v-model="cshy" placeholder="请输入">
                     </div>
                 </li>
                 <div class="ys_tit">业主签约谈判的条件</div>
@@ -94,92 +113,146 @@
                 <li class="clearfix">
                     <span class="ys_tit">免租期：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lpsjgs" placeholder="请输入">
+                        <input type="text" value="" v-model="mzq" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">价格：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lpsjgs" placeholder="请输入">
+                        <input type="text" value="" v-model="Price" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">签约年限：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lpsjgs" placeholder="请输入">
+                        <input type="text" value="" v-model="qynx" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">递增方式：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lpsjgs" placeholder="请输入">
+                        <input type="text" value="" v-model="dzsort" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">接受转租形式：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="lpsjgs" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="lpsjgs" name="company">否</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="zzsort" name="company">是</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="zzsort" name="company">否</label>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">配合工商注册：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="lpsjgs" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="lpsjgs" name="company">否</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="gszc" name="company">是</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="gszc" name="company">否</label>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">配合开具发票：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="lpsjgs" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="lpsjgs" name="company">否</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="kjfp" name="company">是</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="kjfp" name="company">否</label>
                     </div>
                 </li>
                 <div class="ys_tit">产权情况</div>
                 <li class="clearfix pr">
                     <span class="ys_tit">产权归属：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lppz" readonly placeholder="请选择产权归属" @click="openQuality4">
+                        <input type="text" value="" v-model="chqattach" readonly placeholder="请选择产权归属" @click="openQuality4">
                         <i class="right_arrow" @click="openQuality4">&gt;</i>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">是否已做抵押：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="lpsjgs" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="lpsjgs" name="company">否</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="Sfdy" name="company">是</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="Sfdy" name="company">否</label>
                     </div>
                 </li>
                 <li class="clearfix pr">
                     <span class="ys_tit">产权证：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lppz" readonly placeholder="请选择产权证类别" @click="openQuality5">
+                        <input type="text" value="" v-model="chqsort" readonly placeholder="请选择产权证类别" @click="openQuality5">
                         <i class="right_arrow" @click="openQuality5">&gt;</i>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">产权证原件：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="lpsjgs" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="lpsjgs" name="company">否</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="sfyj" name="company">是</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="sfyj" name="company">否</label>
                     </div>
                 </li>
                 <div class="ys_tit">房间注册情况</div>
                 <li class="clearfix">
                     <span class="ys_tit w224">是否有公司注册：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="lpsjgs" name="company">有</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="lpsjgs" name="company">无</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="sfgszc" name="company">有</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="sfgszc" name="company">无</label>
+                    </div>
+                </li>
+                <!--<li class="clearfix">
+                    <span class="ys_tit w224">迁出时间：</span>
+                    &lt;!&ndash;<div class="ys_item_con fl">
+                        <input type="text" value="" v-model="qctime" placeholder="请输入">
+                    </div>&ndash;&gt;
+                    <div class="ys_item_con fl">
+                        <input type="text" value="" readonly placeholder="请选择迁出时间"  v-model.trim="qctime" @click="openPicker()">
+                        &lt;!&ndash;<i class="calendar_icon"  @click="openPicker()"></i>&ndash;&gt;
+                        <i class="right_arrow" style="position: absolute;top:0;right: 0;" @click="openPicker">&gt;</i>
+                    </div>
+                    &lt;!&ndash;<div class="ys_item_con fl">
+                        <input type="text" value="" v-model="chqattach" readonly placeholder="请选择产权归属" @click="openQuality4">
+                        <i class="right_arrow" @click="openQuality4">&gt;</i>
+                    </div>&ndash;&gt;
+                </li>-->
+                <li class="clearfix pr">
+                    <span class="ys_tit">迁出时间：</span>
+                    <div class="ys_item_con fl">
+                        <input type="text" value="" v-model="qctime" readonly placeholder="请选择迁出时间" @click="openPicker()">
+                        <i class="calendar_icon" @click="openPicker()"></i>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">是否备案：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="lpsjgs" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="lpsjgs" name="company">否</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="sfba" name="company">是</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="sfba" name="company">否</label>
                     </div>
                 </li>
+                <!--<li class="clearfix">
+                    <span class="ys_tit w224">配合备案时间：</span>
+                    &lt;!&ndash;<div class="ys_item_con fl">
+                        <input type="text" value="" v-model="batime" placeholder="请输入">
+                    </div>&ndash;&gt;
+                    <div class="ys_item_con fl">
+                        <input type="text" value="" readonly placeholder="请选择配合备案时间"  v-model.trim="batime" @click="openPicker()">
+                       &lt;!&ndash; <i class="calendar_icon"  @click="openPicker()"></i>&ndash;&gt;
+                    </div>
+                </li>-->
+                <li class="clearfix pr">
+                    <span class="ys_tit">配合备案时间：</span>
+                    <div class="ys_item_con fl">
+                        <input type="text" value="" v-model="qctime" readonly placeholder="请选择配合备案时间" @click="openPicker()">
+                        <i class="calendar_icon" @click="openPicker()"></i>
+                    </div>
+                </li>
+              <!--  <li class="clearfix pr mb20">
+                    <span class="ys_tit zyzd">空置时间：</span>
+                    <div class="ys_item_con fl">
+                        <input type="text" value="" readonly placeholder="请选择日期"  v-model.trim="kzsj" @click="openPicker()">
+                        <i class="calendar_icon"  @click="openPicker()"></i>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" readonly onfocus="this.blur()" placeholder="请选择日期"  v-model.trim="kzsj">
+                        <i class="calendar_icon"></i>
+                    </div>
+                </li>-->
+
+
+
+
 
                 <!--<li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;">
                     <span class="ys_tit w170" style="width: 2rem !important;padding-left: 0.2rem;">合作意向：</span>
@@ -191,7 +264,7 @@
                 <li class="clearfix pr">
                     <span class="ys_tit">合作意向：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lppz" readonly onfocus="this.blur()" placeholder="请选择" @click="openQuality6">
+                        <input type="text" value="" v-model="hzyx" readonly onfocus="this.blur()" placeholder="请选择" @click="openQuality6">
                         <i class="right_arrow" @click="openQuality6">&gt;</i>
                     </div>
                 </li>
@@ -225,7 +298,7 @@
             <mt-picker :slots="slots" @change="selectLevel"></mt-picker>
         </mt-popup>
 
-        <!--楼盘品质-->
+        <!--对接人姓名-->
         <mt-popup v-model="popQuality" position="bottom" class="mint-popup-4">
             <div class="picker-toolbar">
                 <span class="mint-datetime-action mint-datetime-cancel" @click="sureQuality">取消</span>
@@ -306,7 +379,46 @@
 
         data () {
             return {
+                fyid:'',
+                lpname:'建外sojourn',
+                zdhname:'建外sojourn',
+                duijierenif:false,
                 duijie:true,
+                hzyxid:'',//合作意向id
+                hzyx:'',//合作意向
+                duijierid:'业主',//对接人
+                djrid:'',//对接人id
+                cshy:'',//从事行业
+                mzq:'',//免租期
+                Price:'',//价格
+                qynx:'',//签约年限
+                dzsort:'',//递增方式
+                zzsort:'',//接受转租形式
+                gszc:'',//配合工商注册
+                kjfp:'',//配合开具发票
+                chqattach:'',//产权归属
+                Sfdy:'',//是否已做抵押
+                chqsort:'',//产权证类别
+                sfyj:'',//产权证是否原件
+                sfgszc:'',//是否有公司注册
+                qctime:'',//迁出时间
+                sfba:'',//是否备案
+                batime:'',//配合备案时间
+                year:'',//对接人年龄
+                phone:'',//对接人电话
+                xb:'',//对接人性别
+                xgbq:'',//性格特征
+                xaddress:'',//对接人现住址
+                yezhuzshuj:[],
+                yezhu:[],
+
+
+
+
+
+
+
+
                 "lpid": "", //楼盘id
                 "topic": "", //楼盘名称
                 "address": "", //地址
@@ -369,7 +481,7 @@
                 //对接人姓名
                 slots_quality: [
                     {
-                        values: ["","业主1", "业主2", "业主3"],
+                        values: [],
                     }
                 ],
                 //对接人性别
@@ -445,6 +557,79 @@
             }
         },
         methods: {
+            //特色标签权限的判断
+            tebqqxpd(){
+                let user22 = JSON.parse(localStorage.getItem('cook'));
+                this.Fyyxid = this.$route.params.fyyzid;
+                this.fyid = this.$route.params.fyid;
+                const url = this.$api + "/yhcms/web/wxqx/getGdxx.do";
+                this.$http.post(url, {"fyyxid":this.$route.params.fyyzid,"foreEndType":2,"code":"30000008"}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    const data1 = JSON.parse(res.bodyText).data1;
+                    if(data != ""){
+                        this.hzyx = data1.hzyx;
+                        this.hzyxid = data1.id;
+                        if(data.djrstate == 1){
+                            this.duijierid = '业主';
+                            this.duijie = true;
+                            this.yezhuid();
+                        }else if(data.djrstate == 2){
+                            this.duijierid = '代理人';
+                            this.duijie = false;
+                            this.dailirenid();
+                        }
+                        this.djrid = data.djrid;
+                        this.cshy = data.cshy;
+                        this.mzq = data.mzq;
+                        this.Price = data.Price;
+                        this.qynx = data.qynx;
+                        this.dzsort = data.dzsort;
+                        this.zzsort = data.zzsort;
+                        this.gszc = data.gszc;
+                        this.kjfp = data.kjfp;
+                        this.chqattach = data.chqattach;
+                        this.Sfdy = data.Sfdy;
+                        this.chqsort = data.chqsort;
+                        this.sfyj = data.sfyj;
+                        this.sfgszc = data.sfgszc;
+                        this.qctime = data.qctime;
+                        this.sfba = data.sfba;
+                        this.batime = data.batime;
+                        this.year = data.year;
+                    }else{
+
+                    }
+
+
+
+                    /*this.getInitData();
+                     this.getTsbq();*/
+
+
+
+                    /* const url1 = this.$api + "/yhcms/web/wxqx/getGdxx.do";
+                     this.$http.post(url1, {"fyyxid":this.$route.params.fyyzid,"foreEndType":2,"code":"30000008"}).then((res)=>{
+                     Indicator.close();
+                     const data = JSON.parse(res.bodyText).data1;
+                     this.hzyxid = data.hzyx;
+                     this.duijierid = data.id;
+                     /!*this.getInitData();
+                     this.getTsbq();*!/
+
+
+                     }, (res)=>{
+                     Indicator.close()
+                     });*/
+
+
+
+
+
+                }, (res)=>{
+                    Indicator.close()
+                });
+            },
             duijiere(e){
                 const target = $(e.target), val = target.attr("rel");
                 if(this.duijie){
@@ -452,7 +637,74 @@
                 }else{
                     this.duijie = true;
                 }
+                if(val == 1){
+                    this.duijierid = '代理人';
+                }else{
+                    this.duijierid = '业主';
+                }
             },
+
+            //获取业主id
+            yezhuid(){
+                const url = this.$api + "/yhcms/web/wxqx/getLpZdYzxx.do";
+                this.$http.post(url, {"parameters":{"fyid":this.fyid},"foreEndType":2,"code":"30000008"}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    /*this.phone = data[0].phone;
+                    this.xb = data[0].xb;
+                    this.xgbq = data[0].tsbq;
+                    this.xaddress = data[0].address;*/
+                    for(var i=0;i<data.length;i++){
+                        this.yezhuzshuj[i] = data[i];
+                        this.yezhu[i] = data[i].topic;
+                    }
+                    this.slots_quality[0].values = this.yezhu;
+
+
+                }, (res)=>{
+                    Indicator.close()
+                });
+            },
+            //获取业主的基本信息
+            yezhubas(){
+                const url = this.$api + "/yhcms/web/wxqx/getZdfyYzxx.do";
+                this.$http.post(url, {"parameters":{"id":this.id},"foreEndType":2,"code":"30000008"}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    this.phone = data.phone;
+                    this.xb = data.xb;
+                    this.xgbq = data.xgbq;
+                    this.xaddress = data.czaddress;
+                }, (res)=>{
+                    Indicator.close()
+                });
+            },
+            //获取代理人的id
+            dailirenid(){
+                const url = this.$api + "/yhcms/web/wxqx/getLpZdDlrxx.do";
+                this.$http.post(url, {"parameters":{"fyid":this.fyid},"foreEndType":2,"code":"30000008"}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    this.slots_quality = data;
+                }, (res)=>{
+                    Indicator.close();
+                });
+            },
+            //获取代理人的基本信息
+            dalirenbas(){
+                const url = this.$api + "/yhcms/web/wxqx/getZdfyDlrxx.do";
+                this.$http.post(url, {"parameters":{"id":this.id},"foreEndType":2,"code":"30000008"}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    this.phone = data.phone;
+                    this.xb = data.xb;
+                    this.xgbq = data.bqid;
+                    this.xaddress = data.address;
+                }, (res)=>{
+                    Indicator.close()
+                });
+            },
+
 
 
 
@@ -532,7 +784,16 @@
 
             //选择品质
             selectQuality(picker, values){
-                this.lppz = values[0];
+                this.djrid = values[0];
+                for(var i=0;i<this.yezhu.length;i++){
+                    if(this.djrid == this.yezhu[i]){
+                        this.phone = this.yezhuzshuj[i].phone;
+                        this.xb = this.yezhuzshuj[i].xb;
+                        this.xgbq = this.yezhuzshuj[i].tsbq;
+                        this.xaddress = this.yezhuzshuj[i].address;
+                    }
+                }
+
             },
             selectQuality2(picker, values){
                 this.lppz = values[0];
@@ -784,74 +1045,7 @@
                 });
             },
 
-            //特色标签权限的判断
-            tebqqxpd(){
-                let user22 = JSON.parse(localStorage.getItem('cook'));
-                const url = this.$api + "/yhcms/web/wxqx/getLpqx.do";
-                this.$http.post(url, {"cookie":user22.sjs,"lpid":this.$route.params.lpid,"foreEndType":2,"code":"30000008"}).then((res)=>{
-                    Indicator.close();
-                    const data = JSON.parse(res.bodyText).data;
-                    const meg = JSON.parse(res.bodyText).message;
-                    this.ryzt = data.ryzt;
-                    this.qxzt = data.qxzt;
-                    console.log("ryzt:"+data.ryzt+",  qxzt: "+data.qxzt);
-                    //data.qxzt = 11;
-                    if(data.qxzt == 0){
-                        this.teqx = false;
-                        MessageBox('提示',meg);
-                        window.history.go(-1);
-                        return;
-                    }
-                    //此用户有所有权限
-                    if(data.qxzt == 1 || data.qxzt == 21 || data.qxzt == 31 || data.qxzt == 41 || data.qxzt == 43){
-                        this.teqx = true;
-                        this.kfsqx = false;
-                        this.cqxzqx = true;
-                        this.lpjjqx = false;
-                        this.zxptqx = false;
-                        this.lpsjqx = false;
-                        this.plsjsqx = false;
-                        this.lpsjsfgqx = false;
-                        this.kprqqx = true;
-                        this.lpjbqx = true;
-                        this.lppzqx = true;
-                        this.saveqx = true;
-                    }
-                    if(data.qxzt == 2){
-                        MessageBox('提示',"此用户已被禁用，请联系管理员！");
-                        this.$router.push({path: '/login'});
-                    }
-                    if(data.qxzt == 3){
-                        this.$router.push({path: '/login'});
-                    }
-                    //只有查看权限
-                    if(data.qxzt == 11){
-                        this.teqx = false;
-                        this.kfsqx = true;
-                        this.cqxzqx = false;
-                        this.lpjjqx = true;
-                        this.zxptqx = true;
-                        this.lpsjqx = true;
-                        this.plsjsqx = true;
-                        this.lpsjsfgqx = true;
-                        this.kprqqx = false;
-                        this.lpjbqx = false;
-                        this.lppzqx = false;
-                        this.saveqx = false;
-                        $("input").attr('placeholder',"");
-                    }
 
-                    if(data.qxzt == 46){
-                        MessageBox('提示',"此用户不属于收购部人员！");
-                        this.$router.push({path: '/login'});
-                    }
-                    this.getInitData();
-                    this.getTsbq();
-
-                }, (res)=>{
-                    Indicator.close()
-                });
-            },
             fanhui(){
                 window.history.go(-1);
             },
@@ -971,7 +1165,7 @@
 
         },
         mounted(){
-            //this.tebqqxpd();
+            this.tebqqxpd();
 
         },
     }

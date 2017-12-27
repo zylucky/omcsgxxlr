@@ -146,6 +146,7 @@
                 "id": "",
                 "fyid": "",//房源id
                 lpid:'',
+                yezhuyxid:'',//业主意向id
                 lpname:'',
                 zdhname:'',
                 bezhu:'',//备注
@@ -155,6 +156,7 @@
                 fygjzt:'',//房源跟进状态
                 fygjlx:'',//房源跟进类型
                 fygjlx1:'',
+                fyyzid:'',//房源意向的id
                 fygjztxl:'',//跟进状态类型的选择的判断
                 fygjlxsfxs:'',//根据跟进状态来判断是否显示跟进状态类型
                 baocunzhih:false,
@@ -185,14 +187,14 @@
                 ],
                 slots_quality3: [
                     {
-                        values: ['','A(可约业主可收购)', 'B(深度议价中)', 'C(初步审核)'],
+                        values: ['','A(可约业主可收购)', 'B(深度议价中)', 'C(初步核实)'],
                     }
                 ],
             }
         },
         methods: {
             xiazaq(){
-                this.$router.push({path: '/genjingongdan/'+this.lpid+'/'+this.fyid});
+                this.$router.push({path: '/genjingongdan/'+this.fyyzid+'/'+this.fyid});
             },
             shaohzaq(){
                 this.$router.push({path: '/fang_list/' + this.lpid});
@@ -228,17 +230,14 @@
                     this.fygjzt = "";
                 }
                 if(values[0] == "有效"){
-                    alert(1111);
                     this.slots[1].values = this.slots1;
                     this.fygjzt = values[0];
                 }
                 if(values[0] == "暂缓"){
-                    alert(222);
                     this.slots[1].values = this.slots2;
                     this.fygjzt = values[0];
                 }
                 if(values[0] == "无效"){
-                    alert(4444);
                     this.slots[1].values = this.slots3;
                     this.fygjzt = values[0];
                 }
@@ -352,8 +351,93 @@
                     text: '',
                     spinnerType: 'fading-circle'
                 });
-                const url1 = this.$api + "/yhcms/web/zdfyxx/getZdfyxx.do";
+                const url = this.$api + "/yhcms/web/wxqx/getGjxx.do";
                 let that = this;
+                this.$http.post(url, {"fyid":this.fyid}).then((res)=>{
+                    Indicator.close();
+                    const topic=JSON.parse(res.bodyText).data1;
+                    this.yezhuyxid = topic.id;
+                    if(topic.hzyx != ''){
+                        if(topic.hzyx == 1){
+                            this.hzyx = "A(可约业主可收购)";
+                        }else if(topic.hzyx == 2){
+                            this.hzyx = "B(深度议价中)";
+                        }else if(topic.hzyx == 3){
+                            this.hzyx = "C(初步核实)";
+                        }
+                    }
+                }, (res)=>{
+                    Indicator.close()
+                });
+                const url2 = this.$api + "/yhcms/web/zdfyxx/getGjzt.do";
+                this.$http.post(url2, {"fyid":fyid}).then((res)=>{
+                    Indicator.close();
+                    const data=JSON.parse(res.bodyText).data;
+                    if(data){
+                        this.bezhu = data.bzh;
+                        if(data.gjzt1 == 1){
+                            this.fygjzt = "有效";
+                        }else if(data.gjzt1 == 2){
+                            this.fygjzt = "暂缓";
+                        }else if(data.gjzt1 == 3){
+                            this.fygjzt = "无效";
+                        }else{
+                            this.fygjzt = "请选择";
+                        }
+                        this.fygjlx = data.gjzt2;
+                        if(data.jgzt == 1){
+                            data.jgzt = "是";
+                        }else if(data.jgzt == 2){
+                            data.jgzt = "否";
+                        }else{
+                            data.jgzt = "请选择";
+                        }
+                        this.sfjg = data.jgzt;
+                        this.fyzsqk = data.zszt;
+                        this.id = data.id;
+                        if(data.gjzt1){
+                            if(data.gjzt1 == 1){
+                                this.fygjztxl = 1;
+                                if(this.fygjlx == 1){
+                                    this.fygjlx = "45天内到期";
+                                }
+                                if(this.fygjlx == 2){
+                                    this.fygjlx = "90天内到期";
+                                }
+                                if(this.fygjlx == 3){
+                                    this.fygjlx = "当前空置";
+                                }
+                            }
+                            if(data.gjzt1 == 2){
+                                this.fygjztxl = 2;
+                                if(this.fygjlx == 4){
+                                    this.fygjlx = "业主直租";
+                                }
+                                if(this.fygjlx == 5){
+                                    this.fygjlx = "资产公司压房或转租";
+                                }
+                                if(this.fygjlx == 6){
+                                    this.fygjlx = "纠纷中";
+                                }
+                                if(this.fygjlx == 7){
+                                    this.fygjlx = "意向不明确";
+                                }
+                            }
+                            if(data.gjzt1 == 3){
+                                this.fygjztxl = 3;
+                                if(this.fygjlx == 8){
+                                    this.fygjlx = "无业主电话";
+                                }
+                                if(this.fygjlx == 9){
+                                    this.fygjlx = "业主电话无效";
+                                }
+                            }
+                        }
+                    }
+                }, (res)=>{
+                    Indicator.close()
+                });
+                const url1 = this.$api + "/yhcms/web/zdfyxx/getZdfyxx.do";
                 this.$http.post(url1, {"parameters":{"id":this.fyid, "lpid": lpid},"foreEndType":2,"code":"300000064"}).then((res)=>{
                         Indicator.close();
                         const topic=JSON.parse(res.bodyText).topic;
@@ -364,8 +448,8 @@
                 }, (res)=>{
                     Indicator.close()
                 });
-                const url = this.$api + "/yhcms/web/zdfyxx/getGjzt.do";
-                this.$http.post(url, {"fyid":fyid}).then((res)=>{
+                const url3 = this.$api + "/yhcms/web/zdfyxx/getGjzt.do";
+                this.$http.post(url3, {"fyid":fyid}).then((res)=>{
                     Indicator.close();
                     const data=JSON.parse(res.bodyText).data;
                     if(data){
@@ -534,6 +618,17 @@
                         }else{
                             var fygjzt = '';
                         }
+                        var hzyx = '';
+                        if(this.hzyx != ''){
+                            if(this.hzyx == "A(可约业主可收购)"){
+                                hzyx = 1;
+                            }else if(this.hzyx == "B(深度议价中)"){
+                                hzyx = 2;
+                            }else if(this.hzyx == "C(初步核实)"){
+                                hzyx = 3;
+                            }
+                        }
+                        let user22 = JSON.parse(localStorage.getItem('cook'));
                         //this.fygjlx = 1;
                         Indicator.open({
                             text: '保存中...',
@@ -546,17 +641,45 @@
                             Indicator.close();
                             var result = JSON.parse(res.bodyText);
                             if (result.success) {
-                                Toast({
-                                    message: '保存成功',
-                                    duration: 1000
+
+                                //保存合作意向的接口
+                                this.$http.post(
+                                    this.$api + "/yhcms/web/wxqx/updateGjxx.do",
+                                    {"parameters":{
+                                        fyid:this.fyid,
+                                        id:this.yezhuyxid,
+                                        hzyx:hzyx,
+                                        cookie:user22.sjs
+                                    }}
+                                ).then(function (res) {
+                                    Indicator.close();
+                                    var result = JSON.parse(res.bodyText);
+                                    if (result.success) {
+                                        Toast({
+                                            message: '保存成功',
+                                            duration: 1000
+                                        });
+                                        this.fyyzid = result.fyyzid;
+                                        if(this.hzyx == ""){
+                                            setTimeout(function () {
+                                                history.go(-1);
+                                            }, 1000);
+                                        }else{
+                                            this.baocunzhih = true;
+                                        }
+                                    } else {
+                                        Toast({
+                                            message: '保存失败: ' + result.message,
+                                            position: 'bottom'
+                                        });
+                                    }
+                                }, function (res) {
+                                    Toast({
+                                        message: '保存失败',
+                                        position: 'bottom'
+                                    });
                                 });
-                                if(this.hzyx == ""){
-                                    setTimeout(function () {
-                                        history.go(-1);
-                                    }, 1000);
-                                }else{
-                                    this.baocunzhih = true;
-                                }
+
                             } else {
                                 Toast({
                                     message: '保存失败: ' + result.message,

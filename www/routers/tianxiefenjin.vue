@@ -28,7 +28,7 @@
                 </div>
                 <div class="analy_item" style="font-size: 0.32rem;padding: 0;margin-top: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
                     <div class="analy_content" style="width: 7.1rem;height: 2rem;background-color: rgb(241,241,241);">
-                        <textarea name="" cols="30" rows="10" v-model="bezhu" placeholder="请输入跟进记录..." style="padding-left: 0.4rem;font-size: 0.32rem;background-color: rgb(241,241,241);height: 2.6rem;"></textarea>
+                        <textarea name="" cols="30" rows="10" v-model="information" placeholder="请输入跟进记录..." style="padding-left: 0.4rem;font-size: 0.32rem;background-color: rgb(241,241,241);height: 2.6rem;"></textarea>
                     </div>
                 </div>
             </ul>
@@ -83,9 +83,11 @@
             return {
                 "id": "",
                 "fyid": "",//房源id
+                fyyzid:'',
                 lpid:'',
                 lpname:'',
                 zdhname:'',
+                information:'',
                 bezhu:'',//备注
                 fyzsqk:'',//房源租售情况
                 sfjg:'',//是否精耕
@@ -128,6 +130,97 @@
             }
         },
         methods: {
+            getInitData(){
+                this.fyyzid = this.$route.params.fyyzid;
+                this.fyid = this.$route.params.fyid;
+                Indicator.open({
+                    text: '',
+                    spinnerType: 'fading-circle'
+                });
+                const url1 = this.$api + "/yhcms/web/wxqx/getFyBt.do";
+                this.$http.post(url1, {"fyid":this.fyid,"foreEndType":2,"code":"30000008"}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    this.lpname = data.topic;
+                    this.zdhname = data.zdh +'-'+ + data.fybh;
+                }, (res)=>{
+                    Indicator.close()
+                });
+            },
+            saveInfo(){
+                const _this = this;
+                /*if(this.fygjzt != "" && !this.fygjlx){
+                 Toast({
+                 message: '房源跟进状态不能为空！',
+                 duration: 1000
+                 });
+                 return false;
+                 }else{
+                 if(this.bezhu == "" && this.fyzsqk == "" && this.sfjg == "" && this.fygjzt == ""){
+                 Toast({
+                 message: '所有信息为空，不予保存',
+                 duration: 1000
+                 });
+                 setTimeout(function () {
+                 history.go(-1);
+                 //_this.$router.push({path: '/index'})
+                 }, 1000);
+                 }else{
+                 if(this.sfjg == "是"){
+                 var sfjg = 1;
+                 }else if(this.sfjg == "否"){
+                 var sfjg = 2;
+                 }else{
+                 var sfjg = '';
+                 }
+                 if(this.fygjzt == "有效"){
+                 var fygjzt = 1;
+                 }else if(this.fygjzt == "暂缓"){
+                 var fygjzt = 2;
+                 }else if(this.fygjzt == "无效"){
+                 var fygjzt = 3;
+                 }else{
+                 var fygjzt = '';
+                 }*/
+                //this.fygjlx = 1;
+                let user22 = JSON.parse(localStorage.getItem('cook'));
+                Indicator.open({
+                    text: '保存中...',
+                    spinnerType: 'fading-circle'
+                });
+                this.$http.post(
+                    this.$api + "/yhcms/web/wxqx/updateInfo.do",
+                    {"parameters":
+                        {"fyyxid":this.fyyzid,
+                            "information":this.information,
+                            "cookie":user22.sjs
+                        }
+                    }
+                ).then(function (res) {
+                    Indicator.close();
+                    var result = JSON.parse(res.bodyText);
+                    if (result.success) {
+                        Toast({
+                            message: '保存成功',
+                            duration: 1000
+                        });
+                        setTimeout(function () {
+                            //history.go(-1);
+                            _this.$router.push({path: '/genjinjilu/'+_this.fyyzid+'/'+_this.fyid});
+                        }, 1000);
+                    } else {
+                        Toast({
+                            message: '保存失败: ' + result.message,
+                            position: 'bottom'
+                        });
+                    }
+                }, function (res) {
+                    Toast({
+                        message: '保存失败',
+                        position: 'bottom'
+                    });
+                });
+            },
             onValuesChange(picker, values) {
                 if (values[0] > values[1]) {
                     picker.setSlotValue(1, values[0]);
@@ -272,96 +365,7 @@
                     }
                 },1);
             },
-            getInitData(){
-                const fyid = this.$route.params.fyid;
-                const lpid = this.$route.params.lpid;
-                this.lpid = lpid;
-                this.fyid = fyid;
-                Indicator.open({
-                    text: '',
-                    spinnerType: 'fading-circle'
-                });
-                const url1 = this.$api + "/yhcms/web/zdfyxx/getZdfyxx.do";
-                let that = this;
-                this.$http.post(url1, {"parameters":{"id":this.fyid, "lpid": lpid},"foreEndType":2,"code":"300000064"}).then((res)=>{
-                    Indicator.close();
-                    const topic=JSON.parse(res.bodyText).topic;
-                    const topic1=JSON.parse(res.bodyText).data.jbxx;
-                    this.lpname = topic;
-                    this.zdhname = topic1.zdh + '-' + topic1.fybh;
-                    console.log(this.lpname);
-                }, (res)=>{
-                    Indicator.close()
-                });
-                const url = this.$api + "/yhcms/web/zdfyxx/getGjzt.do";
-                this.$http.post(url, {"fyid":fyid}).then((res)=>{
-                    Indicator.close();
-                    const data=JSON.parse(res.bodyText).data;
-                    if(data){
-                        this.bezhu = data.bzh;
-                        if(data.gjzt1 == 1){
-                            this.fygjzt = "有效";
-                        }else if(data.gjzt1 == 2){
-                            this.fygjzt = "暂缓";
-                        }else if(data.gjzt1 == 3){
-                            this.fygjzt = "无效";
-                        }else{
-                            this.fygjzt = "请选择";
-                        }
-                        this.fygjlx = data.gjzt2;
-                        if(data.jgzt == 1){
-                            data.jgzt = "是";
-                        }else if(data.jgzt == 2){
-                            data.jgzt = "否";
-                        }else{
-                            data.jgzt = "请选择";
-                        }
-                        this.sfjg = data.jgzt;
-                        this.fyzsqk = data.zszt;
-                        this.id = data.id;
-                        if(data.gjzt1){
-                            if(data.gjzt1 == 1){
-                                this.fygjztxl = 1;
-                                if(this.fygjlx == 1){
-                                    this.fygjlx = "45天内到期";
-                                }
-                                if(this.fygjlx == 2){
-                                    this.fygjlx = "90天内到期";
-                                }
-                                if(this.fygjlx == 3){
-                                    this.fygjlx = "当前空置";
-                                }
-                            }
-                            if(data.gjzt1 == 2){
-                                this.fygjztxl = 2;
-                                if(this.fygjlx == 4){
-                                    this.fygjlx = "业主直租";
-                                }
-                                if(this.fygjlx == 5){
-                                    this.fygjlx = "资产公司压房或转租";
-                                }
-                                if(this.fygjlx == 6){
-                                    this.fygjlx = "纠纷中";
-                                }
-                                if(this.fygjlx == 7){
-                                    this.fygjlx = "意向不明确";
-                                }
-                            }
-                            if(data.gjzt1 == 3){
-                                this.fygjztxl = 3;
-                                if(this.fygjlx == 8){
-                                    this.fygjlx = "无业主电话";
-                                }
-                                if(this.fygjlx == 9){
-                                    this.fygjlx = "业主电话无效";
-                                }
-                            }
-                        }
-                    }
-                }, (res)=>{
-                    Indicator.close()
-                });
-            },
+
             sfspAction(e){
                 const target = $(e.target), val = target.attr("value");
                 if(val == 1){
@@ -428,78 +432,7 @@
             fanhui(){
                 window.history.go(-1);
             },
-            saveInfo(){
-                this.$router.push({path: '/genjinjilu/'+this.fyid});
-                const _this = this;
-                if(this.fygjzt != "" && !this.fygjlx){
-                    Toast({
-                        message: '房源跟进状态不能为空！',
-                        duration: 1000
-                    });
-                    return false;
-                }else{
-                    if(this.bezhu == "" && this.fyzsqk == "" && this.sfjg == "" && this.fygjzt == ""){
-                        Toast({
-                            message: '所有信息为空，不予保存',
-                            duration: 1000
-                        });
-                        setTimeout(function () {
-                            history.go(-1);
-                            //_this.$router.push({path: '/index'})
-                        }, 1000);
-                    }else{
-                        if(this.sfjg == "是"){
-                            var sfjg = 1;
-                        }else if(this.sfjg == "否"){
-                            var sfjg = 2;
-                        }else{
-                            var sfjg = '';
-                        }
-                        if(this.fygjzt == "有效"){
-                            var fygjzt = 1;
-                        }else if(this.fygjzt == "暂缓"){
-                            var fygjzt = 2;
-                        }else if(this.fygjzt == "无效"){
-                            var fygjzt = 3;
-                        }else{
-                            var fygjzt = '';
-                        }
-                        //this.fygjlx = 1;
-                        Indicator.open({
-                            text: '保存中...',
-                            spinnerType: 'fading-circle'
-                        });
-                        this.$http.post(
-                            this.$api + "/yhcms/web/zdfyxx/saveFyzt.do",
-                            {"parameters":{"bzh":this.bezhu,"fyid":this.fyid,"gjzt1":fygjzt,"gjzt2":level1[this.fygjlx],"id":this.id,"jgzt":sfjg,"zszt":this.fyzsqk}}
-                        ).then(function (res) {
-                            Indicator.close();
-                            var result = JSON.parse(res.bodyText);
-                            if (result.success) {
-                                Toast({
-                                    message: '保存成功',
-                                    duration: 1000
-                                });
-                                setTimeout(function () {
-                                    //history.go(-1);
-                                    _this.$router.push({path: '/genjingongdan'})
-                                }, 1000);
-                            } else {
-                                Toast({
-                                    message: '保存失败: ' + result.message,
-                                    position: 'bottom'
-                                });
-                            }
-                        }, function (res) {
-                            Toast({
-                                message: '保存失败',
-                                position: 'bottom'
-                            });
-                        });
 
-                    }
-                }
-            }
         },
         computed:{
             yt_t(){

@@ -45,11 +45,18 @@
                         <input type="text" value="" v-model="phone" placeholder="请输入">
                     </div>
                 </li>
-                <li class="clearfix pr">
+                <!--<li class="clearfix pr">
                     <span class="ys_tit">对接人性别：</span>
                     <div class="ys_item_con fl">
                         <input type="text" value="" v-model="xb" readonly placeholder="请选择对接人性别" @click="openQuality2">
                         <i class="right_arrow" @click="openQuality2">&gt;</i>
+                    </div>
+                </li>-->
+                <li class="clearfix">
+                    <span class="ys_tit w224">对接人性别：</span>
+                    <div class="ys_item_con fl">
+                        <label class="mr20"><input type="radio" v-model="xb" value="1" name="xb">是</label>
+                        <label><input type="radio" value="0"  v-model="xb" name="xb">否</label>
                     </div>
                 </li>
                 <li class="clearfix">
@@ -106,7 +113,7 @@
                 <li class="clearfix pr">
                     <span class="ys_tit">委托方式：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="lppz" readonly placeholder="请选择委托方式" @click="openQuality3">
+                        <input type="text" value="" v-model="wtsort" readonly placeholder="请选择委托方式" @click="openQuality3">
                         <i class="right_arrow" @click="openQuality3">&gt;</i>
                     </div>
                 </li>
@@ -137,22 +144,27 @@
                 <li class="clearfix">
                     <span class="ys_tit w224">接受转租形式：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="zzsort" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="zzsort" name="company">否</label>
+                        <label class="mr20"><input type="radio" value="1" v-model="zzsort" name="zzsort">是</label>
+                        <label><input type="radio" value="2" v-model="zzsort" name="zzsort">否</label>
                     </div>
+                   <!-- radio中的name不能用company-->
+                    <!--<div class="ys_item_con fl">
+                        <label class="mr20"><input type="radio" value="1" v-model="zzsort" name="company">是</label>
+                        <label><input type="radio" value="0" v-model="zzsort" name="company">否</label>
+                    </div>-->
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">配合工商注册：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="gszc" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="gszc" name="company">否</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="gszc" name="gszc">是</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="gszc" name="gszc">否</label>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">配合开具发票：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="kjfp" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="kjfp" name="company">否</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="kjfp" name="kjfp">是</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="kjfp" name="kjfp">否</label>
                     </div>
                 </li>
                 <div class="ys_tit">产权情况</div>
@@ -166,8 +178,8 @@
                 <li class="clearfix">
                     <span class="ys_tit w224">是否已做抵押：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="Sfdy" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="Sfdy" name="company">否</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="Sfdy" name="Sfdy">是</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="Sfdy" name="Sfdy">否</label>
                     </div>
                 </li>
                 <li class="clearfix pr">
@@ -180,16 +192,16 @@
                 <li class="clearfix">
                     <span class="ys_tit w224">产权证原件：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="sfyj" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="sfyj" name="company">否</label>
+                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="sfyj" name="sfyj">是</label>
+                        <label @click="sfygsclass"><input type="radio" value="2" v-model="sfyj" name="sfyj">否</label>
                     </div>
                 </li>
                 <div class="ys_tit">房间注册情况</div>
                 <li class="clearfix">
                     <span class="ys_tit w224">是否有公司注册：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="sfgszc" name="company">有</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="sfgszc" name="company">无</label>
+                        <label class="mr20" @click="gszc1sclass"><input type="radio" value="1" v-model="sfgszc" name="sfgszc">有</label>
+                        <label @click="gszc1sclass"><input type="radio" value="2" v-model="sfgszc" name="sfgszc">无</label>
                     </div>
                 </li>
                 <!--<li class="clearfix">
@@ -207,18 +219,22 @@
                         <i class="right_arrow" @click="openQuality4">&gt;</i>
                     </div>&ndash;&gt;
                 </li>-->
-                <li class="clearfix pr">
+                <li class="clearfix pr" v-show="sfgszc == 1">
                     <span class="ys_tit">迁出时间：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="qctime" readonly placeholder="请选择迁出时间" @click="openPicker()">
+                        <input type="text" value=""
+                               readonly
+                               placeholder="请选择迁出时间"
+                               v-model="qctime"
+                               @click="openPicker()">
                         <i class="calendar_icon" @click="openPicker()"></i>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">是否备案：</span>
                     <div class="ys_item_con fl">
-                        <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="sfba" name="company">是</label>
-                        <label @click="sfygsclass"><input type="radio" value="2" v-model="sfba" name="company">否</label>
+                        <label class="mr20" @click="gszcclass"><input type="radio" value="1" v-model="sfba" name="sfba">是</label>
+                        <label @click="gszcclass"><input type="radio" value="2" v-model="sfba" name="sfba">否</label>
                     </div>
                 </li>
                 <!--<li class="clearfix">
@@ -231,10 +247,14 @@
                        &lt;!&ndash; <i class="calendar_icon"  @click="openPicker()"></i>&ndash;&gt;
                     </div>
                 </li>-->
-                <li class="clearfix pr">
+                <li class="clearfix pr" v-show="sfba == 2">
                     <span class="ys_tit">配合备案时间：</span>
                     <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="qctime" readonly placeholder="请选择配合备案时间" @click="openPicker()">
+                        <input type="text" value=""
+                               readonly
+                               placeholder="请选择配合备案时间"
+                               v-model="batime"
+                               @click="openPicker()">
                         <i class="calendar_icon" @click="openPicker()"></i>
                     </div>
                 </li>
@@ -353,15 +373,25 @@
 <script>
 
     const lang = {
-        '优': 1,
-        '良': 2,
-        '差': 3,
+        '业主': 1,
+        '代理人': 2,
     };
 
     const level = {
-        "5A":"1","甲":"2","乙":"3","公寓":"4","商务":"5","综合":"6"
+        "出资":"1","代理":"2"
     };
 
+    const cq = {
+        "公司产权":"1","个人产权":"2"
+    };
+
+    const cqz = {
+        "共有产权证":"1","个人产权证":"2"
+    };
+
+    const hz = {
+        "A(可约业主可收购)":"1","B(深度议价中)":"2","C(初步审核)":"3"
+    };
     import { Toast } from 'mint-ui'; //toast
     import { Indicator } from 'mint-ui'; //toast
 
@@ -379,15 +409,19 @@
 
         data () {
             return {
+                id:'',
                 fyid:'',
-                lpname:'建外sojourn',
-                zdhname:'建外sojourn',
+                lpname:'',
+                zdhname:'',
+                fybh:'',
                 duijierenif:false,
                 duijie:true,
+                fyyzid:'',//合单id
                 hzyxid:'',//合作意向id
                 hzyx:'',//合作意向
                 duijierid:'业主',//对接人
                 djrid:'',//对接人id
+                djrnameid:'',//对接人姓名id
                 cshy:'',//从事行业
                 mzq:'',//免租期
                 Price:'',//价格
@@ -409,8 +443,11 @@
                 xb:'',//对接人性别
                 xgbq:'',//性格特征
                 xaddress:'',//对接人现住址
+                wtsort:'',//委托方式
                 yezhuzshuj:[],
                 yezhu:[],
+                stauts:'',
+
 
 
 
@@ -468,8 +505,7 @@
 
                 //日期
                 pickerValue: '',
-                startDate: new Date("1990-01-01"),
-
+                startDate: new Date("2000-01-01"),
                 //楼盘级别
                 lpjb: '',
                 slots: [
@@ -559,17 +595,36 @@
         methods: {
             //特色标签权限的判断
             tebqqxpd(){
-                let user22 = JSON.parse(localStorage.getItem('cook'));
-                this.Fyyxid = this.$route.params.fyyzid;
+                this.fyyzid = this.$route.params.fyyzid;
                 this.fyid = this.$route.params.fyid;
+                this.lpid = this.$route.params.lpid;
+                const url1 = this.$api + "/yhcms/web/wxqx/getFyBt.do";
+                this.$http.post(url1, {"fyid":this.fyid,"foreEndType":2,"code":"30000008"}).then((res)=>{
+                        Indicator.close();
+                        const data = JSON.parse(res.bodyText).data;
+                        this.lpname = data.topic;
+                        this.zdhname = data.zdh +'-'+ + data.fybh;
+                        this.fybh = data.fybh;
+                }, (res)=>{
+                    Indicator.close()
+                });
                 const url = this.$api + "/yhcms/web/wxqx/getGdxx.do";
                 this.$http.post(url, {"fyyxid":this.$route.params.fyyzid,"foreEndType":2,"code":"30000008"}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
                     const data1 = JSON.parse(res.bodyText).data1;
                     if(data != ""){
-                        this.hzyx = data1.hzyx;
+                        if(data1.hzyx != ''){
+                            if(data1.hzyx == 1){
+                                this.hzyx = "A(可约业主可收购)";
+                            }else if(data1.hzyx == 2){
+                                this.hzyx = "B(深度议价中)";
+                            }else if(data1.hzyx == 3){
+                                this.hzyx = "C(初步核实)";
+                            }
+                        }
                         this.hzyxid = data1.id;
+                        this.id = data.id;
                         if(data.djrstate == 1){
                             this.duijierid = '业主';
                             this.duijie = true;
@@ -579,24 +634,55 @@
                             this.duijie = false;
                             this.dailirenid();
                         }
-                        this.djrid = data.djrid;
+
+
                         this.cshy = data.cshy;
                         this.mzq = data.mzq;
-                        this.Price = data.Price;
+                        this.Price = data.price;
                         this.qynx = data.qynx;
                         this.dzsort = data.dzsort;
                         this.zzsort = data.zzsort;
                         this.gszc = data.gszc;
                         this.kjfp = data.kjfp;
-                        this.chqattach = data.chqattach;
-                        this.Sfdy = data.Sfdy;
-                        this.chqsort = data.chqsort;
+                        if(data.chqattach == 1){
+                            this.chqattach = '公司产权';
+                        }else if(data.chqattach == 2){
+                            this.chqattach = '个人产权';
+                        }
+                        this.Sfdy = data.sfdy;
+                        if(data.chqsort == 1){
+                            this.chqsort = '共有产权证';
+                        }else if(data.chqsort == 2){
+                            this.chqsort = '个人产权证';
+                        }
                         this.sfyj = data.sfyj;
                         this.sfgszc = data.sfgszc;
-                        this.qctime = data.qctime;
+                        if(data.qctime !=''){
+                            var date =  new Date(data.qctime);
+                            var y = 1900+date.getYear();
+                            var m = "0"+(date.getMonth()+1);
+                            var d = "0"+date.getDate();
+                            var tt11= y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+                            this.qctime = tt11;
+                        }
+                        if(data.wtsort == 1){
+                            this.wtsort = '出资';
+                        }else if(data.wtsort == 2){
+                            this.wtsort = '代理';
+                        }
                         this.sfba = data.sfba;
-                        this.batime = data.batime;
+                        if(data.batime !=''){
+                            var date =  new Date(data.batime);
+                            var y = 1900+date.getYear();
+                            var m = "0"+(date.getMonth()+1);
+                            var d = "0"+date.getDate();
+                            var tt11= y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+                            this.batime = tt11;
+                        }
                         this.year = data.year;
+                        this.djrnameid = data.djrid;
+                        console.log(this.yezhuzshuj);
+
                     }else{
 
                     }
@@ -637,83 +723,101 @@
                 }else{
                     this.duijie = true;
                 }
+                this.djrid = '';
+                this.phone = '';
+                this.xb = '';
+                this.xgbq = '';
+                this.xaddress = '';
+                this.slots_quality = [
+                    {
+                        values: [],
+                    }
+                ];
                 if(val == 1){
                     this.duijierid = '代理人';
+                    this.dailirenid();
                 }else{
                     this.duijierid = '业主';
+                    this.yezhuid();
                 }
             },
 
             //获取业主id
             yezhuid(){
+                this.yezhuzshuj = [];
+                this.yezhu = [];
                 const url = this.$api + "/yhcms/web/wxqx/getLpZdYzxx.do";
                 this.$http.post(url, {"parameters":{"fyid":this.fyid},"foreEndType":2,"code":"30000008"}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    /*this.phone = data[0].phone;
-                    this.xb = data[0].xb;
-                    this.xgbq = data[0].tsbq;
-                    this.xaddress = data[0].address;*/
                     for(var i=0;i<data.length;i++){
                         this.yezhuzshuj[i] = data[i];
                         this.yezhu[i] = data[i].topic;
                     }
                     this.slots_quality[0].values = this.yezhu;
-
-
-                }, (res)=>{
-                    Indicator.close()
-                });
-            },
-            //获取业主的基本信息
-            yezhubas(){
-                const url = this.$api + "/yhcms/web/wxqx/getZdfyYzxx.do";
-                this.$http.post(url, {"parameters":{"id":this.id},"foreEndType":2,"code":"30000008"}).then((res)=>{
-                    Indicator.close();
-                    const data = JSON.parse(res.bodyText).data;
-                    this.phone = data.phone;
-                    this.xb = data.xb;
-                    this.xgbq = data.xgbq;
-                    this.xaddress = data.czaddress;
+                    if(this.djrnameid != ""){
+                        for(var i=0;i<this.yezhuzshuj.length;i++){
+                            if(this.djrnameid == this.yezhuzshuj[i].id){
+                                this.stauts = 1;
+                                this.djrnameid = this.yezhuzshuj[i].id;
+                                this.djrid = this.yezhuzshuj[i].topic;
+                                this.phone = this.yezhuzshuj[i].phone;
+                                this.xb = this.yezhuzshuj[i].xb;
+                                this.xgbq = this.yezhuzshuj[i].tsbq;
+                                this.xaddress = this.yezhuzshuj[i].address;
+                            }
+                        }
+                    }
                 }, (res)=>{
                     Indicator.close()
                 });
             },
             //获取代理人的id
             dailirenid(){
+                this.yezhuzshuj = [];
+                this.yezhu = [];
                 const url = this.$api + "/yhcms/web/wxqx/getLpZdDlrxx.do";
                 this.$http.post(url, {"parameters":{"fyid":this.fyid},"foreEndType":2,"code":"30000008"}).then((res)=>{
                     Indicator.close();
                     const data = JSON.parse(res.bodyText).data;
-                    this.slots_quality = data;
+                    for(var i=0;i<data.length;i++){
+                        this.yezhuzshuj[i] = data[i];
+                        this.yezhu[i] = data[i].topic;
+                    }
+                    this.slots_quality[0].values = this.yezhu;
+                    if(this.djrnameid != ""){
+                        for(var i=0;i<this.yezhuzshuj.length;i++){
+                            if(this.djrnameid == this.yezhuzshuj[i].id){
+                                this.stauts = 1;
+                                this.djrnameid = this.yezhuzshuj[i].id;
+                                this.djrid = this.yezhuzshuj[i].topic;
+                                this.phone = this.yezhuzshuj[i].phone;
+                                this.xb = this.yezhuzshuj[i].xb;
+                                this.xgbq = this.yezhuzshuj[i].tsbq;
+                                this.xaddress = this.yezhuzshuj[i].address;
+                            }
+                        }
+                    }
                 }, (res)=>{
                     Indicator.close();
                 });
             },
-            //获取代理人的基本信息
-            dalirenbas(){
-                const url = this.$api + "/yhcms/web/wxqx/getZdfyDlrxx.do";
-                this.$http.post(url, {"parameters":{"id":this.id},"foreEndType":2,"code":"30000008"}).then((res)=>{
-                    Indicator.close();
-                    const data = JSON.parse(res.bodyText).data;
-                    this.phone = data.phone;
-                    this.xb = data.xb;
-                    this.xgbq = data.bqid;
-                    this.xaddress = data.address;
-                }, (res)=>{
-                    Indicator.close()
-                });
+            duijierendiji(){
+                alert(1111);
+                alert(this.xb);
             },
-
-
-
+            gszcclass(){
+                this.batime = '';
+            },
+            gszc1sclass(){
+                this.qctime = '';
+            },
 
 
 
 
             sfygsclass(){
                 let that = this;
-
                 setTimeout(function (){
                     console.log(that.sfygs );
                     if(that.sfygs == 1){
@@ -733,7 +837,11 @@
 
             //日期确定
             handleConfirm(value){
-                this.kprq = this.transformDate(value);
+                if(this.sfgszc== 1){
+                    this.qctime = this.transformDate(value);
+                }else if(this.sfba== 2){
+                    this.batime = this.transformDate(value);
+                }
             },
 
             //楼盘类型panel展示
@@ -784,34 +892,38 @@
 
             //选择品质
             selectQuality(picker, values){
-                this.djrid = values[0];
-                for(var i=0;i<this.yezhu.length;i++){
-                    if(this.djrid == this.yezhu[i]){
-                        this.phone = this.yezhuzshuj[i].phone;
-                        this.xb = this.yezhuzshuj[i].xb;
-                        this.xgbq = this.yezhuzshuj[i].tsbq;
-                        this.xaddress = this.yezhuzshuj[i].address;
+                if(this.stauts == 1){
+                    this.stauts = 2;
+                }else{
+                    this.djrid = values[0];
+                    for(var i=0;i<this.yezhu.length;i++){
+                        if(this.djrid == this.yezhu[i]){
+                            this.djrnameid = this.yezhuzshuj[i].id;
+                            this.phone = this.yezhuzshuj[i].phone;
+                            this.xb = this.yezhuzshuj[i].xb;
+                            this.xgbq = this.yezhuzshuj[i].tsbq;
+                            this.xaddress = this.yezhuzshuj[i].address;
+                        }
                     }
                 }
-
             },
             selectQuality2(picker, values){
                 this.lppz = values[0];
             },
             //委托方式
             selectQuality3(picker, values){
-                this.lppz = values[0];
+                this.wtsort = values[0];
             },
             //委托方式
             selectQuality4(picker, values){
-                this.lppz = values[0];
+                this.chqattach = values[0];
             },
             //委托方式
             selectQuality5(picker, values){
-                this.lppz = values[0];
+                this.chqsort = values[0];
             },
             selectQuality6(picker, values){
-                this.lppz = values[0];
+                this.hzyx = values[0];
             },
 
             //品质确定
@@ -1050,23 +1162,6 @@
                 window.history.go(-1);
             },
             saveBuildMsg2(){
-                this.$router.push({path: '/tianxiefenjin/'+this.fyid});
-            },
-            saveBuildMsg(){
-                this.$router.push({path: '/yixing_genjin/'+this.$route.params.lpid+'/'+this.$route.params.fyid});
-                var _this = this;
-                if(this.topic==''){
-                    MessageBox('提示', '请填写楼盘名称');
-                    return;
-                }
-
-                var tt= this.chqxz.join("、");
-                if(tt==''){
-                    MessageBox('提示', '请选择产权性质');
-                    return;
-                }
-
-
 
                 /*if(!this.kfsh){
                  MessageBox('提示', '请填写开发商');
@@ -1098,69 +1193,477 @@
                     text: '保存中...',
                     spinnerType: 'fading-circle'
                 });
-
+                const _this = this;
                 /*
                  setTimeout(function(){
                  _this.$router.push({path:'/list2'});
                  },1000);
                  */
-                if(this.tsbq == ""){
+                /*if(this.tsbq == ""){
+                 this.tsbq = "";
+                 }else{
+                 this.tsbq = "、" + this.tsbq.join("、") + "、";
+                 }*/
+                if(this.duijierid == '业主'){
+                    this.$http.post(
+                        this.$api + "/yhcms/web/wxqx/saveZdYzxx.do",
+                        {"parameters":
+                            {"id":this.djrnameid,
+                                "fyid":this.fyid,
+                                "topic":this.djrid,
+                                "xgbq":this.xgbq,
+                                "phone":this.phone,
+                                "xb":this.xb,
+                                "xaddress":this.xaddress
+                            }
+                        }
+                    ).then(function (res) {
+                        Indicator.close();
+                        var result = JSON.parse(res.bodyText);
+                        if (result.success) {
+
+                            //保存工单信息
+                            let user22 = JSON.parse(localStorage.getItem('cook'));
+                            this.$http.post(
+                                this.$api + "/yhcms/web/wxqx/updateGdxx.do",
+                                {"parameters":
+                                    {
+                                        "fyyxid":this.fyyzid,
+                                        "id":this.id,//合单的id
+                                        "djrstate":lang[this.duijierid],//对接人id
+                                        "djrid":this.djrnameid,//业主的id
+                                        "cshy":this.cshy,
+                                        "mzq":this.mzq,
+                                        "price":this.Price,
+                                        "qynx":this.qynx,
+                                        "dzsort":this.dzsort,
+                                        "zzsort":this.zzsort,
+                                        "gszc":this.gszc,
+                                        "kjfp":this.kjfp,
+                                        "chqattach":cq[this.chqattach],
+                                        "sfdy":this.Sfdy,
+                                        "chqsort":cqz[this.chqsort],
+                                        "sfyj":this.sfyj,
+                                        "year":this.year,
+                                        "sfgszc":this.sfgszc,
+                                        "qctime":this.qctime,
+                                        "sfba":this.sfba,
+                                        "batime":this.batime,
+                                        "hzyx":hz[this.hzyx],
+                                        "fpbatime":this.fpbatime,
+                                        "wtsort":level[this.wtsort],
+                                        "cookie":user22.sjs
+                                    }
+                                }
+                            ).then(function (res) {
+                                Indicator.close();
+                                var result = JSON.parse(res.bodyText);
+                                if (result.success) {
+                                    Toast({
+                                        message: '保存成功',
+                                        position: 'bottom',
+                                        duration: 1000
+                                    });
+                                    setTimeout(function(){
+                                        _this.$router.push({path: '/tianxiefenjin/'+_this.fyyzid +'/'+_this.fyid});
+
+                                        // _this.$router.push({path:'/index'});
+                                    },1000);
+                                } else {
+                                    //this.$Message.error(res.message);
+                                    Toast({
+                                        message: '保存失败: ' + result.message,
+                                        position: 'bottom'
+                                    });
+                                }
+                            }, function (res) {
+                                //this.$Message.error('保存失败');
+                                Toast({
+                                    message: '保存失败! 请稍候再试',
+                                    position: 'bottom'
+                                });
+                            });
+
+                            /*
+                             setTimeout(function(){
+                             history.go(-1);
+                             // _this.$router.push({path:'/index'});
+                             },1000);*/
+                        } else {
+                            //this.$Message.error(res.message);
+                            Toast({
+                                message: '保存失败: ' + result.message,
+                                position: 'bottom'
+                            });
+                        }
+                    }, function (res) {
+                        //this.$Message.error('保存失败');
+                        Toast({
+                            message: '保存失败! 请稍候再试',
+                            position: 'bottom'
+                        });
+                    });
+                }else if(this.duijierid == '代理人'){
+                    this.$http.post(
+                        this.$api + "/yhcms/web/wxqx/saveZdDlrxx.do",
+                        {"parameters":
+                            {"id":this.djrnameid,
+                                "fyid":this.fyid,
+                                "topic":this.djrid,
+                                "bqid":this.xgbq,
+                                "phone":this.phone,
+                                "xb":this.xb,
+                                "address":this.xaddress
+                            }
+                        }
+                    ).then(function (res) {
+                        Indicator.close();
+                        var result = JSON.parse(res.bodyText);
+                        if (result.success) {
+
+                            //保存工单信息
+                            let user22 = JSON.parse(localStorage.getItem('cook'));
+                            this.$http.post(
+                                this.$api + "/yhcms/web/wxqx/updateGdxx.do",
+                                {"parameters":
+                                    {
+                                        "fyyxid":this.fyyzid,
+                                        "id":this.id,//合单的id
+                                        "djrstate":lang[this.duijierid],//对接人id
+                                        "djrid":this.djrnameid,//业主的id
+                                        "cshy":this.cshy,
+                                        "mzq":this.mzq,
+                                        "price":this.Price,
+                                        "qynx":this.qynx,
+                                        "dzsort":this.dzsort,
+                                        "zzsort":this.zzsort,
+                                        "gszc":this.gszc,
+                                        "kjfp":this.kjfp,
+                                        "chqattach":cq[this.chqattach],
+                                        "sfdy":this.Sfdy,
+                                        "chqsort":cqz[this.chqsort],
+                                        "sfyj":this.sfyj,
+                                        "year":this.year,
+                                        "sfgszc":this.sfgszc,
+                                        "qctime":this.qctime,
+                                        "sfba":this.sfba,
+                                        "batime":this.batime,
+                                        "hzyx":hz[this.hzyx],
+                                        "fpbatime":this.fpbatime,
+                                        "wtsort":level[this.wtsort],
+                                        "cookie":user22.sjs
+                                    }
+                                }
+                            ).then(function (res) {
+                                Indicator.close();
+                                var result = JSON.parse(res.bodyText);
+                                if (result.success) {
+                                    Toast({
+                                        message: '保存成功',
+                                        position: 'bottom',
+                                        duration: 1000
+                                    });
+
+                                    setTimeout(function(){
+                                        _this.$router.push({path: '/tianxiefenjin/'+_this.fyyzid +'/'+_this.fyid});
+                                        // _this.$router.push({path:'/index'});
+                                    },1000);
+                                } else {
+                                    //this.$Message.error(res.message);
+                                    Toast({
+                                        message: '保存失败: ' + result.message,
+                                        position: 'bottom'
+                                    });
+                                }
+                            }, function (res) {
+                                //this.$Message.error('保存失败');
+                                Toast({
+                                    message: '保存失败! 请稍候再试',
+                                    position: 'bottom'
+                                });
+                            });
+
+
+
+
+
+
+
+
+
+
+                            /*setTimeout(function(){
+                             history.go(-1);
+                             // _this.$router.push({path:'/index'});
+                             },1000);*/
+                        } else {
+                            //this.$Message.error(res.message);
+                            Toast({
+                                message: '保存失败: ' + result.message,
+                                position: 'bottom'
+                            });
+                        }
+                    }, function (res) {
+                        //this.$Message.error('保存失败');
+                        Toast({
+                            message: '保存失败! 请稍候再试',
+                            position: 'bottom'
+                        });
+                    });
+                }
+
+            },
+            saveBuildMsg(){
+
+                /*if(!this.kfsh){
+                 MessageBox('提示', '请填写开发商');
+                 return;
+                 }
+
+                 if(this.kprq == ''){
+                 MessageBox('提示', '请选择开盘日期');
+                 return;
+                 }
+
+                 if(this.lpjb == ''){
+                 MessageBox('提示', '请选择楼盘级别');
+                 return;
+                 }
+
+                 if(!this.lppz){
+                 MessageBox('提示', '请选择楼盘品质');
+                 return;
+                 }*/
+
+                /*
+                 Toast({
+                 message: '保存成功',
+                 position: 'bottom'
+                 });
+                 */
+                Indicator.open({
+                    text: '保存中...',
+                    spinnerType: 'fading-circle'
+                });
+                const _this = this;
+                /*
+                 setTimeout(function(){
+                 _this.$router.push({path:'/list2'});
+                 },1000);
+                 */
+                /*if(this.tsbq == ""){
                     this.tsbq = "";
                 }else{
                     this.tsbq = "、" + this.tsbq.join("、") + "、";
-                }
-                this.$http.post(
-                    this.$api + "/yhcms/web/lpjbxx/saveLp.do",
-                    {
-                        "parameters": {
-                            "lpid": this.lpid, //楼盘id
-                            "topic": this.topic, //楼盘名称
-                            "address": this.address, //地址
-                            "tsbq": this.tsbq, //特色标签
-                            "kfsh": this.kfsh, //开发商名称
-                            "kprq": this.kprq, //开盘日期(必选)
-                            "lpjb": level[this.lpjb], //楼盘级别(必选)
-                            "chqxz": this.chqxz.join("、"), //产权性质
-                            "lppz": lang[this.lppz], //楼盘品质 1优 2良 3差
-                            "zxjnjg": this.zxjnjg, //均价
-                            "shyl": this.shyl,  //使用率
-                            "hshkzbl": this.hshkzbl, //户数空置比例
-                            "zxptmx": this.zxptmx,  //装修设施配套明细
-                            "lpsjgs": this.lpsjgs, //楼盘设计公司
-                            "lpsjs": this.lpsjs, //楼盘设计师
-                            "lpsjfg": this.lpsjfg //楼盘设计风格
-                        },
-                        "foreEndType": 2,
-                        "code": "300000041"
-                    }
-                ).then(function (res) {
-                    Indicator.close();
-                    var result = JSON.parse(res.bodyText);
-                    if (result.success) {
-                        Toast({
-                            message: '保存成功',
-                            position: 'bottom',
-                            duration: 1000
-                        });
+                }*/
+                if(this.duijierid == '业主'){
+                    this.$http.post(
+                        this.$api + "/yhcms/web/wxqx/saveZdYzxx.do",
+                        {"parameters":
+                            {"id":this.djrnameid,
+                            "fyid":this.fyid,
+                            "topic":this.djrid,
+                            "xgbq":this.xgbq,
+                            "phone":this.phone,
+                            "xb":this.xb,
+                            "xaddress":this.xaddress
+                            }
+                        }
+                    ).then(function (res) {
+                        Indicator.close();
+                        var result = JSON.parse(res.bodyText);
+                        if (result.success) {
 
-                        setTimeout(function(){
-                            history.go(-1);
-                            // _this.$router.push({path:'/index'});
-                        },1000);
-                    } else {
-                        //this.$Message.error(res.message);
+                            //保存工单信息
+                            let user22 = JSON.parse(localStorage.getItem('cook'));
+                            this.$http.post(
+                                this.$api + "/yhcms/web/wxqx/updateGdxx.do",
+                                {"parameters":
+                                    {
+                                        "fyyxid":this.fyyzid,
+                                        "id":this.id,//合单的id
+                                        "djrstate":lang[this.duijierid],//对接人id
+                                        "djrid":this.djrnameid,//业主的id
+                                        "cshy":this.cshy,
+                                        "mzq":this.mzq,
+                                        "price":this.Price,
+                                        "qynx":this.qynx,
+                                        "dzsort":this.dzsort,
+                                        "zzsort":this.zzsort,
+                                        "gszc":this.gszc,
+                                        "kjfp":this.kjfp,
+                                        "chqattach":cq[this.chqattach],
+                                        "sfdy":this.Sfdy,
+                                        "chqsort":cqz[this.chqsort],
+                                        "sfyj":this.sfyj,
+                                        "year":this.year,
+                                        "sfgszc":this.sfgszc,
+                                        "qctime":this.qctime,
+                                        "sfba":this.sfba,
+                                        "batime":this.batime,
+                                        "hzyx":hz[this.hzyx],
+                                        "fpbatime":this.fpbatime,
+                                        "wtsort":level[this.wtsort],
+                                        "cookie":user22.sjs
+                                    }
+                                }
+                            ).then(function (res) {
+                                Indicator.close();
+                                var result = JSON.parse(res.bodyText);
+                                if (result.success) {
+                                    Toast({
+                                        message: '保存成功',
+                                        position: 'bottom',
+                                        duration: 1000
+                                    });
+
+                                    setTimeout(function(){
+                                        _this.$router.push({path: '/yixing_genjin/'+_this.fybh});
+                                        // _this.$router.push({path:'/index'});
+                                    },1000);
+                                } else {
+                                    //this.$Message.error(res.message);
+                                    Toast({
+                                        message: '保存失败: ' + result.message,
+                                        position: 'bottom'
+                                    });
+                                }
+                            }, function (res) {
+                                //this.$Message.error('保存失败');
+                                Toast({
+                                    message: '保存失败! 请稍候再试',
+                                    position: 'bottom'
+                                });
+                            });
+
+                           /*
+                            setTimeout(function(){
+                                history.go(-1);
+                                // _this.$router.push({path:'/index'});
+                            },1000);*/
+                        } else {
+                            //this.$Message.error(res.message);
+                            Toast({
+                                message: '保存失败: ' + result.message,
+                                position: 'bottom'
+                            });
+                        }
+                    }, function (res) {
+                        //this.$Message.error('保存失败');
                         Toast({
-                            message: '保存失败: ' + result.message,
+                            message: '保存失败! 请稍候再试',
                             position: 'bottom'
                         });
-                    }
-                }, function (res) {
-                    //this.$Message.error('保存失败');
-                    Toast({
-                        message: '保存失败! 请稍候再试',
-                        position: 'bottom'
                     });
-                });
+                }else if(this.duijierid == '代理人'){
+                    this.$http.post(
+                        this.$api + "/yhcms/web/wxqx/saveZdDlrxx.do",
+                        {"parameters":
+                            {"id":this.djrnameid,
+                            "fyid":this.fyid,
+                            "topic":this.djrid,
+                            "bqid":this.xgbq,
+                            "phone":this.phone,
+                            "xb":this.xb,
+                            "address":this.xaddress
+                            }
+                        }
+                    ).then(function (res) {
+                        Indicator.close();
+                        var result = JSON.parse(res.bodyText);
+                        if (result.success) {
+
+                            //保存工单信息
+                            let user22 = JSON.parse(localStorage.getItem('cook'));
+                            this.$http.post(
+                                this.$api + "/yhcms/web/wxqx/updateGdxx.do",
+                                {"parameters":
+                                    {
+                                        "fyyxid":this.fyyzid,
+                                        "id":this.id,//合单的id
+                                        "djrstate":lang[this.duijierid],//对接人id
+                                        "djrid":this.djrnameid,//业主的id
+                                        "cshy":this.cshy,
+                                        "mzq":this.mzq,
+                                        "price":this.Price,
+                                        "qynx":this.qynx,
+                                        "dzsort":this.dzsort,
+                                        "zzsort":this.zzsort,
+                                        "gszc":this.gszc,
+                                        "kjfp":this.kjfp,
+                                        "chqattach":cq[this.chqattach],
+                                        "sfdy":this.Sfdy,
+                                        "chqsort":cqz[this.chqsort],
+                                        "sfyj":this.sfyj,
+                                        "year":this.year,
+                                        "sfgszc":this.sfgszc,
+                                        "qctime":this.qctime,
+                                        "sfba":this.sfba,
+                                        "batime":this.batime,
+                                        "hzyx":hz[this.hzyx],
+                                        "fpbatime":this.fpbatime,
+                                        "wtsort":level[this.wtsort],
+                                        "cookie":user22.sjs
+                                    }
+                                }
+                            ).then(function (res) {
+                                Indicator.close();
+                                var result = JSON.parse(res.bodyText);
+                                if (result.success) {
+                                    Toast({
+                                        message: '保存成功',
+                                        position: 'bottom',
+                                        duration: 1000
+                                    });
+
+                                    setTimeout(function(){
+                                        _this.$router.push({path: '/yixing_genjin/'+this.fybh});
+                                        // _this.$router.push({path:'/index'});
+                                    },1000);
+                                } else {
+                                    //this.$Message.error(res.message);
+                                    Toast({
+                                        message: '保存失败: ' + result.message,
+                                        position: 'bottom'
+                                    });
+                                }
+                            }, function (res) {
+                                //this.$Message.error('保存失败');
+                                Toast({
+                                    message: '保存失败! 请稍候再试',
+                                    position: 'bottom'
+                                });
+                            });
+
+
+
+
+
+
+
+
+
+
+                            /*setTimeout(function(){
+                                history.go(-1);
+                                // _this.$router.push({path:'/index'});
+                            },1000);*/
+                        } else {
+                            //this.$Message.error(res.message);
+                            Toast({
+                                message: '保存失败: ' + result.message,
+                                position: 'bottom'
+                            });
+                        }
+                    }, function (res) {
+                        //this.$Message.error('保存失败');
+                        Toast({
+                            message: '保存失败! 请稍候再试',
+                            position: 'bottom'
+                        });
+                    });
+                }
+
             }
 
         },

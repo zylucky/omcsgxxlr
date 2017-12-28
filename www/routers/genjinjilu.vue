@@ -97,8 +97,8 @@
         <div class="option">
             <div class="analy_item" style="padding: 0;line-height: 0.8rem;padding-left: 0.4rem;box-shadow: 1px 1px 3px rgb(196,195,200);border-radius:5px;">
                 <div class="analy_content">
-                    <span style="color: black;font-weight: 500;font-size: 0.36rem;">建外soho</span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span style="color: black;font-weight: 500;font-size: 0.36rem;">建外soho</span>
+                    <span style="color: black;font-weight: 500;font-size: 0.36rem;" v-text="lpname">建外soho</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style="color: black;font-weight: 500;font-size: 0.36rem;" v-text="zdname">建外soho</span>
                 </div>
             </div>
             <!--筛选结果start-->
@@ -114,13 +114,13 @@
                             <hr style="border:0.1px dashed #8B8989;width: 0.5rem;margin-top: -0.15rem;margin-left: 0.37rem;" />
                             <hr style="border:0.1px dashed #8B8989;width: 1.5rem;transform:rotate(90deg);margin-top:0.93rem;margin-left: -0.6rem;" />
                         </dt>
-                        <dd style="border:1px solid red;margin-left: 0.85rem;height: 1.5rem;padding-top: 0.2rem;">
+                        <dd style="margin-left: 0.85rem;height: 1.5rem;padding-top: 0.2rem;">
                             <dl style="height: 0.6rem;">
-                                <dd style="float: left;">收购部</dd>
-                                <dd style="float: left;">张三</dd>
-                                <dd style="float: right;margin-right: 0.3rem;">2017-06-06</dd>
+                                <dd style="float: left;">{{item.depart}}</dd>
+                                <dd style="float: left;">{{item.gjname}}</dd>
+                                <dd style="float: right;margin-right: 0.3rem;">{{item.gtime}}</dd>
                             </dl>
-                            <dl>跟进内容</dl>
+                            <dl>{{item.information}}</dl>
                         </dd>
 
                     </dl>
@@ -160,7 +160,11 @@
 
         data () {
             return {
+                fyid:'',
+                fyyzid:'',
                 lpid:"",
+                lpname:'',
+                zdname:'',
                 districtArray: [],
                 priceArray: [],
                 sizeArray: [],
@@ -197,37 +201,7 @@
         },
         mounted(){
             $('title').html('楼盘列表');
-            this.init();
-
-            //下滑时，条件tab固定
-            $(window).scroll(function () {
-                if ($(window).scrollTop() > 0) {
-                    $('.filtate-outter').css({
-                        position: 'fixed',
-                        top: '.88rem',
-                        left: 0
-                    });
-
-                    $('#pos_block').show();
-
-                } else {
-                    $('.filtate-outter').css({
-                        position: 'relative',
-                        top: 0,
-                        left: 0
-                    });
-                    $('#pos_block').hide();
-                }
-            });
-
-            $('#close_msg,.shadow').click(function (e) {
-                e.stopPropagation();
-                $('#msg_super_wrap').animate({
-                    bottom: '-100%'
-                });
-                $('.shadow').hide();
-            });
-
+            this.getData();
         },
         created: function () {
 
@@ -242,16 +216,38 @@
             }
         },
         methods: {
-            init(){
-                this.para.search_keywork = this.$route.query.keyword;
-                axios.defaults.baseURL = this.$api;
-                axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
-                this.resetGetData();
-                this.getFilters();
+            getData(){
+                this.fyyzid = this.$route.params.fyyzid;
+                this.fyid = this.$route.params.fyid;
+                const url1 = this.$api + "/yhcms/web/wxqx/getFyBt.do";
+                this.$http.post(url1, {"fyid":this.fyid,"foreEndType":2,"code":"30000008"}).then((res)=>{
+                    Indicator.close();
+                    const data = JSON.parse(res.bodyText).data;
+                    this.lpname = data.topic;
+                    this.zdname = data.zdh +'-'+ + data.fybh;
+                }, (res)=>{
+                    Indicator.close()
+                });
+                const url = this.$api + "/yhcms/web/wxqx/getInforLb.do";
+                this.$http.post(url, { "fyyxid":this.fyyzid}).then((res)=>{
+                    Indicator.close();
+                    this.resultData = JSON.parse(res.bodyText).data;
+                    for(var i=0;i<this.resultData.length;i++){
+                        if(this.resultData[i].gtime != ''){
+                             var date =  new Date(this.resultData[i].gtime);
+                             var y = 1900+date.getYear();
+                             var m = "0"+(date.getMonth()+1);
+                             var d = "0"+date.getDate();
+                             this.resultData[i].gtime= y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+                        }
+                    }
+                }, (res)=>{
+                    Indicator.close()
+                });
 
             },
             saveOwnerData(){
-                this.$router.push({path: '/tianxiefenjin/'+this.fyid});
+                this.$router.push({path: '/tianxiefenjin/'+this.fyyzid+'/'+this.fyid});
             },
             toDetail(){
                 const _this = this;
@@ -442,52 +438,7 @@
                 }
             },
 
-            getData(){
-                var paraObj = {
-                    "parameters": {
-                        "search_keywork": this.para.search_keywork,
-                        "district": this.para.district,
-                        "business": this.para.business,
-                        "area": this.para.area,
-                        "price_dj": this.para.price_dj,
-                        "curr_page": this.para.curr_page,
-                        "items_perpage": 10
-                    },
-                    "foreEndType": 2,
-                    "code": "30000001"
-                }, that = this;
-                this.currentFilterTab = 'nth';
-                let successCb = function (result) {
-                    Indicator.close();
-                    that.loading = false;
-                    that.resultData = that.resultData.concat(result.data.data);
-                    if (!result.data.data || result.data.data.length <= 0) {
-                        this_.noMore = true;
-                    }
-                    if (that.resultData.length == 0) {
-                        Toast({
-                            message: '抱歉,暂无符合条件的楼盘!',
-                            position: 'middle',
-                            duration: 3000
-                        });
-                    } else if (that.resultData.length > 0 && that.noMore) {
-                        Toast({
-                            message: '已经获得当前条件的所有楼盘!',
-                            position: 'middle',
-                            duration: 3000
-                        });
-                    }
-                };
-                let errorCb = function (result) {
-                    Indicator.close();
-                    Toast({
-                        message: '抱歉,暂无符合条件的楼盘!',
-                        position: 'middle',
-                        duration: 3000
-                    });
-                };
-                this.gRemoteData(paraObj, successCb, errorCb);
-            },
+
             gRemoteData(paraobj, successcb, errorcb){
                 const url = this.$api + "/yhcms/web/lpjbxx/getLplb.do";
                 axios.post(url, paraobj)

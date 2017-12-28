@@ -562,6 +562,7 @@
         methods: {
             init(){
                 const lpid = this.$route.params.lpid, zdid = this.$route.params.zdid;
+                this.fybh = this.$route.params.fybh;
                 this.lpid = lpid;
                 this.zdid = zdid;
 
@@ -804,25 +805,20 @@
                     spinnerType: 'fading-circle'
                 });
                 var paraObj = {
-                    "parameters": {
-                        "lpid": this.lpid,
-                        "zdid": this.zdid,
-                        "fybh": this.fybh,
-                        "fyid": "",
-                        "hystate": this.hystate,
-                        "gjstate": this.fhyfyejv,
-                        "gjstate1": this.fhyfyejv1,
-                        "fhystate": this.fhystate,
-                        "bussiness": this.business,
-                        "fq": this.fq,
-                        "curr_page": this.para.curr_page,
-                        "items_perpage": 10
-                    },
+                    "parameters":
+                        {
+                            "fybh":this.fybh,
+                            "dtime":this.fybh,
+                            "state":this.fybh,
+                            "cookie":this.fybh,
+                            "curr_page":this.fybh,
+                            "items_perpage":10
+                        },
                     "foreEndType": 2,
                     "code": "300000065"
                 }, that = this;
 
-                axios.post("/yhcms/web/zdfyxx/getLpZdfyxx.do", paraObj)
+                axios.post("/yhcms/web/wxqx/getLpZdfyxx.do", paraObj)
                     .then(function (response) {
                         Indicator.close()
                         that.loading = false;

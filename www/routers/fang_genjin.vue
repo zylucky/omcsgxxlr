@@ -63,7 +63,7 @@
                         <i class="right_arrow" @click="openDecorationType">&gt;</i>
                     </div>
                 </li>
-                <li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;">
+                <li class="clearfix" style="font-size: 0.32rem;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 1px 1px 3px rgb(196,195,200);line-height: 1rem !important;" v-show="hzif">
                     <span class="ys_tit w170" style="width: 2rem !important;padding-left: 0.2rem;">合作意向：</span>
                     <div class="ys_item_con fl">
                         <input type="text" value="" v-model.trim="hzyx" onfocus="this.blur()" placeholder="请选择" style="padding-left:34%;font-size: 0.32rem;width: 80%;" @click="openDecorationTypeHzyx">
@@ -149,6 +149,7 @@
                 yezhuyxid:'',//业主意向id
                 lpname:'',
                 zdhname:'',
+                hzif:false,
                 bezhu:'',//备注
                 fyzsqk:'',//房源租售情况
                 sfjg:'',//是否精耕
@@ -223,7 +224,7 @@
             sureBtype(){
                 this.popupVisible = false;
             },
-            //选择赋值
+            //房源状态选择赋值
             selectLevel(picker, values) {
                 if(values[0] == ""){
                     this.slots[1].values = [''];
@@ -232,6 +233,10 @@
                 if(values[0] == "有效"){
                     this.slots[1].values = this.slots1;
                     this.fygjzt = values[0];
+                    this.hzif = true;
+                }else{
+                    this.hzif = false;
+                    this.hzyx = '';
                 }
                 if(values[0] == "暂缓"){
                     this.slots[1].values = this.slots2;
@@ -377,6 +382,7 @@
                         this.bezhu = data.bzh;
                         if(data.gjzt1 == 1){
                             this.fygjzt = "有效";
+                            this.hzif = true;
                         }else if(data.gjzt1 == 2){
                             this.fygjzt = "暂缓";
                         }else if(data.gjzt1 == 3){

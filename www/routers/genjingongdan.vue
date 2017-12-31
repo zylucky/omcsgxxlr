@@ -2,6 +2,7 @@
     @import "../resources/css/reset.css";
     @import "../resources/css/base.less";
     .tsbq{width:100% !important}
+    .active{color: rgb(53,134,242) !important;border:1px solid rgb(53,134,242) !important;}
 
 </style>
 <template>
@@ -14,12 +15,12 @@
                         <span v-text="zdhname" style="color: black;font-weight: 500;font-size: 0.36rem;"></span>
                     </div>
                 </div>
-                <div class="analy_item" style="padding: 0;line-height: 0.8rem;float: right;height: 1.22rem;">
+                <div class="analy_item" style="padding: 0;line-height: 0.8rem;float: right;height: 1.22rem;" @click="bianji">
                     <div class="" style="width: 1.5rem;margin-right: 0.2rem;margin-top: 0.3rem;padding-left: 0.4rem;background-color: #007aff;">
                         <a href="javascript:;" style="color: white;">编辑</a>
                     </div>
                 </div>
-                <li class="clearfix" style="clear: both;">
+                <li class="clearfix" style="clear: both;" v-if="xgif">
                     <span class="ys_tit">对接人：</span>
                     <div class="ys_item_con fl" v-if="duijie" @click="duijiere($event)" v-text="duijierid" rel="1"></div>
                     <div class="ys_item_con fl" v-else @click="duijiere($event)" v-text="duijierid" rel="2"></div>
@@ -32,17 +33,37 @@
                         <div class="ys_item_con fl" v-else rel="2"><a href="javascript:;">代理人</a></div>
                     </div>-->
                 </li>
+                <li class="clearfix" style="clear: both;" v-else>
+                    <span class="ys_tit">对接人：</span>
+                    <div class="ys_item_con fl" v-if="duijie" v-text="duijierid" rel="1"></div>
+                    <div class="ys_item_con fl" v-else v-text="duijierid" rel="2"></div>
+                    <!--<div v-if="duijierenif">
+                        <div class="ys_item_con fl" v-if="duijie" @click="duijiere($event)" rel="1"><a href="javascript:;">业主</a></div>
+                        <div class="ys_item_con fl" v-else @click="duijiere($event)" rel="2"><a href="javascript:;">代理人</a></div>
+                    </div>
+                    <div v-if="duijierenif">
+                        <div class="ys_item_con fl" v-if="duijie" rel="1"><a href="javascript:;">业主</a></div>
+                        <div class="ys_item_con fl" v-else rel="2"><a href="javascript:;">代理人</a></div>
+                    </div>-->
+                </li>
                 <li class="clearfix pr">
                     <span class="ys_tit">对接人姓名：</span>
-                    <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="djrid" readonly placeholder="请选择对接人" @click="openQuality">
+                    <div class="ys_item_con fl" v-if="xgif">
+                        <input type="text" value="" v-model="djrid" readonly onfocus="this.blur()" placeholder="请选择对接人" @click="openQuality">
                         <i class="right_arrow" @click="openQuality">&gt;</i>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" v-model="djrid" readonly onfocus="this.blur()" placeholder="请选择对接人">
+                        <i class="right_arrow">&gt;</i>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">对接人电话：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value="" v-model="phone" placeholder="请输入">
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" readonly onfocus="this.blur()" v-model="phone" placeholder="请输入">
                     </div>
                 </li>
                 <!--<li class="clearfix pr">
@@ -54,98 +75,143 @@
                 </li>-->
                 <li class="clearfix">
                     <span class="ys_tit w224">对接人性别：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <label class="mr20"><input type="radio" v-model="xb" value="1" name="xb">是</label>
                         <label><input type="radio" value="0"  v-model="xb" name="xb">否</label>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <label class="mr20"><input type="radio" disabled v-model="xb" value="1" name="xb">是</label>
+                        <label><input type="radio" value="0" disabled v-model="xb" name="xb">否</label>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">对接人居住地：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value="" v-model="xaddress" placeholder="请输入">
                     </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" readonly onfocus="this.blur()" v-model="xaddress" placeholder="请输入">
+                    </div>
                 </li>
-                <li class="clearfix">
-                    <span class="ys_tit">性格特征：</span>
-                    <div class="ys_item_con fl"><a href="javascript:;">{{xgbq}}</a></div>
+                <!--<li class="clearfix">
+                    <span class="ys_tit">性格标签：</span>
+                    <div class="ys_item_con fl"><a href="javascript:;">{{xgbq_t}}</a></div>
                 </li>
                 <li class="clearfix bg_gray">
                     <div class="xgbq ys_item_con fl" @click="selectTag($event)">
-                        <span v-for="xg in tsbq_all" class="ys_tag" :class="{'active': xgbq.indexOf(xg.id) > -1}" :value="xg.id" >{{xg.topic}}</span>
+                        <span v-for="xg in xgbq_all" class="ys_tag" :class="{'active': xgbq.indexOf(xg.id) > -1}" :value="xg.id" >{{xg.topic}}</span>
                     </div>
                 </li>
-               <!-- <li class="clearfix pr" v-if=kprqqx>
-                    <span class="ys_tit">开盘日期：</span>
-                    <div class="ys_item_con fl">
-                        <input type="text" value=""
-                               readonly
-                               placeholder="请选择日期"
-                               v-model="kprq"
-                               @click="openPicker()">
-                        <i class="calendar_icon" @click="openPicker()"></i>
+-->
+                <li class="clearfix">
+                    <span class="ys_tit">性格标签：</span>
+                    <div class="ys_item_con fl" style="width: 75%;"><a href="javascript:;">
+                        <span v-for="xgt in xgss" class="ys_tag" style="color: rgb(53,134,242);border:1px solid rgb(53,134,242);background-color: rgb(255,255,255);">{{xgt}}</span>
+                    </a></div>
+                </li>
+                <li class="clearfix bg_gray">
+                    <div class="xgbq ys_item_con fl"  style="width: 100%;">
+                        <span v-for="(xg,index) in xgbq_all" class="ys_tag" @click="selectTag($event,xg.id,index,xg.topic)" :class="{'active': xgbq.indexOf(xg.id) > -1}" :value="xg.id" style="background-color: rgb(255,255,255);border:1px solid rgb(255,255,255);">{{xg.topic}}</span>
                     </div>
                 </li>
-                <li class="clearfix pr" v-else>
-                    <span class="ys_tit zyzd">开盘日期：</span>
-                    <div class="ys_item_con fl">
-                        <input type="text" value=""
-                               readonly
-                               onfocus="this.blur()"
-                               placeholder="请选择日期"
-                               v-model="kprq"
-                        >
-                        <i class="calendar_icon"></i>
-                    </div>
-                </li>-->
+                <!-- <li class="clearfix pr" v-if=kprqqx>
+                     <span class="ys_tit">开盘日期：</span>
+                     <div class="ys_item_con fl">
+                         <input type="text" value=""
+                                readonly
+                                placeholder="请选择日期"
+                                v-model="kprq"
+                                @click="openPicker()">
+                         <i class="calendar_icon" @click="openPicker()"></i>
+                     </div>
+                 </li>
+                 <li class="clearfix pr" v-else>
+                     <span class="ys_tit zyzd">开盘日期：</span>
+                     <div class="ys_item_con fl">
+                         <input type="text" value=""
+                                readonly
+                                onfocus="this.blur()"
+                                placeholder="请选择日期"
+                                v-model="kprq"
+                         >
+                         <i class="calendar_icon"></i>
+                     </div>
+                 </li>-->
                 <li class="clearfix pr">
                     <span class="ys_tit">对接人年龄：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value="" v-model="year" placeholder="请输入">
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" readonly onfocus="this.blur()" v-model="year" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">从事行业：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value="" v-model="cshy" placeholder="请输入">
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" readonly onfocus="this.blur()" v-model="cshy" placeholder="请输入">
                     </div>
                 </li>
                 <div class="ys_tit">业主签约谈判的条件</div>
                 <li class="clearfix pr">
                     <span class="ys_tit">委托方式：</span>
-                    <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="wtsort" readonly placeholder="请选择委托方式" @click="openQuality3">
+                    <div class="ys_item_con fl" v-if="xgif">
+                        <input type="text" value="" v-model="wtsort" readonly onfocus="this.blur()" placeholder="请选择委托方式" @click="openQuality3">
                         <i class="right_arrow" @click="openQuality3">&gt;</i>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" v-model="wtsort" readonly onfocus="this.blur()" placeholder="请选择委托方式">
+                        <i class="right_arrow">&gt;</i>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">免租期：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value="" v-model="mzq" placeholder="请输入">
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" readonly onfocus="this.blur()" v-model="mzq" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">价格：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value="" v-model="Price" placeholder="请输入">
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" readonly onfocus="this.blur()" value="" v-model="Price" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">签约年限：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value="" v-model="qynx" placeholder="请输入">
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" readonly onfocus="this.blur()" v-model="qynx" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit">递增方式：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value="" v-model="dzsort" placeholder="请输入">
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" readonly onfocus="this.blur()" v-model="dzsort" placeholder="请输入">
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">接受转租形式：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <label class="mr20"><input type="radio" value="1" v-model="zzsort" name="zzsort">是</label>
                         <label><input type="radio" value="2" v-model="zzsort" name="zzsort">否</label>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <label class="mr20"><input type="radio" disabled value="1" v-model="zzsort" name="zzsort">是</label>
+                        <label><input type="radio" value="2" disabled v-model="zzsort" name="zzsort">否</label>
                     </div>
                    <!-- radio中的name不能用company-->
                     <!--<div class="ys_item_con fl">
@@ -155,53 +221,81 @@
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">配合工商注册：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="gszc" name="gszc">是</label>
                         <label @click="sfygsclass"><input type="radio" value="2" v-model="gszc" name="gszc">否</label>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <label class="mr20"><input type="radio" disabled value="1" v-model="gszc" name="gszc">是</label>
+                        <label><input type="radio" value="2" disabled v-model="gszc" name="gszc">否</label>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">配合开具发票：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="kjfp" name="kjfp">是</label>
                         <label @click="sfygsclass"><input type="radio" value="2" v-model="kjfp" name="kjfp">否</label>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <label class="mr20"><input type="radio" disabled value="1" v-model="kjfp" name="kjfp">是</label>
+                        <label><input type="radio" value="2" disabled v-model="kjfp" name="kjfp">否</label>
                     </div>
                 </li>
                 <div class="ys_tit">产权情况</div>
                 <li class="clearfix pr">
                     <span class="ys_tit">产权归属：</span>
-                    <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="chqattach" readonly placeholder="请选择产权归属" @click="openQuality4">
+                    <div class="ys_item_con fl" v-if="xgif">
+                        <input type="text" value="" v-model="chqattach" readonly onfocus="this.blur()" placeholder="请选择产权归属" @click="openQuality4">
                         <i class="right_arrow" @click="openQuality4">&gt;</i>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" v-model="chqattach" readonly onfocus="this.blur()" placeholder="请选择产权归属">
+                        <i class="right_arrow">&gt;</i>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">是否已做抵押：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="Sfdy" name="Sfdy">是</label>
                         <label @click="sfygsclass"><input type="radio" value="2" v-model="Sfdy" name="Sfdy">否</label>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <label class="mr20"><input type="radio" disabled value="1" v-model="Sfdy" name="Sfdy">是</label>
+                        <label><input type="radio" value="2" disabled v-model="Sfdy" name="Sfdy">否</label>
                     </div>
                 </li>
                 <li class="clearfix pr">
                     <span class="ys_tit">产权证：</span>
-                    <div class="ys_item_con fl">
-                        <input type="text" value="" v-model="chqsort" readonly placeholder="请选择产权证类别" @click="openQuality5">
+                    <div class="ys_item_con fl" v-if="xgif">
+                        <input type="text" value="" v-model="chqsort" readonly onfocus="this.blur()" placeholder="请选择产权证类别" @click="openQuality5">
                         <i class="right_arrow" @click="openQuality5">&gt;</i>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" v-model="chqsort" readonly onfocus="this.blur()" placeholder="请选择产权证类别">
+                        <i class="right_arrow">&gt;</i>
                     </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">产权证原件：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <label class="mr20" @click="sfygsclass"><input type="radio" value="1" v-model="sfyj" name="sfyj">是</label>
                         <label @click="sfygsclass"><input type="radio" value="2" v-model="sfyj" name="sfyj">否</label>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <label class="mr20"><input type="radio" disabled value="1" v-model="sfyj" name="sfyj">是</label>
+                        <label><input type="radio" value="2" disabled v-model="sfyj" name="sfyj">否</label>
                     </div>
                 </li>
                 <div class="ys_tit">房间注册情况</div>
                 <li class="clearfix">
                     <span class="ys_tit w224">是否有公司注册：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <label class="mr20" @click="gszc1sclass"><input type="radio" value="1" v-model="sfgszc" name="sfgszc">有</label>
                         <label @click="gszc1sclass"><input type="radio" value="2" v-model="sfgszc" name="sfgszc">无</label>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <label class="mr20"><input type="radio" value="1" disabled v-model="sfgszc" name="sfgszc">有</label>
+                        <label><input type="radio" value="2" disabled v-model="sfgszc" name="sfgszc">无</label>
                     </div>
                 </li>
                 <!--<li class="clearfix">
@@ -221,20 +315,34 @@
                 </li>-->
                 <li class="clearfix pr" v-show="sfgszc == 1">
                     <span class="ys_tit">迁出时间：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value=""
                                readonly
+                               onfocus="this.blur()"
                                placeholder="请选择迁出时间"
                                v-model="qctime"
                                @click="openPicker()">
                         <i class="calendar_icon" @click="openPicker()"></i>
                     </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value=""
+                               readonly
+                               onfocus="this.blur()"
+                               placeholder="请选择迁出时间"
+                               v-model="qctime"
+                               >
+                        <i class="calendar_icon"></i>
+                    </div>
                 </li>
                 <li class="clearfix">
                     <span class="ys_tit w224">是否备案：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <label class="mr20" @click="gszcclass"><input type="radio" value="1" v-model="sfba" name="sfba">是</label>
                         <label @click="gszcclass"><input type="radio" value="2" v-model="sfba" name="sfba">否</label>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <label class="mr20"><input type="radio" disabled value="1" v-model="sfba" name="sfba">是</label>
+                        <label><input type="radio" value="2" disabled v-model="sfba" name="sfba">否</label>
                     </div>
                 </li>
                 <!--<li class="clearfix">
@@ -249,13 +357,23 @@
                 </li>-->
                 <li class="clearfix pr" v-show="sfba == 2">
                     <span class="ys_tit">配合备案时间：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value=""
                                readonly
+                               onfocus="this.blur()"
                                placeholder="请选择配合备案时间"
                                v-model="batime"
                                @click="openPicker()">
                         <i class="calendar_icon" @click="openPicker()"></i>
+                    </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value=""
+                               readonly
+                               onfocus="this.blur()"
+                               placeholder="请选择配合备案时间"
+                               v-model="batime"
+                               >
+                        <i class="calendar_icon"></i>
                     </div>
                 </li>
               <!--  <li class="clearfix pr mb20">
@@ -283,13 +401,17 @@
                 </li>-->
                 <li class="clearfix pr">
                     <span class="ys_tit">合作意向：</span>
-                    <div class="ys_item_con fl">
+                    <div class="ys_item_con fl" v-if="xgif">
                         <input type="text" value="" v-model="hzyx" readonly onfocus="this.blur()" placeholder="请选择" @click="openQuality6">
                         <i class="right_arrow" @click="openQuality6">&gt;</i>
                     </div>
+                    <div class="ys_item_con fl" v-else>
+                        <input type="text" value="" v-model="hzyx" readonly onfocus="this.blur()" placeholder="请选择">
+                        <i class="right_arrow">&gt;</i>
+                    </div>
                 </li>
             </ul>
-            <div>
+            <div v-show="xgif">
                 <a href="javascript:;" style="width: 50%;margin: 0;float: left;" class="ys_default_btn" @click="saveBuildMsg">保存</a>
                 <a href="javascript:;" style="width: 50%;margin: 0;float: right;" class="ys_default_btn" @click="saveBuildMsg2">保存并填写跟进</a>
             </div>
@@ -410,6 +532,7 @@
         data () {
             return {
                 id:'',
+                xgif:false,
                 fyid:'',
                 lpname:'',
                 zdhname:'',
@@ -442,6 +565,12 @@
                 phone:'',//对接人电话
                 xb:'',//对接人性别
                 xgbq:'',//性格特征
+                xgss:[],
+                xgbqid:[],
+                xgssid:[],
+                xgbq_all:[],
+                sgbqsfys:true,
+                xgbqif:false,
                 xaddress:'',//对接人现住址
                 wtsort:'',//委托方式
                 yezhuzshuj:[],
@@ -577,7 +706,7 @@
                 let tip = this.chqxz.map((item,idx)=>{return map[item.toString()]});
                 return tip.join(",");
             },
-            tsbq_t(){
+            /*tsbq_t(){
                 if(this.tsbq.length < 1){
                     return "请选择标签";
                 }
@@ -590,6 +719,21 @@
                 });
 
                 return tags.join(",");
+            },*/
+            //将得到的id数组转化为逗号
+            xgbq_t(){
+                if(this.xgbq.length < 1){
+                    return "请选择标签";
+                }
+                let tags = this.xgbq.map((t)=>{
+                    for(let i = 0; i < this.xgbq_all.length; ++i){
+                        if(this.xgbq_all[i].id === t){
+                            return this.xgbq_all[i].topic;
+                        }
+                    }
+                });
+                //return tags.join(",");
+                return tags;
             }
         },
         methods: {
@@ -681,7 +825,6 @@
                         }
                         this.year = data.year;
                         this.djrnameid = data.djrid;
-                        console.log(this.yezhuzshuj);
 
                     }else{
 
@@ -716,6 +859,9 @@
                     Indicator.close()
                 });
             },
+            bianji(){
+                this.xgif = true;
+            },
             duijiere(e){
                 const target = $(e.target), val = target.attr("rel");
                 if(this.duijie){
@@ -728,6 +874,8 @@
                 this.xb = '';
                 this.xgbq = '';
                 this.xaddress = '';
+                this.xgss = [];
+                alert(222222);
                 this.slots_quality = [
                     {
                         values: [],
@@ -764,6 +912,15 @@
                                 this.phone = this.yezhuzshuj[i].phone;
                                 this.xb = this.yezhuzshuj[i].xb;
                                 this.xgbq = this.yezhuzshuj[i].tsbq;
+                                this.xgss = this.xgbq.split(';');
+                                for(var g=0;g<this.xgbq_all.length;g++){
+                                    for(var k=0;k<this.xgss.length;k++){
+                                        if(this.xgbq_all[g].id == this.xgss[k]){
+                                            this.xgssid[k] = this.xgss[k];
+                                            this.xgss[k] = this.xgbq_all[g].topic;
+                                        }
+                                    }
+                                 }
                                 this.xaddress = this.yezhuzshuj[i].address;
                             }
                         }
@@ -785,8 +942,11 @@
                         this.yezhu[i] = data[i].topic;
                     }
                     this.slots_quality[0].values = this.yezhu;
+                    console.log(this.yezhuzshuj);
                     if(this.djrnameid != ""){
                         for(var i=0;i<this.yezhuzshuj.length;i++){
+                            alert(this.yezhuzshuj[i].id);
+                            alert(this.djrnameid);
                             if(this.djrnameid == this.yezhuzshuj[i].id){
                                 this.stauts = 1;
                                 this.djrnameid = this.yezhuzshuj[i].id;
@@ -794,6 +954,16 @@
                                 this.phone = this.yezhuzshuj[i].phone;
                                 this.xb = this.yezhuzshuj[i].xb;
                                 this.xgbq = this.yezhuzshuj[i].tsbq;
+                                this.xgss = this.xgbq.split(';');
+                                alert(44444);
+                                for(var g=0;g<this.xgbq_all.length;g++){
+                                    for(var k=0;k<this.xgss.length;k++){
+                                        if(this.xgbq_all[g].id == this.xgss[k]){
+                                            this.xgssid[k] = this.xgss[k];
+                                            this.xgss[k] = this.xgbq_all[g].topic;
+                                        }
+                                    }
+                                }
                                 this.xaddress = this.yezhuzshuj[i].address;
                             }
                         }
@@ -812,6 +982,60 @@
             gszc1sclass(){
                 this.qctime = '';
             },
+            getXgbq(){
+                Indicator.open({
+                    text: '',
+                    spinnerType: 'fading-circle'
+                });
+                const url = this.$api + "/yhcms/web/wxqx/getXgbq.do";
+                let that = this;
+                this.$http.post(url).then((res)=>{
+                    Indicator.close()
+                    const data = JSON.parse(res.bodyText).data;
+                    that.xgbq_all = data;
+                }, (res)=>{
+                    Indicator.close()
+                });
+            },
+            //选择tag
+            /*selectTag(e){
+                const target = $(e.target), val = target.attr("value");
+                if(!val){return;}
+                if ($(e.target).hasClass('active')) {
+                    let tsbq_t = new Set(this.tsbq);
+                    tsbq_t.delete(val);
+                    this.tsbq = [...tsbq_t];
+                    $(e.target).removeClass('active');
+                } else {
+                    let tsbq_t = new Set(this.tsbq);
+                    tsbq_t.add(val);
+                    this.tsbq = [...tsbq_t];
+                    $(e.target).addClass('active');
+                }
+            },*/
+            selectTag(e,id,idx,top){
+                const target = $(e.target);
+                target.addClass('active');
+                this.xgssid.push(id);
+//                $('.ys_tag').eq(idx).addClass('active');
+                for(var g=0;g<this.xgbq_all.length;g++){
+                    for(var k=0;k<this.xgssid.length;k++){
+                        if(this.xgbq_all[g].id == this.xgssid[k]){
+                            this.xgbqid[k] = this.xgssid[k];
+                            this.xgssid[k] = this.xgbq_all[g].topic;
+                        }
+                    }
+                }
+                for(var n=0;n<this.xgssid.length;n++){
+                    for (var j = n+1; j < this.xgssid.length; j++) {
+                        if(this.xgssid[n] == this.xgssid[j]){
+                            this.xgssid.splice(j,1);
+                            j--;
+                        }
+                    }
+                }
+                this.xgss = this.xgssid;
+            },
 
 
 
@@ -819,7 +1043,6 @@
             sfygsclass(){
                 let that = this;
                 setTimeout(function (){
-                    console.log(that.sfygs );
                     if(that.sfygs == 1){
                         $(".gsdivclass").removeClass('showClass');
 
@@ -981,22 +1204,7 @@
                 return n = n < 10 ? '0' + n : '' + n;
             },
 
-            //选择tag
-            selectTag(e){
-                const target = $(e.target), val = target.attr("value");
-                if(!val){return;}
-                if ($(e.target).hasClass('active')) {
-                    let tsbq_t = new Set(this.tsbq);
-                    tsbq_t.delete(val);
-                    this.tsbq = [...tsbq_t];
-                    $(e.target).removeClass('active');
-                } else {
-                    let tsbq_t = new Set(this.tsbq);
-                    tsbq_t.add(val);
-                    this.tsbq = [...tsbq_t];
-                    $(e.target).addClass('active');
-                }
-            },
+
 
             //获取后台的数据
             getInitData(){
@@ -1211,7 +1419,7 @@
                             {"id":this.djrnameid,
                                 "fyid":this.fyid,
                                 "topic":this.djrid,
-                                "xgbq":this.xgbq,
+                                "xgbq":this.xgbqid.join(';'),
                                 "phone":this.phone,
                                 "xb":this.xb,
                                 "xaddress":this.xaddress
@@ -1310,7 +1518,7 @@
                             {"id":this.djrnameid,
                                 "fyid":this.fyid,
                                 "topic":this.djrid,
-                                "bqid":this.xgbq,
+                                "bqid":this.xgbqid.join(';'),
                                 "phone":this.phone,
                                 "xb":this.xb,
                                 "address":this.xaddress
@@ -1463,7 +1671,7 @@
                             {"id":this.djrnameid,
                             "fyid":this.fyid,
                             "topic":this.djrid,
-                            "xgbq":this.xgbq,
+                            "xgbq":this.xgbqid.join(';'),
                             "phone":this.phone,
                             "xb":this.xb,
                             "xaddress":this.xaddress
@@ -1518,7 +1726,7 @@
                                     });
 
                                     setTimeout(function(){
-                                        _this.$router.push({path: '/yixing_genjin/'+_this.fybh});
+                                        _this.$router.push({path: '/yixing_genjin'});
                                         // _this.$router.push({path:'/index'});
                                     },1000);
                                 } else {
@@ -1562,7 +1770,7 @@
                             {"id":this.djrnameid,
                             "fyid":this.fyid,
                             "topic":this.djrid,
-                            "bqid":this.xgbq,
+                            "bqid":this.xgbqid.join(';'),
                             "phone":this.phone,
                             "xb":this.xb,
                             "address":this.xaddress
@@ -1617,7 +1825,7 @@
                                     });
 
                                     setTimeout(function(){
-                                        _this.$router.push({path: '/yixing_genjin/'+this.fybh});
+                                        _this.$router.push({path: '/yixing_genjin'});
                                         // _this.$router.push({path:'/index'});
                                     },1000);
                                 } else {
@@ -1669,6 +1877,7 @@
         },
         mounted(){
             this.tebqqxpd();
+            this.getXgbq();
 
         },
     }

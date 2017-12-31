@@ -170,10 +170,10 @@
         <a href="javascript:;" class="detail-search" style="position: fixed;left: 0; top: 0">
             <input type="text" id="keyword" placeholder="请输入房源编号" maxlength="50" @focus="changeRou">
         </a>
-        <router-link class="bulid_msg_item"  :to="{path:'/fang_basic/'+ this.lpid + '/' + this.zdid + '/' + this.zdid1}" >
+        <!--<router-link class="bulid_msg_item"  :to="{path:'/fang_basic/'+ this.lpid + '/' + this.zdid + '/' + this.zdid1}" >
             <i class="basic_01"></i>
             <span><img style="z-index: 1001;position: fixed;top: 0.2rem;left: 6.5rem;width: 0.5rem;" src="../resources/images/list/fang.png"></span>
-        </router-link>
+        </router-link>-->
         <router-view></router-view>
         <section class="section">
 
@@ -339,7 +339,7 @@
 
                     <!--循环是获取索引下标index-->
                     <li class="ys_listcon pv15" v-for="(item,index) in resultData" style="clear: both;">
-                        <a href="javascript:;" class="supply_box" :fyid="item.id" style="overflow: hidden;">
+                        <a href="javascript:;" class="supply_box" :fyid="item.id" :lpid="item.lpid" style="overflow: hidden;">
                             <dl class="supply">
                                 <dt @click="shadowShow">
                                     <img v-if="item.pic" :src="$prefix + '/' + item.pic">
@@ -357,20 +357,21 @@
                                         <span class="banc" v-if="item.zlzt == '航远'" style="position: relative;left:3.7rem;top: -1.2rem;width:50px;height:50px;display:block;"></span>
                                     </dl>
                                 </dd>
-                                <dt style="clear: both;height: 0.5rem;margin-top: 0.3rem;float: left;font-size: 0.3rem;">2017-12-20</dt>
+                                <dt style="clear: both;height: 0.5rem;margin-top: 0.3rem;float: left;font-size: 0.3rem;">{{item.time2}}</dt>
+                                <dd style="clear: both;height: 0.5rem;margin-top:-1.7rem;margin-left:6rem;float: left;font-size: 0.3rem;color: red;">{{item.h1}}</dd>
                                 <dd style="clear: both;float:right;margin-top: -0.5rem;" @click="gongdaif(index)">
                                     <a href="javascript:;"><img src="../resources/images/fangyfx/genjinlist/genjinlist.png" style="width: 0.6rem;"></a>
                                 </dd>
 
                                <!-- v-show条件中可以用tag（立一个变量）循环加点击出现和隐藏要用2个条件-->
                                 <dd v-show="gdif==index && tag==true" style="clear: both;float:right;margin-top: -0.7rem;margin-right: 0.7rem;line-height: 0.8rem;width: 3rem;background-color: rgb(66,66,66);border-radius:5px;">
-                                    <a href="javascript:;">
+                                    <a href="javascript:;" :fyyzid="item.yxyzid" :fyid="item.id">
                                         <dl style="float: left;color: white;margin-left: 0.4rem;" @click="gongdanif">
                                             <img src="../resources/images/fangyfx/genjinlist/1.png" style="width: 0.3rem;">&nbsp;工单
                                         </dl>
                                     </a>
                                     <dl style="border-right: 1px solid black;width: 0.2rem;float: left;height: 0.5rem;margin-top: 0.15rem;margin-left: 0.1rem;"></dl>
-                                    <a href="javascript:;">
+                                    <a href="javascript:;" :fyyzid="item.yxyzid" :fyid="item.id">
                                         <dl style="float: right;color: white;margin-right: 0.2rem;" @click="jiluif">
                                             <img src="../resources/images/fangyfx/genjinlist/2.png" style="width: 0.3rem;margin-top: -0.1rem;">&nbsp;记录
                                         </dl>
@@ -481,7 +482,7 @@
                 gdif:-1,
                 govDistrictArray:[{fdcode:"0",fdname: "不限"},{fdcode:"1",fdname: "有效"},{fdcode:"2",fdname: "暂缓"},{fdcode:"3",fdname: "无效"}],
                 govDistrictArraysj:[],
-                stateArray:[{val:"", name:"全部"},{val:"2", name:"A"},{val:"4", name:"B"},{val:"3", name:"C"}],
+                stateArray:[{val:"", name:"全部"},{val:"1", name:"A"},{val:"2", name:"B"},{val:"3", name:"C"}],
                 subBuesiness:[],
                 fhyfyejv:'',
                 fhyfyejv1:'',
@@ -489,6 +490,7 @@
                 lpid: "",
                 zdid:"",
                 zdid1:"0",
+                fyyzid:'',
                 fybh: "",
                 hystate: "",
                 fhystate: "",
@@ -498,6 +500,7 @@
                 noMore: false,
                 currentFilterTab: 'nth',
                 priceFilterTab: 'p',
+                priceFilter:0,
                 resultData: [],
                 curTab: "",
                 hyfy:'',
@@ -562,7 +565,10 @@
         methods: {
             init(){
                 const lpid = this.$route.params.lpid, zdid = this.$route.params.zdid;
-                this.fybh = this.$route.params.fybh;
+                /*this.fybh = this.$route.params.fybh;*/
+                if(this.$route['query']['keyword']){
+                    this.fybh = this.$route['query']['keyword'];
+                }
                 this.lpid = lpid;
                 this.zdid = zdid;
 
@@ -572,7 +578,7 @@
                 axios.defaults.baseURL = this.$api;
                 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
-                this.fybh = this.$route.query.keyword;
+                //this.fybh = this.$route.query.keyword;
 
                 this.getFilters();
                 this.getData();
@@ -589,21 +595,27 @@
 //                    this.gdif = true;
 //                }
             },
-            gongdanif(){
-                this.$router.push({path: '/genjingongdan/'+this.fyid});
+            gongdanif(event){
+                const evt = (event || window.event), target = (evt.target || evt.srcElement), href = $(target).parents("a"), fyyzid=$(href).attr("fyyzid"), fyid=$(href).attr("fyid");
+                this.fyyzid = fyyzid;
+                const fyyid = fyid;
+                this.$router.push({path: '/genjingongdan/'+this.fyyzid+'/'+fyyid});
             },
-            jiluif(){
-                this.$router.push({path: '/genjinjilu/'+this.fyid});
+            jiluif(event){
+                const evt = (event || window.event), target = (evt.target || evt.srcElement), href = $(target).parents("a"), fyyzid=$(href).attr("fyyzid"), fyid=$(href).attr("fyid");
+                this.fyyzid = fyyzid;
+                const fyyid = fyid;
+                this.$router.push({path: '/genjinjilu/'+this.fyyzid+'/'+fyyid});
             },
             setPriceFilter(e){
                 const li = $(e.target).closest("li");
                 $(li).addClass("highlight").toggleClass("active-filter");
 
-                if(this.priceFilter === '' || this.priceFilter === 'P2'){
-                    this.priceFilter = 'P1';
+                if(this.priceFilter === '' || this.priceFilter === '1'){
+                    this.priceFilter = '2';
                 }
                 else{
-                    this.priceFilter = 'P2';
+                    this.priceFilter = '1';
                 }
                 this.areaFilter = '';
                 const that = this;
@@ -728,7 +740,7 @@
                 });
             },
             changeRou: function () {
-                let link = '/search?rt=fang_list/'+this.lpid;
+                let link = '/search?rt=yixing_genjin';/*fybh*/
                 if(this.zdid){
                     link += '/' + this.zdid;
                 }
@@ -759,7 +771,7 @@
                             this.fq = code;
                         }
                         break;
-                    case 'feature':
+                    case 'positionS':
                         $('h2.area-h').html(value);
                         if(code === '' && val === ''){
                             this.hystate = '';
@@ -774,12 +786,12 @@
                             this.fhystate = '';
                         }
                         else{
-                            this.hystate = '';
+                            this.hystate = code;
                             this.fhystate = code;
                         }
                         break;
                     case 'positionA':
-                        this.hystate = '0';
+                        this.hystate = value;
                         break;
                     default:
                 }
@@ -799,7 +811,8 @@
                 this.getData();
             },
             getData(){
-                console.log(this.govDistrictArray);
+                this.resultData = [];
+                let user22 = JSON.parse(localStorage.getItem('cook'));
                 Indicator.open({
                     text: '',
                     spinnerType: 'fading-circle'
@@ -807,11 +820,11 @@
                 var paraObj = {
                     "parameters":
                         {
-                            "fybh":this.fybh,
-                            "dtime":this.fybh,
-                            "state":this.fybh,
-                            "cookie":this.fybh,
-                            "curr_page":this.fybh,
+                            "fybh":this.fybh,//搜索条件房源编号
+                            "dtime":this.priceFilter,//排序
+                            "state":this.hystate,//合作意向
+                            "cookie":user22.sjs,
+                            "curr_page":this.para.curr_page,
                             "items_perpage":10
                         },
                     "foreEndType": 2,
@@ -822,7 +835,7 @@
                     .then(function (response) {
                         Indicator.close()
                         that.loading = false;
-                        const data = response.data.data.data2;
+                        const data = response.data.data;
                         that.resultData = that.resultData.concat(data);
 
                         if (data.length <= 0) {
@@ -903,8 +916,9 @@
             shadowShow(event){
                 this.tag = false;
                 $('.shadow').show();
-                const evt = (event || window.event), target = (evt.target || evt.srcElement), href = $(target).parents("a"), fyid=$(href).attr("fyid");
+                const evt = (event || window.event), target = (evt.target || evt.srcElement), href = $(target).parents("a"), fyid=$(href).attr("fyid"), lpid=$(href).attr("lpid");
                 this.fyid = fyid;
+                this.lpid = lpid;
                 this.tebqqxpd();
                 this.getProgress();
                 $('#msg_super_wrap').animate({

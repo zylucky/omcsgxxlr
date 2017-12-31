@@ -35,7 +35,7 @@ var router = new VueRouter({
       /*component: require('./routers/fang_photo.vue')*/
     },
     {
-      path: '/yixing_genjin/:fybh',//意向业主跟进列表
+      path: '/yixing_genjin',//意向业主跟进列表
       component: require('./routers/yixing_genjin.vue')
     },
     {

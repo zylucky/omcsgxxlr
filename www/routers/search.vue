@@ -287,13 +287,14 @@
                 localStorage.setItem("historyData",JSON.stringify(this.hotArray));
             },
             toList:function(){
-                this.$router.push({path: '/index'});
+                this.$router.push({path: '/' + this.rt});
+                //this.$router.push({path: '/index'});
             },
             toList2:function(){
                 if(this.search_keyword){
                     this.changeHistory(this.search_keyword);
                 }
-                this.$router.push({path: '/index', query: {keyword: this.search_keyword}});
+                this.$router.push({path: '/' + this.rt, query: {keyword: this.search_keyword}});
             },
             doSearch:function(){
                 if(!this.search_keyword){

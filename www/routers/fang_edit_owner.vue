@@ -329,7 +329,8 @@
                     text: '保存中...',
                     spinnerType: 'fading-circle'
                 });
-
+                alert(1111);
+                console.log(this.xgbq);
                 this.$http.post(
                     this.$api + "/yhcms/web/zdfyxx/saveZdYzxx.do",
                     {
@@ -389,6 +390,7 @@
         },
         computed:{
             xgbq_t(){
+                alert(this.xgbq.length);
                 if(this.xgbq.length < 1){
                     return "请选择标签";
                 }

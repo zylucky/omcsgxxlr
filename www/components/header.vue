@@ -172,6 +172,22 @@
           this.$router.push({path:'/'});
       },
       yixing_genjin(){
+          if(window.location.href.indexOf("yixing_genjin") != -1){
+              $('.sidenav').animate({
+                  left: '-100%'
+              }, 150, function () {
+                  $('.sidenav').hide();
+              });
+              $("#section").animate({
+                  left: '0'
+              }, 150);
+              $(".section").animate({
+                  left: '0'
+              }, 150);
+              this.popupVisible = false;
+          }else{
+
+          }
           $("#zhezhao").remove();
           $('html').removeAttr("style");
           $("body").removeAttr("style");
